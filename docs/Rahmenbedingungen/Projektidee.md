@@ -1,0 +1,7 @@
+- **"Turn-Based Card Game" Engine**
+- Mögliche Patterns
+    - _State Pattern:_ Für die Phasen eines Zuges (Ziehen, Legen, Prüfen).
+    - _Strategy Pattern:_ Für unterschiedliche Karteneffekte oder Siegbedingungen.
+    - _Factory Method:_ Um verschiedene Decks zu generieren.
+    - _Command Pattern:_ Für das Ausspielen von Karten (ermöglicht auch eine "Undo"-Funktion).
+- **Showcase:** Ein minimales Kartenspiel (z.B. Durak, Poker oder Mau Mau), das in der Konsole oder mit einer winzigen JavaFX-GUI läuft und dein Framework nutzt.
