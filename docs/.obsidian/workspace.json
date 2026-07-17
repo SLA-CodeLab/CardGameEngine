@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "uml/Glossar.md",
+                "file": "uml/+Übersicht.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Glossar"
+              "title": "+Übersicht"
             }
           }
         ]
@@ -185,13 +185,16 @@
   },
   "active": "0d96583b6a16db25",
   "lastOpenFiles": [
-    "Grundregeln.md",
-    "uml/Glossar.md",
-    "Rahmenbedingungen/Projektidee.md",
-    "Pasted image 20260717102419.png",
-    "Pasted image 20260717115622.png",
-    "Projektstruktur.md",
+    "uml/usecase3.png",
+    "uml/aktivitaetsdiagramm2.png",
+    "uml/RuppschabloneVorlage.png",
+    "uml/+Übersicht.md",
     "uml/Rupp-Schablone.md",
+    "Pasted image 20260717115622.png",
+    "Rahmenbedingungen/Projektidee.md",
+    "uml/Glossar.md",
+    "Grundregeln.md",
+    "Projektstruktur.md",
     "uml/activitaetsdiagramm-engine.uxf",
     "uml/use-case-engine.uxf",
     "Rahmenbedingungen/HausarbeitOOAD.pdf",
