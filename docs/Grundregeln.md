@@ -17,6 +17,7 @@
 
 # Was soll der Showcase machen
 - Es soll ein Durak Spiel sein welches das Framework nutzt und erweitert
+- Im Showcase müssen wir definieren wie ein Turn abläuft also aus welchen Phasen es besteht und welche Actions man in welcher Phase machen kann
 
 # Visualisierung
 - komplett ki-generierte grafische Oberfläche mit Java Swing weil das älter ist kaum dependecies wegen Java 11, Maven etc. 

@@ -28,6 +28,7 @@ CardGameProject/
 └── docs/uml/
 ```
 
+Generiert mit Beispielklassen
 ```csharp
 CardGameProject/
 ├── src/

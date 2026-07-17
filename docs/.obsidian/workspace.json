@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Glossar.md",
+                "file": "uml/Glossar.md",
                 "mode": "source",
                 "source": false
               },
@@ -185,11 +185,15 @@
   },
   "active": "0d96583b6a16db25",
   "lastOpenFiles": [
-    "uml/use-case-engine.uxf",
     "Grundregeln.md",
-    "Glossar.md",
-    "Projektstruktur.md",
+    "uml/Glossar.md",
     "Rahmenbedingungen/Projektidee.md",
+    "Pasted image 20260717102419.png",
+    "Pasted image 20260717115622.png",
+    "Projektstruktur.md",
+    "uml/Rupp-Schablone.md",
+    "uml/activitaetsdiagramm-engine.uxf",
+    "uml/use-case-engine.uxf",
     "Rahmenbedingungen/HausarbeitOOAD.pdf",
     "bericht/HausarbeitOOAD.pdf",
     "Rahmenbedingungen",
