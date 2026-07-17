@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="15.1">
-  <zoom_level>10</zoom_level>
+  <zoom_level>8</zoom_level>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>650</x>
-      <y>10</y>
-      <w>30</w>
-      <h>70</h>
+      <x>608</x>
+      <y>8</y>
+      <w>24</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
@@ -15,10 +15,10 @@
   <element>
     <id>UMLSpecialState</id>
     <coordinates>
-      <x>650</x>
+      <x>608</x>
       <y>0</y>
-      <w>20</w>
-      <h>20</h>
+      <w>16</w>
+      <h>16</h>
     </coordinates>
     <panel_attributes>type=initial</panel_attributes>
     <additional_attributes/>
@@ -26,10 +26,10 @@
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>610</x>
-      <y>60</y>
-      <w>100</w>
-      <h>40</h>
+      <x>576</x>
+      <y>48</y>
+      <w>80</w>
+      <h>32</h>
     </coordinates>
     <panel_attributes>Deck anlegen</panel_attributes>
     <additional_attributes/>
@@ -37,10 +37,10 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>650</x>
-      <y>90</y>
-      <w>30</w>
-      <h>70</h>
+      <x>608</x>
+      <y>72</y>
+      <w>24</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
@@ -48,10 +48,10 @@
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>610</x>
-      <y>140</y>
-      <w>100</w>
-      <h>40</h>
+      <x>576</x>
+      <y>112</y>
+      <w>80</w>
+      <h>32</h>
     </coordinates>
     <panel_attributes>Deck mischen</panel_attributes>
     <additional_attributes/>
@@ -59,10 +59,10 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>650</x>
-      <y>170</y>
-      <w>30</w>
-      <h>70</h>
+      <x>608</x>
+      <y>136</y>
+      <w>24</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
@@ -70,10 +70,10 @@
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>610</x>
-      <y>220</y>
-      <w>100</w>
-      <h>40</h>
+      <x>576</x>
+      <y>176</y>
+      <w>80</w>
+      <h>32</h>
     </coordinates>
     <panel_attributes>Hand verteilen</panel_attributes>
     <additional_attributes/>
@@ -81,10 +81,21 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>650</x>
-      <y>250</y>
-      <w>30</w>
-      <h>70</h>
+      <x>608</x>
+      <y>200</y>
+      <w>24</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>608</x>
+      <y>328</y>
+      <w>24</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
@@ -92,89 +103,10 @@
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>700</x>
-      <y>360</y>
-      <w>120</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>Card auf Table
-legen</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLSpecialState</id>
-    <coordinates>
-      <x>640</x>
-      <y>300</y>
-      <w>40</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>type=decision</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>670</x>
-      <y>300</y>
-      <w>170</w>
-      <h>80</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-
-r2=[wenn Spiel benötigt]</panel_attributes>
-    <additional_attributes>90.0;60.0;90.0;20.0;10.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLSpecialState</id>
-    <coordinates>
-      <x>640</x>
-      <y>420</y>
-      <w>40</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>type=decision</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>670</x>
-      <y>390</y>
-      <w>110</w>
-      <h>70</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;50.0;90.0;50.0;90.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>650</x>
-      <y>330</y>
-      <w>30</w>
-      <h>110</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;90.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>650</x>
-      <y>450</y>
-      <w>30</w>
-      <h>70</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLState</id>
-    <coordinates>
-      <x>590</x>
-      <y>500</y>
-      <w>140</w>
-      <h>40</h>
+      <x>560</x>
+      <y>368</y>
+      <w>112</w>
+      <h>32</h>
     </coordinates>
     <panel_attributes>Turn durchführen</panel_attributes>
     <additional_attributes/>
@@ -182,10 +114,10 @@ r2=[wenn Spiel benötigt]</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>650</x>
-      <y>530</y>
-      <w>30</w>
-      <h>70</h>
+      <x>608</x>
+      <y>392</y>
+      <w>24</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
@@ -193,10 +125,10 @@ r2=[wenn Spiel benötigt]</panel_attributes>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>590</x>
-      <y>580</y>
-      <w>140</w>
-      <h>40</h>
+      <x>560</x>
+      <y>432</y>
+      <w>112</w>
+      <h>32</h>
     </coordinates>
     <panel_attributes>Phase durchführen</panel_attributes>
     <additional_attributes/>
@@ -204,10 +136,10 @@ r2=[wenn Spiel benötigt]</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>650</x>
-      <y>610</y>
-      <w>30</w>
-      <h>70</h>
+      <x>608</x>
+      <y>456</y>
+      <w>24</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
@@ -215,10 +147,10 @@ r2=[wenn Spiel benötigt]</panel_attributes>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>590</x>
-      <y>660</y>
-      <w>140</w>
-      <h>40</h>
+      <x>560</x>
+      <y>496</y>
+      <w>112</w>
+      <h>32</h>
     </coordinates>
     <panel_attributes>Action durchführen</panel_attributes>
     <additional_attributes/>
@@ -226,10 +158,10 @@ r2=[wenn Spiel benötigt]</panel_attributes>
   <element>
     <id>UMLSpecialState</id>
     <coordinates>
-      <x>640</x>
-      <y>840</y>
-      <w>40</w>
-      <h>40</h>
+      <x>600</x>
+      <y>640</y>
+      <w>32</w>
+      <h>32</h>
     </coordinates>
     <panel_attributes>type=decision</panel_attributes>
     <additional_attributes/>
@@ -237,10 +169,10 @@ r2=[wenn Spiel benötigt]</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>650</x>
-      <y>870</y>
-      <w>210</w>
-      <h>70</h>
+      <x>608</x>
+      <y>664</y>
+      <w>168</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 [keine Aktion möglich/gewollt]</panel_attributes>
@@ -249,10 +181,10 @@ r2=[wenn Spiel benötigt]</panel_attributes>
   <element>
     <id>UMLSpecialState</id>
     <coordinates>
-      <x>640</x>
-      <y>920</y>
-      <w>40</w>
-      <h>40</h>
+      <x>600</x>
+      <y>704</y>
+      <w>32</w>
+      <h>32</h>
     </coordinates>
     <panel_attributes>type=decision</panel_attributes>
     <additional_attributes/>
@@ -260,10 +192,10 @@ r2=[wenn Spiel benötigt]</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>650</x>
-      <y>950</y>
-      <w>140</w>
-      <h>70</h>
+      <x>608</x>
+      <y>728</y>
+      <w>112</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 [War letzte Phase]</panel_attributes>
@@ -272,10 +204,10 @@ r2=[wenn Spiel benötigt]</panel_attributes>
   <element>
     <id>UMLSpecialState</id>
     <coordinates>
-      <x>640</x>
-      <y>1000</y>
-      <w>40</w>
-      <h>40</h>
+      <x>600</x>
+      <y>768</y>
+      <w>32</w>
+      <h>32</h>
     </coordinates>
     <panel_attributes>type=decision</panel_attributes>
     <additional_attributes/>
@@ -283,10 +215,10 @@ r2=[wenn Spiel benötigt]</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>670</x>
-      <y>670</y>
-      <w>190</w>
-      <h>220</h>
+      <x>624</x>
+      <y>504</y>
+      <w>152</w>
+      <h>176</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m2=[weitere Aktion möglich]</panel_attributes>
@@ -295,10 +227,10 @@ m2=[weitere Aktion möglich]</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>670</x>
-      <y>590</y>
-      <w>220</w>
-      <h>380</h>
+      <x>624</x>
+      <y>440</y>
+      <w>176</w>
+      <h>304</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m2=[in nächste Phase gehen]</panel_attributes>
@@ -307,10 +239,10 @@ m2=[in nächste Phase gehen]</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>670</x>
-      <y>510</y>
-      <w>270</w>
-      <h>540</h>
+      <x>624</x>
+      <y>376</y>
+      <w>216</w>
+      <h>432</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m2=[nächster Player]</panel_attributes>
@@ -319,22 +251,22 @@ m2=[nächster Player]</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>530</x>
-      <y>780</y>
-      <w>130</w>
-      <h>110</h>
+      <x>480</x>
+      <y>632</y>
+      <w>136</w>
+      <h>48</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m2=[undo Action]</panel_attributes>
-    <additional_attributes>20.0;10.0;20.0;80.0;110.0;80.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;30.0;150.0;30.0</additional_attributes>
   </element>
   <element>
     <id>UMLSpecialState</id>
     <coordinates>
-      <x>650</x>
-      <y>1160</y>
-      <w>20</w>
-      <h>20</h>
+      <x>600</x>
+      <y>936</y>
+      <w>16</w>
+      <h>16</h>
     </coordinates>
     <panel_attributes>type=final</panel_attributes>
     <additional_attributes/>
@@ -342,22 +274,22 @@ m2=[undo Action]</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>480</x>
-      <y>920</y>
-      <w>180</w>
+      <x>472</x>
+      <y>704</y>
+      <w>144</w>
       <h>200</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 r2=[Win Condition erfüllt]</panel_attributes>
-    <additional_attributes>130.0;180.0;70.0;180.0;70.0;20.0;160.0;20.0</additional_attributes>
+    <additional_attributes>120.0;230.0;70.0;230.0;70.0;20.0;160.0;20.0</additional_attributes>
   </element>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>610</x>
-      <y>1080</y>
-      <w>100</w>
-      <h>40</h>
+      <x>568</x>
+      <y>872</y>
+      <w>80</w>
+      <h>32</h>
     </coordinates>
     <panel_attributes>Winner 
 deklarieren</panel_attributes>
@@ -366,10 +298,10 @@ deklarieren</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>650</x>
-      <y>1110</y>
-      <w>30</w>
-      <h>70</h>
+      <x>600</x>
+      <y>896</y>
+      <w>24</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
@@ -377,10 +309,10 @@ deklarieren</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>650</x>
-      <y>690</y>
-      <w>30</w>
-      <h>80</h>
+      <x>608</x>
+      <y>520</y>
+      <w>24</w>
+      <h>64</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
     <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
@@ -388,10 +320,10 @@ deklarieren</panel_attributes>
   <element>
     <id>UMLSpecialState</id>
     <coordinates>
-      <x>640</x>
-      <y>750</y>
-      <w>40</w>
-      <h>40</h>
+      <x>600</x>
+      <y>568</y>
+      <w>32</w>
+      <h>32</h>
     </coordinates>
     <panel_attributes>type=decision</panel_attributes>
     <additional_attributes/>
@@ -399,10 +331,10 @@ deklarieren</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>670</x>
-      <y>690</y>
-      <w>140</w>
-      <h>110</h>
+      <x>624</x>
+      <y>520</y>
+      <w>112</w>
+      <h>88</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m2=[Action ungültig]</panel_attributes>
@@ -411,10 +343,10 @@ m2=[Action ungültig]</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>650</x>
-      <y>780</y>
-      <w>110</w>
-      <h>80</h>
+      <x>608</x>
+      <y>592</y>
+      <w>88</w>
+      <h>64</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 [Action gültig]</panel_attributes>
@@ -423,24 +355,148 @@ m2=[Action ungültig]</panel_attributes>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>480</x>
-      <y>750</y>
-      <w>140</w>
-      <h>40</h>
+      <x>432</x>
+      <y>608</y>
+      <w>112</w>
+      <h>32</h>
     </coordinates>
-    <panel_attributes>Action rückgängig
-machen</panel_attributes>
+    <panel_attributes>Undo (Action
+rückgängig machen)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>540</x>
-      <y>670</y>
-      <w>70</w>
-      <h>100</h>
+      <x>480</x>
+      <y>504</y>
+      <w>96</w>
+      <h>64</h>
     </coordinates>
-    <panel_attributes>lt=-&gt;</panel_attributes>
-    <additional_attributes>10.0;80.0;10.0;10.0;50.0;10.0</additional_attributes>
+    <panel_attributes>lt=-&gt;
+m1=[undo möglich]</panel_attributes>
+    <additional_attributes>10.0;60.0;10.0;10.0;100.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>560</x>
+      <y>240</y>
+      <w>112</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>Round durchführen</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>608</x>
+      <y>264</y>
+      <w>24</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>608</x>
+      <y>248</y>
+      <w>272</w>
+      <h>608</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+r2=[Jeder Player war einmal dran]</panel_attributes>
+    <additional_attributes>80.0;10.0;320.0;10.0;320.0;740.0;10.0;740.0;10.0;690.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>560</x>
+      <y>304</y>
+      <w>112</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>Table aktualisieren</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLObject</id>
+    <coordinates>
+      <x>800</x>
+      <y>256</y>
+      <w>64</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>GameLoop</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLObject</id>
+    <coordinates>
+      <x>760</x>
+      <y>384</y>
+      <w>64</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>TurnLoop</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLObject</id>
+    <coordinates>
+      <x>720</x>
+      <y>448</y>
+      <w>64</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>PhaseLoop</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLObject</id>
+    <coordinates>
+      <x>680</x>
+      <y>512</y>
+      <w>64</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>ActionLoop</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLSpecialState</id>
+    <coordinates>
+      <x>472</x>
+      <y>552</y>
+      <w>32</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>type=decision</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>480</x>
+      <y>576</y>
+      <w>24</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>496</x>
+      <y>552</y>
+      <w>128</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+r2=[Undo unmöglich]</panel_attributes>
+    <additional_attributes>140.0;120.0;90.0;80.0;90.0;20.0;10.0;20.0</additional_attributes>
   </element>
 </diagram>
