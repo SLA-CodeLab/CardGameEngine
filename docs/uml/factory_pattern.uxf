@@ -1,5 +1,5 @@
-<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><element><id>UMLPackage</id><coordinates><x>300</x><y>110</y><w>660</w><h>180</h></coordinates><panel_attributes>framework.factory</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>680</x><y>180</y><w>210</w><h>70</h></coordinates><panel_attributes>&lt;&lt;abstract&gt;&gt;
 DeckFactory
+<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><element><id>UMLPackage</id><coordinates><x>300</x><y>110</y><w>660</w><h>180</h></coordinates><panel_attributes>framework.factory</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>680</x><y>180</y><w>210</w><h>70</h></coordinates><panel_attributes>&lt;&lt;abstract&gt;&gt;
 --
 + createDeck(): Deck
 + getDeckSize(): int</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>440</x><y>180</y><w>210</w><h>70</h></coordinates><panel_attributes>&lt;&lt;interface&gt;&gt;
