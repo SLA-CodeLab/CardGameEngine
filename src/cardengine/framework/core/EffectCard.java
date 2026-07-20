@@ -1,4 +1,4 @@
-package cardengine.framework.core;
+/*package cardengine.framework.core;
 
 import cardengine.framework.strategy.Effect;
 
@@ -19,3 +19,4 @@ public class EffectCard extends Card {
         return "EffectCard (ID: " + getId() + ")";
     }
 }
+*/
