@@ -18,10 +18,11 @@ public class Game {
     private Table table = new Table();
     private List<Player> players = new ArrayList<>();
 
-    public void initGame(DeckFactory deckFactory) {
+    public void initGame(DeckFactory deckFactory, WinCondition winCondition) {
         if (deckFactory != null) {
             this.deck = deckFactory.createDeck();
         }
+        this.winCondition = winCondition;
     }
 
     public void executeCommand(Command command) {
@@ -49,6 +50,16 @@ public class Game {
             return winCondition.isGameOver(this);
         }
         return false;
+    }
+
+    /**
+     * @author Lukas
+     */
+    public Player getWinner() {
+        if (winCondition != null) {
+            return winCondition.getWinner(this);
+        }
+        return null;
     }
 
     public Phase getCurrentPhase() {
