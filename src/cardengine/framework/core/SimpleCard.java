@@ -1,10 +1,13 @@
 package cardengine.framework.core;
 
-public class CardWithoutAction extends Card {
+import cardengine.framework.strategy.Effect;
+
+public class SimpleCard extends Card {
     private Suit suit;
     private Rank rank;
+    private Effect effect;
 
-    public CardWithoutAction(int id, Suit suit, Rank rank) {
+    public SimpleCard(int id, Suit suit, Rank rank) {
         super(id);
         this.suit = suit;
         this.rank = rank;
@@ -16,6 +19,10 @@ public class CardWithoutAction extends Card {
 
     public Rank getRank() {
         return rank;
+    }
+
+    public Effect getEffect() {
+        return effect;
     }
 
     @Override
