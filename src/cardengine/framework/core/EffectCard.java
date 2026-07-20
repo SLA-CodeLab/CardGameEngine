@@ -1,12 +1,12 @@
-/*package cardengine.framework.core;
+package cardengine.framework.core;
 
 import cardengine.framework.strategy.Effect;
 
-public class EffectCard extends Card {
+public class EffectCard extends SimpleCard {
     private Effect action;
 
-    public EffectCard(int id, Effect action) {
-        super(id);
+    public EffectCard(int id, Suit suit, Rank rank, Effect action) {
+        super(id,suit,rank);
         this.action = action;
     }
 
@@ -19,4 +19,3 @@ public class EffectCard extends Card {
         return "EffectCard (ID: " + getId() + ")";
     }
 }
-*/

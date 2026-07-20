@@ -1,11 +1,9 @@
 package cardengine.framework.core;
 
-import cardengine.framework.strategy.Effect;
 
 public class SimpleCard extends Card {
     private Suit suit;
     private Rank rank;
-    private Effect effect;
 
     public SimpleCard(int id, Suit suit, Rank rank) {
         super(id);
@@ -21,9 +19,6 @@ public class SimpleCard extends Card {
         return rank;
     }
 
-    public Effect getEffect() {
-        return effect;
-    }
 
     @Override
     public String toString() {
