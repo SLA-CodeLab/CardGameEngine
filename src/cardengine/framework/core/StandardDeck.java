@@ -11,5 +11,7 @@ public abstract class StandardDeck extends CardCollection implements Deck {
     }
 
     @Override
-    public void resetDeck() {}
+    public void resetDeck() {
+        //eher nicht gebracuht, weil man dann einfach neue deck erstellt. Zu viel Für nichts
+    }
 }

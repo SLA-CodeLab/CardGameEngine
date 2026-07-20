@@ -16,6 +16,7 @@ public abstract class CardCollection {
         cards.remove(card);
     }
 
+    //frage mich was die Methode eig machen muss?
     public Card drawCard() {
         return null;
     }
@@ -25,6 +26,11 @@ public abstract class CardCollection {
     }
 
     public boolean transferCard(Card card, CardCollection targetCollection) {
-        return true;
+        if (card != null) {
+            cards.remove(card);
+            targetCollection.cards.add(card);
+            return true;
+        }
+        return false;
     }
 }

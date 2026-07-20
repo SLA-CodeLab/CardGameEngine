@@ -6,7 +6,7 @@ import java.util.List;
 public class Hand extends CardCollection {
     
     public List<Card> getPlayableCards() {
-        // Stub
+        // die Mehode muss dann in phase mirgieren, da es erst in der bestimmten Phase klar wird
         return new ArrayList<>(cards);
     }
 }
