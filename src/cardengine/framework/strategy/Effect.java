@@ -1,7 +1,7 @@
 package cardengine.framework.strategy;
 
-import cardengine.framework.core.GameLoop;
+import cardengine.framework.core.Game;
 
 public interface Effect {
-    void apply(GameLoop game);
+    void apply(Game game);
 }

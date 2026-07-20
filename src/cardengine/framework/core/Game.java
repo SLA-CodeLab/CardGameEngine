@@ -10,7 +10,7 @@ import cardengine.framework.factory.DeckFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameLoop {
+public class Game {
     private Phase currentPhase;
     private CommandHistory commandHistory = new CommandHistory();
     private WinCondition winCondition;
@@ -30,7 +30,14 @@ public class GameLoop {
         }
     }
 
+    /**
+     * @author Lukas
+     */
     public void undoLastAction() {
+        if (commandHistory != null) {
+            commandHistory.undo();
+
+        }
     }
 
     public void changePhase(Phase newPhase) {
