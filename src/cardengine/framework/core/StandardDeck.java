@@ -11,5 +11,23 @@ public abstract class StandardDeck extends CardCollection implements Deck {
     }
 
     @Override
-    public void resetDeck() {}
+    public void resetDeck() {
+        cards.clear();
+    }
+
+    /**
+     *
+     * @author Lukas
+     * @return oberste Karte des Decks
+     */
+    @Override
+    public Card drawCard() {
+        if (cards.isEmpty()) return null;
+        return cards.remove(cards.size() - 1);
+    }
+
+    @Override
+    public int getDeckSize() {
+        return cards.size();
+    }
 }

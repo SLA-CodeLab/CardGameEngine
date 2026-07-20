@@ -6,4 +6,6 @@ public interface Deck {
     void shuffle();
     void resetDeck();
     Card drawCard();
+    boolean isEmpty();
+    int getDeckSize();
 }
