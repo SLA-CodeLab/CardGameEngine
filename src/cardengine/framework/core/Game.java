@@ -18,12 +18,82 @@ public class Game {
     private Table table = new Table();
     private List<Player> players = new ArrayList<>();
 
+    /**
+     * Wenn ein Spiel gestartet wird soll diese Methode das gesamte Spiel vorbereiten also von Karten vorbereiten Deck shuffeln und Hände verteilen.
+     * Also alles im Aktivitätsdiagramm was oberhalb GameLoop steht
+     *
+     * @author Lukas
+     * @param deckFactory
+     * @param winCondition
+     */
     public void initGame(DeckFactory deckFactory, WinCondition winCondition) {
+        //Deck anlegen
         if (deckFactory != null) {
             this.deck = deckFactory.createDeck();
         }
-        this.winCondition = winCondition;
+
+        //Deck mischen
+        if (deck != null) {
+            deck.shuffle();
+        }
+
+        //Hand verteilen
+        distributeHands();
+
+        //GameLoop
+        gameLoop();
     }
+
+    /**
+     * Diese Methode durchläuft den tatsächlichen GameLoop der sobal die WinCondition erfüllt ist beendet
+     *
+     * @author Lukas
+     */
+    private void gameLoop() {
+        while (true) {
+            //updateTable(); stattdessen muss man mit einer Phase arbeiten nach Command Pattern und dann im Showcase
+            //TurnLoop
+            for (int i = 0; i < players.size(); i++) {
+                Player currentPlayer = players.get(i);
+
+                // PhaseLoop
+                while (currentPhase != null) {
+                    //Innerhalb Phase ActionLoop
+                    currentPhase.aktionDurchfuehren(this);
+
+                    //Am Ende der Phase bevor in die nächste geht soll WinCondition geprüft werden
+                    if (checkWinCondition()) {
+                        break;
+                    }
+                    //Nächste Phase oder Nächster Turn oder
+                    if (shouldAdvancePhase()) {
+                        advanceToNextPhase();
+                    } else if (isTurnOver()) {
+                        break; //ende für currentPlayer
+                    }
+                }
+            }
+        }
+    }
+
+    private boolean isTurnOver() {
+        //todo
+        return false;
+    }
+
+    private void advanceToNextPhase() {
+        //todo
+    }
+
+    private boolean shouldAdvancePhase() {
+        //todo
+        return false;
+    }
+
+    private void distributeHands() {
+        //todo
+    }
+
 
     public void executeCommand(Command command) {
         if (commandHistory != null) {
@@ -37,7 +107,6 @@ public class Game {
     public void undoLastAction() {
         if (commandHistory != null) {
             commandHistory.undo();
-
         }
     }
 
