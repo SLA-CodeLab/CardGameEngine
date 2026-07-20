@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="15.1">
-  <zoom_level>10</zoom_level>
+  <zoom_level>8</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>300</x>
-      <y>250</y>
-      <w>200</w>
-      <h>70</h>
+      <x>264</x>
+      <y>128</y>
+      <w>160</w>
+      <h>56</h>
     </coordinates>
     <panel_attributes>&lt;&lt;control&gt;&gt;
 Game
@@ -20,10 +20,10 @@ Game
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>610</x>
-      <y>250</y>
-      <w>230</w>
-      <h>60</h>
+      <x>512</x>
+      <y>128</y>
+      <w>184</w>
+      <h>48</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 Phase
@@ -34,10 +34,10 @@ Phase
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>490</x>
-      <y>260</y>
-      <w>140</w>
-      <h>50</h>
+      <x>416</x>
+      <y>136</y>
+      <w>112</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 r1=-phase
@@ -47,10 +47,10 @@ m1=1</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>270</x>
-      <y>180</y>
-      <w>630</w>
-      <h>300</h>
+      <x>240</x>
+      <y>72</y>
+      <w>504</w>
+      <h>240</h>
     </coordinates>
     <panel_attributes>framework.core
 --</panel_attributes>
@@ -59,10 +59,10 @@ m1=1</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>270</x>
-      <y>520</y>
-      <w>630</w>
-      <h>140</h>
+      <x>240</x>
+      <y>344</y>
+      <w>504</w>
+      <h>112</h>
     </coordinates>
     <panel_attributes>showcase.durak
 --</panel_attributes>
@@ -71,10 +71,10 @@ m1=1</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>100</x>
-      <y>520</y>
-      <w>160</w>
-      <h>160</h>
+      <x>104</x>
+      <y>344</y>
+      <w>128</w>
+      <h>128</h>
     </coordinates>
     <panel_attributes>Hier nur mal bsp
 wie State Pattern
@@ -90,10 +90,10 @@ unterschiedlich sind</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>710</x>
-      <y>570</y>
-      <w>160</w>
-      <h>60</h>
+      <x>592</x>
+      <y>384</y>
+      <w>128</w>
+      <h>48</h>
     </coordinates>
     <panel_attributes>DrawPhase
 --
@@ -103,10 +103,10 @@ unterschiedlich sind</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>750</x>
-      <y>300</y>
-      <w>30</w>
-      <h>290</h>
+      <x>624</x>
+      <y>168</y>
+      <w>24</w>
+      <h>232</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;270.0</additional_attributes>
@@ -114,10 +114,10 @@ unterschiedlich sind</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>630</x>
-      <y>300</y>
-      <w>30</w>
-      <h>290</h>
+      <x>528</x>
+      <y>168</y>
+      <w>24</w>
+      <h>232</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;270.0</additional_attributes>
@@ -125,10 +125,10 @@ unterschiedlich sind</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>530</x>
-      <y>570</y>
-      <w>160</w>
-      <h>60</h>
+      <x>448</x>
+      <y>384</y>
+      <w>128</w>
+      <h>48</h>
     </coordinates>
     <panel_attributes>AttackPhase
 --
@@ -138,10 +138,10 @@ unterschiedlich sind</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>270</x>
-      <y>680</y>
-      <w>630</w>
-      <h>140</h>
+      <x>240</x>
+      <y>472</y>
+      <w>504</w>
+      <h>112</h>
     </coordinates>
     <panel_attributes>showcase.poker
 --</panel_attributes>
@@ -150,10 +150,10 @@ unterschiedlich sind</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>600</x>
-      <y>730</y>
-      <w>160</w>
-      <h>60</h>
+      <x>504</x>
+      <y>512</y>
+      <w>128</w>
+      <h>48</h>
     </coordinates>
     <panel_attributes>BettingPhase
 --
@@ -163,10 +163,10 @@ unterschiedlich sind</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>690</x>
-      <y>300</y>
-      <w>30</w>
-      <h>450</h>
+      <x>576</x>
+      <y>168</y>
+      <w>24</w>
+      <h>360</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;430.0</additional_attributes>
