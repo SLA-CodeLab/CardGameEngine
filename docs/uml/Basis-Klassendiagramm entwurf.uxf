@@ -1,100 +1,66 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="15.1">
-  <zoom_level>9</zoom_level>
+  <zoom_level>7</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1188</x>
-      <y>216</y>
-      <w>153</w>
-      <h>108</h>
-    </coordinates>
-    <panel_attributes>SimpleCard
-
---
--suit: Suit
--rank: Rank
---
-+getSuit(): Suit
-+getRank(): Rank</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>954</x>
-      <y>423</y>
-      <w>234</w>
-      <h>171</h>
+      <x>301</x>
+      <y>105</y>
+      <w>147</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes>&lt;&lt;abstract&gt;&gt;
-Card
---
--id: int
-
---
-+getId(): int
-+getVisibility(): CardVisibility
-+setVisibility(CardVisibility): void
-+flip(): void
-+toString(): String</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>144</x>
-      <y>657</y>
-      <w>189</w>
-      <h>108</h>
-    </coordinates>
-    <panel_attributes>Player
---
--id: int
--name: String
---
-+getId(): int 
-+getName(): String
-+getHand(): Hand</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>459</x>
-      <y>225</y>
-      <w>189</w>
-      <h>81</h>
-    </coordinates>
-    <panel_attributes>Deck
+StandardDeck
 --
 
---
-shuffle(): void</panel_attributes>
+
+</panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>364</x>
+      <y>161</y>
+      <w>21</w>
+      <h>105</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;130.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>196</x>
+      <y>273</y>
+      <w>119</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>150.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>468</x>
-      <y>657</y>
-      <w>189</w>
-      <h>108</h>
+      <x>56</x>
+      <y>252</y>
+      <w>147</w>
+      <h>63</h>
     </coordinates>
-    <panel_attributes>Hand
+    <panel_attributes>Table
 --
 
 --
-getPlayableCards() List&lt;Card&gt;</panel_attributes>
+getCard(Suit, Rank): Card  </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>459</x>
-      <y>414</y>
-      <w>360</w>
-      <h>144</h>
+      <x>301</x>
+      <y>252</y>
+      <w>280</w>
+      <h>112</h>
     </coordinates>
     <panel_attributes>&lt;&lt;abstract&gt;&gt; 
 CardCollection
@@ -111,24 +77,161 @@ CardCollection
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>810</x>
-      <y>441</y>
-      <w>162</w>
-      <h>45</h>
+      <x>574</x>
+      <y>273</y>
+      <w>126</w>
+      <h>35</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=*
 m2=0
--cards</panel_attributes>
+r2=-cards</panel_attributes>
     <additional_attributes>160.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>686</x>
+      <y>259</y>
+      <w>175</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;abstract&gt;&gt;
+Card
+--
+
+--
++getId(): int
++getVisibility(): CardVisibility
++setVisibility(CardVisibility): void
++flip(): void
++toString(): String</panel_attributes>
+    <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>324</x>
-      <y>684</y>
-      <w>162</w>
-      <h>36</h>
+      <x>1015</x>
+      <y>210</y>
+      <w>35</w>
+      <h>105</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=1
+r2=-suit
+</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;130.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>987</x>
+      <y>133</y>
+      <w>70</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;enum&gt;&gt;
+Suit
+--
+HEARTS
+DIAMONDS
+CLUBS
+SPADES</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>910</x>
+      <y>28</y>
+      <w>70</w>
+      <h>189</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;enum&gt;&gt;
+Rank
+--
+TWO
+THREE
+FOUR
+FIVE
+SIX
+SEVEN
+EIGHT
+NINE
+TEN
+JACK
+QUEEN
+KING
+ACE</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>938</x>
+      <y>210</y>
+      <w>42</w>
+      <h>105</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=1
+r2=-rank
+</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;130.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>707</x>
+      <y>462</y>
+      <w>147</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;enum&gt;&gt;
+CardVisibility
+--
+VISIBLE
+HIDDEN</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>777</x>
+      <y>378</y>
+      <w>56</w>
+      <h>98</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=1
+m2=1
+r2=-visibility</panel_attributes>
+    <additional_attributes>10.0;120.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>385</x>
+      <y>441</y>
+      <w>147</w>
+      <h>84</h>
+    </coordinates>
+    <panel_attributes>Hand
+--
+
+--
+getPlayableCards(): List&lt;Card&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>273</x>
+      <y>462</y>
+      <w>126</w>
+      <h>28</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=1
@@ -138,87 +241,85 @@ m2=1</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>540</x>
-      <y>549</y>
-      <w>27</w>
-      <h>126</h>
+      <x>441</x>
+      <y>357</y>
+      <w>21</w>
+      <h>98</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;120.0</additional_attributes>
   </element>
   <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>540</x>
-      <y>297</y>
-      <w>27</w>
-      <h>135</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;130.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>144</x>
-      <y>414</y>
-      <w>189</w>
-      <h>81</h>
-    </coordinates>
-    <panel_attributes>Table
---
-
---
-getCardById(int): Card  </panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>324</x>
+      <x>133</x>
       <y>441</y>
-      <w>153</w>
-      <h>27</h>
+      <w>147</w>
+      <h>84</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>150.0;10.0;10.0;10.0</additional_attributes>
+    <panel_attributes>Player
+--
+-id: int
+-name: String
+--
++getId(): int 
++getName(): String
++getHand(): Hand</panel_attributes>
+    <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1197</x>
-      <y>621</y>
-      <w>153</w>
-      <h>108</h>
+      <x>910</x>
+      <y>301</y>
+      <w>147</w>
+      <h>70</h>
     </coordinates>
-    <panel_attributes>EffectCard
+    <panel_attributes>SimpleCard
+--
 
 --
--action: CardAction
++getSuit(): Suit
++getRank(): Rank
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>910</x>
+      <y>455</y>
+      <w>147</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+Effect
 --
-getAction: CardAction</panel_attributes>
+
+--</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1107</x>
-      <y>585</y>
-      <w>108</w>
-      <h>117</h>
+      <x>854</x>
+      <y>329</y>
+      <w>70</w>
+      <h>21</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;110.0;100.0;110.0</additional_attributes>
+    <additional_attributes>10.0;10.0;80.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1107</x>
-      <y>252</y>
-      <w>99</w>
-      <h>189</h>
+      <x>973</x>
+      <y>364</y>
+      <w>49</w>
+      <h>105</h>
     </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;190.0;10.0;10.0;90.0;10.0</additional_attributes>
+    <panel_attributes>lt=&lt;-
+m2=-effect</panel_attributes>
+    <additional_attributes>10.0;130.0;10.0;10.0</additional_attributes>
   </element>
 </diagram>
