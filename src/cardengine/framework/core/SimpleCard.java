@@ -5,8 +5,7 @@ public class SimpleCard extends Card {
     private Suit suit;
     private Rank rank;
 
-    public SimpleCard(int id, Suit suit, Rank rank) {
-        super(id);
+    public SimpleCard(Suit suit, Rank rank) {
         this.suit = suit;
         this.rank = rank;
     }

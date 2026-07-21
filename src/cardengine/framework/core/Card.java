@@ -1,16 +1,7 @@
 package cardengine.framework.core;
 
 public abstract class Card {
-    private int id;
     private CardVisibility visibility = CardVisibility.HIDDEN;
-
-    public Card(int id) {
-        this.id = id;
-    }
-
-    public int getId() {
-        return id;
-    }
 
     public CardVisibility getVisibility() {
         return visibility;
@@ -28,6 +19,4 @@ public abstract class Card {
         }
     }
 
-    @Override
-    public abstract String toString();
 }

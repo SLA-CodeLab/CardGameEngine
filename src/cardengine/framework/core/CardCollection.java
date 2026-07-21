@@ -16,21 +16,27 @@ public abstract class CardCollection {
         cards.remove(card);
     }
 
-    //frage mich was die Methode eig machen muss?
-    public Card drawCard() {
-        return null;
-    }
-
     public List<Card> getCards() {
         return cards;
     }
 
-    public boolean transferCard(Card card, CardCollection targetCollection) {
-        if (card != null) {
-            cards.remove(card);
-            targetCollection.cards.add(card);
-            return true;
-        }
-        return false;
+    public boolean isEmpty() {
+        return cards.isEmpty();
+    }
+
+    public int size() {
+        return cards.size();
+    }
+
+    /**
+     * Verschiebt eine konkrete Karte aus dieser Collection in eine andere.
+     *
+     * @author Lukas
+     */
+    public boolean transferCard(Card card, CardCollection target) {
+        if (card == null || target == null) return false;
+        if (!cards.remove(card)) return false;
+        target.addCard(card);
+        return true;
     }
 }
