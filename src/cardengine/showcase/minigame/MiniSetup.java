@@ -19,17 +19,17 @@ public class MiniSetup implements GameSetup {
 
     @Override
     public void distributeInitialHands(Game game) {
-        System.out.println("[MiniSetup] Verteile Startkarten...");
         Deck deck = game.getDeck();
         if (deck == null) return;
 
         // Jeder Spieler bekommt START_HAND_SIZE Karten.
+        // Keine Konsolenausgabe: der Startzustand wird nach start() ueber den
+        // GameListener (onStateChanged) dargestellt.
         for (Player p : game.getPlayers()) {
             for (int i = 0; i < START_HAND_SIZE; i++) {
                 Card c = deck.drawCard();
                 if (c != null) {
                     p.getHand().addCard(c);
-                    System.out.println("-> " + p.getName() + " zieht " + c);
                 }
             }
         }

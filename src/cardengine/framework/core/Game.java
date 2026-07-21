@@ -80,9 +80,6 @@ public class Game {
 //        }
 //    }
 
-    /**
-     * Hiermit wird das Spiel eigetlich erst gestartet
-     */
     public void start() {
         changePhase(startPhase);
         setActivePlayer(players.get(0));
