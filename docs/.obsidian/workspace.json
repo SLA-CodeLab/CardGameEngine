@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "uml/Glossar.md",
+                "file": "Projektstruktur.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Glossar"
+              "title": "Projektstruktur"
             }
           }
         ]
@@ -185,6 +185,7 @@
   },
   "active": "0d96583b6a16db25",
   "lastOpenFiles": [
+    "uml/Glossar.md",
     "uml/gesamt-pattern-diagramm1.uxf",
     "uml/use-case-akim.uxf",
     "uml/factory-pattern.png",
@@ -205,12 +206,10 @@
     "uml/command-pattern-undo.png",
     "uml/BasisKlassenDiagrammKorrekt.png",
     "uml/Rupp-Schablone.md",
-    "uml/Glossar.md",
     "Grundregeln.md",
     "uml/New Textdokument.txt",
     "uml/Basis-Klassendiagramm entwurf.uxf",
     "uml/klassendiagramm-state-pattern.uxf",
-    "Rahmenbedingungen/Projektidee.md",
-    "Rahmenbedingungen/HausarbeitOOAD.pdf"
+    "Rahmenbedingungen/Projektidee.md"
   ]
 }

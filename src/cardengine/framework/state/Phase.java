@@ -1,7 +1,9 @@
 package cardengine.framework.state;
 
+import cardengine.framework.command.Command;
 import cardengine.framework.core.Game;
 
 public interface Phase {
-    void aktionDurchfuehren(Game game);
+    boolean isValid(Game game, Command cmd);
+    void next(Game game);
 }
