@@ -100,7 +100,8 @@ public class Game {
 
         commandHistory.executeCommand(command);
 
-        currentPhase.next(this);
+        Phase nextPhase = currentPhase.next(this);
+        changePhase(nextPhase);
 
         if (checkWinCondition()) {
             changePhase(null);
