@@ -50,13 +50,14 @@ public class MiniDrawPhase implements Phase {
      * @param game aktuelles Spiel
      */
     @Override
-    public void next(Game game) {
+    public Phase next(Game game) {
         List<Player> players = game.getPlayers();
         if (players.isEmpty()) {
-            return;
+            return this;
         }
         int idx = players.indexOf(game.getActivePlayer());
         Player nextPlayer = players.get((idx + 1) % players.size());
         game.setActivePlayer(nextPlayer);
+        return this;
     }
 }
