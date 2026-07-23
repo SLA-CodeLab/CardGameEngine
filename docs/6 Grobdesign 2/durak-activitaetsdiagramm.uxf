@@ -4,8 +4,8 @@
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>240</x>
-      <y>160</y>
+      <x>140</x>
+      <y>190</y>
       <w>100</w>
       <h>40</h>
     </coordinates>
@@ -15,8 +15,8 @@
   <element>
     <id>UMLSpecialState</id>
     <coordinates>
-      <x>280</x>
-      <y>110</y>
+      <x>180</x>
+      <y>140</y>
       <w>20</w>
       <h>20</h>
     </coordinates>
@@ -26,8 +26,8 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>280</x>
-      <y>110</y>
+      <x>180</x>
+      <y>140</y>
       <w>30</w>
       <h>70</h>
     </coordinates>
@@ -37,19 +37,19 @@
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>330</x>
-      <y>170</y>
-      <w>210</w>
+      <x>230</x>
+      <y>200</y>
+      <w>350</w>
       <h>270</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>190.0;10.0;60.0;10.0;60.0;250.0;10.0;250.0</additional_attributes>
+    <additional_attributes>330.0;10.0;20.0;10.0;20.0;250.0;10.0;250.0</additional_attributes>
   </element>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>520</x>
-      <y>160</y>
+      <x>560</x>
+      <y>190</y>
       <w>100</w>
       <h>40</h>
     </coordinates>
@@ -60,10 +60,10 @@
   <element>
     <id>UMLObject</id>
     <coordinates>
-      <x>70</x>
-      <y>80</y>
-      <w>380</w>
-      <h>570</h>
+      <x>0</x>
+      <y>110</y>
+      <w>490</w>
+      <h>590</h>
     </coordinates>
     <panel_attributes>System
 valign=top</panel_attributes>
@@ -72,10 +72,10 @@ valign=top</panel_attributes>
   <element>
     <id>UMLObject</id>
     <coordinates>
-      <x>470</x>
-      <y>80</y>
+      <x>510</x>
+      <y>110</y>
       <w>300</w>
-      <h>570</h>
+      <h>590</h>
     </coordinates>
     <panel_attributes>Angreifer
 valign=top</panel_attributes>
@@ -84,10 +84,10 @@ valign=top</panel_attributes>
   <element>
     <id>UMLObject</id>
     <coordinates>
-      <x>790</x>
-      <y>80</y>
+      <x>830</x>
+      <y>110</y>
       <w>300</w>
-      <h>570</h>
+      <h>590</h>
     </coordinates>
     <panel_attributes>Verteidiger
 valign=top</panel_attributes>
@@ -96,10 +96,10 @@ valign=top</panel_attributes>
   <element>
     <id>UMLObject</id>
     <coordinates>
-      <x>1110</x>
-      <y>80</y>
+      <x>1150</x>
+      <y>110</y>
       <w>300</w>
-      <h>570</h>
+      <h>590</h>
     </coordinates>
     <panel_attributes>Zuleger
 valign=top</panel_attributes>
@@ -108,8 +108,8 @@ valign=top</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>610</x>
-      <y>170</y>
+      <x>650</x>
+      <y>200</y>
       <w>220</w>
       <h>30</h>
     </coordinates>
@@ -119,8 +119,8 @@ valign=top</panel_attributes>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>950</x>
-      <y>160</y>
+      <x>990</x>
+      <y>190</y>
       <w>100</w>
       <h>40</h>
     </coordinates>
@@ -130,8 +130,8 @@ valign=top</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1040</x>
-      <y>170</y>
+      <x>1080</x>
+      <y>200</y>
       <w>110</w>
       <h>30</h>
     </coordinates>
@@ -141,8 +141,8 @@ valign=top</panel_attributes>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>1260</x>
-      <y>160</y>
+      <x>1300</x>
+      <y>190</y>
       <w>120</w>
       <h>40</h>
     </coordinates>
@@ -152,8 +152,8 @@ valign=top</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>680</x>
-      <y>190</y>
+      <x>720</x>
+      <y>220</y>
       <w>660</w>
       <h>140</h>
     </coordinates>
@@ -163,8 +163,8 @@ valign=top</panel_attributes>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>810</x>
-      <y>590</y>
+      <x>1000</x>
+      <y>620</y>
       <w>100</w>
       <h>40</h>
     </coordinates>
@@ -174,8 +174,8 @@ valign=top</panel_attributes>
   <element>
     <id>UMLSpecialState</id>
     <coordinates>
-      <x>650</x>
-      <y>410</y>
+      <x>690</x>
+      <y>440</y>
       <w>40</w>
       <h>40</h>
     </coordinates>
@@ -185,8 +185,8 @@ valign=top</panel_attributes>
   <element>
     <id>UMLSpecialState</id>
     <coordinates>
-      <x>810</x>
-      <y>160</y>
+      <x>850</x>
+      <y>190</y>
       <w>40</w>
       <h>40</h>
     </coordinates>
@@ -196,8 +196,8 @@ valign=top</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>840</x>
-      <y>160</y>
+      <x>880</x>
+      <y>190</y>
       <w>130</w>
       <h>40</h>
     </coordinates>
@@ -208,8 +208,8 @@ r1=[schlagen]</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>820</x>
-      <y>190</y>
+      <x>860</x>
+      <y>220</y>
       <w>130</w>
       <h>330</h>
     </coordinates>
@@ -220,8 +220,8 @@ m2=[nicht schlagen]</panel_attributes>
   <element>
     <id>UMLSpecialState</id>
     <coordinates>
-      <x>1130</x>
-      <y>160</y>
+      <x>1170</x>
+      <y>190</y>
       <w>40</w>
       <h>40</h>
     </coordinates>
@@ -231,8 +231,8 @@ m2=[nicht schlagen]</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1160</x>
-      <y>160</y>
+      <x>1200</x>
+      <y>190</y>
       <w>120</w>
       <h>40</h>
     </coordinates>
@@ -243,8 +243,8 @@ r1=[zulegen]</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>680</x>
-      <y>190</y>
+      <x>720</x>
+      <y>220</y>
       <w>580</w>
       <h>260</h>
     </coordinates>
@@ -255,8 +255,8 @@ m2=[nicht zulegen]</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>560</x>
-      <y>190</y>
+      <x>600</x>
+      <y>220</y>
       <w>110</w>
       <h>270</h>
     </coordinates>
@@ -267,20 +267,20 @@ m1=[zulegen]</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>660</x>
-      <y>440</y>
-      <w>190</w>
-      <h>170</h>
+      <x>700</x>
+      <y>470</y>
+      <w>280</w>
+      <h>130</h>
     </coordinates>
     <panel_attributes>lt=-&gt;
 m1=[nicht zulegen]</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;120.0;170.0;120.0;170.0;150.0</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;110.0;260.0;110.0</additional_attributes>
   </element>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>810</x>
-      <y>500</y>
+      <x>850</x>
+      <y>530</y>
       <w>100</w>
       <h>40</h>
     </coordinates>
@@ -290,8 +290,8 @@ m1=[nicht zulegen]</panel_attributes>
   <element>
     <id>UMLSpecialState</id>
     <coordinates>
-      <x>650</x>
-      <y>290</y>
+      <x>690</x>
+      <y>320</y>
       <w>40</w>
       <h>40</h>
     </coordinates>
@@ -301,8 +301,8 @@ m1=[nicht zulegen]</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>660</x>
-      <y>170</y>
+      <x>700</x>
+      <y>200</y>
       <w>170</w>
       <h>140</h>
     </coordinates>
@@ -313,19 +313,20 @@ m1=[nicht zulegen]</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>80</x>
-      <y>240</y>
-      <w>150</w>
+      <x>10</x>
+      <y>270</y>
+      <w>120</w>
       <h>40</h>
     </coordinates>
-    <panel_attributes>6 Handkarten jeder</panel_attributes>
+    <panel_attributes>6 Handkarten 
+jeder</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>280</x>
-      <y>190</y>
+      <x>180</x>
+      <y>220</y>
       <w>30</w>
       <h>70</h>
     </coordinates>
@@ -335,8 +336,8 @@ m1=[nicht zulegen]</panel_attributes>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>240</x>
-      <y>240</y>
+      <x>140</x>
+      <y>270</y>
       <w>100</w>
       <h>40</h>
     </coordinates>
@@ -346,8 +347,8 @@ m1=[nicht zulegen]</panel_attributes>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>240</x>
-      <y>400</y>
+      <x>140</x>
+      <y>430</y>
       <w>100</w>
       <h>40</h>
     </coordinates>
@@ -358,8 +359,8 @@ bestimmen</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>560</x>
-      <y>190</y>
+      <x>600</x>
+      <y>220</y>
       <w>110</w>
       <h>150</h>
     </coordinates>
@@ -370,41 +371,8 @@ m1=[zulegen]</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>340</x>
-      <y>510</y>
-      <w>490</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;470.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLState</id>
-    <coordinates>
-      <x>250</x>
-      <y>500</y>
-      <w>100</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>Aufnehmen</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLState</id>
-    <coordinates>
-      <x>310</x>
-      <y>590</y>
-      <w>100</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>Abwerfen</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>400</x>
-      <y>600</y>
+      <x>440</x>
+      <y>540</y>
       <w>430</w>
       <h>30</h>
     </coordinates>
@@ -414,8 +382,19 @@ m1=[zulegen]</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>280</x>
-      <y>270</y>
+      <x>420</x>
+      <y>560</y>
+      <w>600</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0;580.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>180</x>
+      <y>300</y>
       <w>30</w>
       <h>70</h>
     </coordinates>
@@ -425,8 +404,8 @@ m1=[zulegen]</panel_attributes>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>240</x>
-      <y>320</y>
+      <x>140</x>
+      <y>350</y>
       <w>100</w>
       <h>40</h>
     </coordinates>
@@ -436,8 +415,8 @@ m1=[zulegen]</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>280</x>
-      <y>350</y>
+      <x>180</x>
+      <y>380</y>
       <w>30</w>
       <h>70</h>
     </coordinates>
@@ -447,43 +426,34 @@ m1=[zulegen]</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>80</x>
-      <y>160</y>
-      <w>150</w>
-      <h>40</h>
+      <x>10</x>
+      <y>170</y>
+      <w>120</w>
+      <h>60</h>
     </coordinates>
-    <panel_attributes>32er Deck (oder 52 je 
-nach Anzahl Spieler)</panel_attributes>
+    <panel_attributes>32er Deck 
+(oder 52 je nach 
+Anzahl Spieler)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>80</x>
-      <y>320</y>
-      <w>150</w>
-      <h>40</h>
+      <x>10</x>
+      <y>330</y>
+      <w>120</w>
+      <h>60</h>
     </coordinates>
-    <panel_attributes>Karte aufgedeckt 
-auf Table als Trumpf</panel_attributes>
+    <panel_attributes>Karte 
+aufgedeckt auf 
+Table als Trumpf</panel_attributes>
     <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>380</x>
-      <y>480</y>
-      <w>30</w>
-      <h>130</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;110.0</additional_attributes>
   </element>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>140</x>
-      <y>590</y>
+      <x>520</x>
+      <y>650</y>
       <w>150</w>
       <h>40</h>
     </coordinates>
@@ -494,8 +464,8 @@ Angreifer</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>80</x>
-      <y>500</y>
+      <x>520</x>
+      <y>560</y>
       <w>150</w>
       <h>40</h>
     </coordinates>
@@ -506,8 +476,8 @@ Angreifer</panel_attributes>
   <element>
     <id>UMLState</id>
     <coordinates>
-      <x>340</x>
-      <y>450</y>
+      <x>380</x>
+      <y>380</y>
       <w>100</w>
       <h>40</h>
     </coordinates>
@@ -517,23 +487,166 @@ Angreifer</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>290</x>
-      <y>460</y>
-      <w>70</w>
-      <h>60</h>
+      <x>420</x>
+      <y>200</y>
+      <w>160</w>
+      <h>200</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>50.0;10.0;10.0;10.0;10.0;40.0</additional_attributes>
+    <additional_attributes>140.0;10.0;10.0;10.0;10.0;180.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLSpecialState</id>
+    <coordinates>
+      <x>960</x>
+      <y>560</y>
+      <w>40</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>type=decision</panel_attributes>
+    <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>380</x>
-      <y>170</y>
+      <x>970</x>
+      <y>220</y>
+      <w>170</w>
+      <h>360</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m2=[nicht alle geschlagen]</panel_attributes>
+    <additional_attributes>70.0;10.0;70.0;60.0;10.0;60.0;10.0;340.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>990</x>
+      <y>560</y>
+      <w>150</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+r2=[alle geschlagen]</panel_attributes>
+    <additional_attributes>60.0;60.0;60.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLSpecialState</id>
+    <coordinates>
+      <x>410</x>
+      <y>530</y>
+      <w>40</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>type=decision</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>420</x>
+      <y>410</y>
+      <w>130</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m2=[Deck nicht leer]</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>290</x>
+      <y>540</y>
+      <w>140</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m2=[Deck leer]</panel_attributes>
+    <additional_attributes>10.0;10.0;120.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>270</x>
+      <y>200</y>
+      <w>310</w>
+      <h>350</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m2=[Nicht WinCondition]</panel_attributes>
+    <additional_attributes>290.0;10.0;10.0;10.0;10.0;330.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLSpecialState</id>
+    <coordinates>
+      <x>260</x>
+      <y>530</y>
+      <w>40</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>type=decision</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>120</x>
+      <y>540</y>
       <w>160</w>
-      <h>300</h>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m2=[WinCondition]</panel_attributes>
+    <additional_attributes>10.0;10.0;140.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLState</id>
+    <coordinates>
+      <x>30</x>
+      <y>530</y>
+      <w>100</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>Platzierungen
+deklarieren</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLSpecialState</id>
+    <coordinates>
+      <x>70</x>
+      <y>610</y>
+      <w>20</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>type=final</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>70</x>
+      <y>560</y>
+      <w>30</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>140.0;10.0;10.0;10.0;10.0;280.0</additional_attributes>
+    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>130</x>
+      <y>590</y>
+      <w>220</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>WinCondition:
+1. Deck leer
+2. Aufgedeckte Karte weg
+3. Maximal ein Spieler hat Hand
+</panel_attributes>
+    <additional_attributes/>
   </element>
 </diagram>
