@@ -1,5 +1,6 @@
 package cardengine.application.ui;
 
+import cardengine.framework.core.Card;
 import cardengine.framework.core.Game;
 import cardengine.framework.core.Player;
 
@@ -22,6 +23,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * Haupt-Fenster (View) der Swing-GUI im Kartenspiel-Look (Durak-Stil).
@@ -47,14 +49,18 @@ public class GameView extends JFrame {
 
     private final List<PlayerPanel> playerPanels = new ArrayList<>();
     private final DeckPanel deckPanel = new DeckPanel();
+    private final DiscardPanel discardPanel = new DiscardPanel();
     private final List<Player> players;
+    private final String gameTitle;
 
     /**
-     * @param players Spieler, fuer die je ein {@link PlayerPanel} angelegt wird
+     * @param players   Spieler, fuer die je ein {@link PlayerPanel} angelegt wird
+     * @param gameTitle Name des Spiels (Fenstertitel und Kopfzeile), z.&nbsp;B. "Mau-Mau"
      */
-    public GameView(List<Player> players) {
-        super("CardGameEngine – Kartentisch (Durak-Stil)");
+    public GameView(List<Player> players, String gameTitle) {
+        super("CardGameEngine – " + gameTitle);
         this.players = players;
+        this.gameTitle = gameTitle;
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
@@ -74,7 +80,7 @@ public class GameView extends JFrame {
         bar.setBackground(BAR_BG);
         bar.setBorder(BorderFactory.createEmptyBorder(8, 14, 8, 14));
 
-        JLabel title = new JLabel("♠ ♥ Minigame ♦ ♣");
+        JLabel title = new JLabel("♠ ♥ " + gameTitle + " ♦ ♣");
         title.setForeground(ACCENT);
         title.setFont(new Font("SansSerif", Font.BOLD, 18));
         bar.add(title, BorderLayout.WEST);
@@ -95,10 +101,11 @@ public class GameView extends JFrame {
             playerPanels.add(new PlayerPanel(p));
         }
 
-        // Mittelbereich mit dem Nachziehstapel.
-        JPanel center = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        // Mittelbereich mit Nachziehstapel (links) und Ablagestapel (rechts).
+        JPanel center = new JPanel(new FlowLayout(FlowLayout.CENTER, 24, 0));
         center.setOpaque(false);
         center.add(deckPanel);
+        center.add(discardPanel);
 
         if (players.size() == 2) {
             // Klassische Sitzordnung: Gegner oben, eigener Spieler unten.
@@ -166,6 +173,34 @@ public class GameView extends JFrame {
     }
 
     /**
+     * GENERIERT von Claude (Opus 4.8).
+     *
+     * <p>Registriert den Handler, der beim Klick auf eine Handkarte des aktiven
+     * Spielers mit genau dieser Karte aufgerufen wird (fuer "Karte spielen", z.&nbsp;B.
+     * in Mau-Mau). Spiele ohne Kartenauswahl (Minigame) setzen diesen Handler
+     * einfach nicht.</p>
+     *
+     * @param listener Empfaenger der angeklickten Karte
+     */
+    public void setCardClickAction(Consumer<Card> listener) {
+        for (PlayerPanel pp : playerPanels) {
+            pp.setCardClickListener(listener);
+        }
+    }
+
+    /**
+     * GENERIERT von Claude (Opus 4.8).
+     *
+     * <p>Beschriftet den Aktions-Button um (Standard: „Karte ziehen"), damit die
+     * gleiche View fuer verschiedene Spiele passende Begriffe zeigen kann.</p>
+     *
+     * @param text neue Button-Beschriftung
+     */
+    public void setDrawButtonText(String text) {
+        drawButton.setText(text);
+    }
+
+    /**
      * Zeichnet den kompletten Spielzustand neu.
      *
      * @param game aktuelles Spiel
@@ -181,6 +216,11 @@ public class GameView extends JFrame {
 
         int deckSize = game.getDeck() != null ? game.getDeck().getDeckSize() : 0;
         deckPanel.setDeckSize(deckSize);
+
+        // Ablagestapel (Tisch): oberste Karte + Anzahl.
+        List<Card> pile = game.getTable().getCards();
+        Card topDiscard = pile.isEmpty() ? null : pile.get(pile.size() - 1);
+        discardPanel.setTop(topDiscard, pile.size());
 
         if (running) {
             statusLabel.setText(active.getName() + " ist am Zug");

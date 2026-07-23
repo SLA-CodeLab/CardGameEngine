@@ -10,7 +10,10 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * Swing-Ansicht fuer die aufgefaechterte Hand eines Spielers.
@@ -36,10 +39,40 @@ public class PlayerPanel extends JPanel {
     private Player player;
     private boolean active;
 
+    /** Wird mit der angeklickten Karte aufgerufen – aber nur, wenn dieser Spieler am Zug ist. */
+    private Consumer<Card> cardClickListener;
+
     public PlayerPanel(Player player) {
         this.player = player;
         setOpaque(false);
         setPreferredSize(new Dimension(340, HEADER_H + CARD_H + 2 * PAD));
+
+        // GENERIERT von Claude (Opus 4.8): Klick auf eine Handkarte des aktiven
+        // Spielers an den Controller melden (Grundlage fuer "Karte spielen").
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (!active || cardClickListener == null) {
+                    return;
+                }
+                int idx = cardIndexAt(e.getX(), e.getY());
+                if (idx >= 0) {
+                    cardClickListener.accept(player.getHand().getCards().get(idx));
+                }
+            }
+        });
+    }
+
+    /**
+     * GENERIERT von Claude (Opus 4.8).
+     *
+     * <p>Registriert den Handler, der beim Klick auf eine Karte des aktiven Spielers
+     * mit genau dieser Karte aufgerufen wird.</p>
+     *
+     * @param listener Empfaenger der angeklickten Karte
+     */
+    public void setCardClickListener(Consumer<Card> listener) {
+        this.cardClickListener = listener;
     }
 
     /**
@@ -92,5 +125,40 @@ public class PlayerPanel extends JPanel {
             }
         }
         g2.dispose();
+    }
+
+    /**
+     * GENERIERT von Claude (Opus 4.8).
+     *
+     * <p>Bildet einen Mausklick auf einen Kartenindex ab. Verwendet exakt dieselbe
+     * Auffaecher-Geometrie wie {@link #paintComponent(Graphics)}. Da sich die Karten
+     * ueberlappen, gewinnt die zuletzt gezeichnete (oberste) Karte – deshalb wird von
+     * hinten nach vorne geprueft.</p>
+     *
+     * @return Index der getroffenen Karte oder {@code -1}
+     */
+    private int cardIndexAt(int px, int py) {
+        List<Card> cards = player.getHand().getCards();
+        int count = cards.size();
+        if (count == 0) {
+            return -1;
+        }
+        int w = getWidth();
+        int top = HEADER_H + PAD;
+        if (py < top || py > top + CARD_H) {
+            return -1;
+        }
+        int available = w - 2 * PAD - CARD_W;
+        int step = count == 1 ? 0 : Math.min(CARD_W + 6, available / (count - 1));
+        int totalWidth = CARD_W + step * (count - 1);
+        int startX = (w - totalWidth) / 2;
+
+        for (int i = count - 1; i >= 0; i--) {
+            int x = startX + i * step;
+            if (px >= x && px <= x + CARD_W) {
+                return i;
+            }
+        }
+        return -1;
     }
 }

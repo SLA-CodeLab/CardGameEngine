@@ -12,32 +12,22 @@ import cardengine.showcase.minigame.MiniDrawCommand;
 import java.util.List;
 
 /**
- * Controller (MVC) zwischen {@link Game} (Model) und {@link GameView} (View).
+ * Controller (MVC) fuer den Minigame-Showcase zwischen {@link Game} und {@link GameView}.
  *
- * <p>Bindet die beiden ueber genau zwei Beruehrungspunkte des Frameworks:
- * Aktionen gehen ueber {@code Game.submitCommand(...)} / {@code Game.undoLastAction()}
- * hinein, Aktualisierungen kommen ueber das {@link GameListener}-Callback heraus.
- * Der Controller baut den showcase-spezifischen {@link MiniDrawCommand} und haelt
- * die View sonst frei von jeder Spiellogik.</p>
- *
- * <p>Alle drei {@link GameListener}-Callbacks werden bedient: {@code onStateChanged}
- * zeichnet neu, {@code onGameOver} zeigt den Gewinner, {@code onInvalidMove} meldet
- * einen abgelehnten Zug.</p>
+ * <p>Bindet beide ueber genau zwei Beruehrungspunkte des Frameworks: Aktionen gehen
+ * ueber {@code Game.submitCommand(...)} / {@code Game.undoLastAction()} hinein,
+ * Aktualisierungen kommen ueber das {@link GameListener}-Callback heraus. Der
+ * Controller baut den showcase-spezifischen {@link MiniDrawCommand} und haelt die
+ * View frei von Spiellogik.</p>
  *
  * @author Claude (Opus 4.8)
  */
-public class GameController implements GameListener {
+public class MinigameController implements GameListener {
 
     private final Game game;
     private final GameView view;
 
-    /**
-     * Verdrahtet Model und View und registriert die Button-Handler.
-     *
-     * @param game vorbereitetes Spiel (vor {@code start()})
-     * @param view zugehoerige Ansicht
-     */
-    public GameController(Game game, GameView view) {
+    public MinigameController(Game game, GameView view) {
         this.game = game;
         this.view = view;
 
@@ -55,7 +45,6 @@ public class GameController implements GameListener {
         Command cmd = new MiniDrawCommand(game, active, game.getDeck());
         game.submitCommand(cmd);
 
-        // Wenn tatsaechlich gezogen wurde, die neue Karte ins Log schreiben.
         if (hand.size() > before) {
             view.log(active.getName() + " zieht " + CardRenderer.shortLabel(hand.get(hand.size() - 1)));
         }
@@ -76,7 +65,6 @@ public class GameController implements GameListener {
 
     @Override
     public void onGameOver(Player winner) {
-        // Wird von Game.submitCommand(...) beim Spielende gefeuert.
         view.showGameOver(winner);
     }
 
