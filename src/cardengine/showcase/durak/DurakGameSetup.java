@@ -32,15 +32,14 @@ public class DurakGameSetup implements GameSetup {
 
             // alle Cards scannen
             for (Card card : hand.getCards()) {
-                SimpleCard simpleCard = (SimpleCard) card;
                 //nach trumpf suchen
-                if (simpleCard.getSuit() == trumpSuit) {
+                if (card.getSuit() == trumpSuit) {
 
                     // Hilfsmittel: GEMINI 3.1 PRO Ansatz Start
-                    if (lowestTrumpOwner == null || simpleCard.getRank().ordinal() < lowestTrumpRank.ordinal()) {
+                    if (lowestTrumpOwner == null || card.getRank().ordinal() < lowestTrumpRank.ordinal()) {
                     // Hilfsmittel: GEMINI 3.1 PRO Ansatz Ende
 
-                        lowestTrumpRank = simpleCard.getRank();
+                        lowestTrumpRank = card.getRank();
                         lowestTrumpOwner = player;
                     }
                 }

@@ -1,9 +1,6 @@
 package cardengine.showcase.durak.factory;
 
-import cardengine.framework.core.Rank;
-import cardengine.framework.core.SimpleCard;
-import cardengine.framework.core.StandardDeck;
-import cardengine.framework.core.Suit;
+import cardengine.framework.core.*;
 
 public class DurakDeck extends StandardDeck {
     /**
@@ -17,7 +14,7 @@ public class DurakDeck extends StandardDeck {
         Rank[] ranks = Rank.values();// {TWO, THREE .. usw}
         for (Suit suit : Suit.values()) { //{HEARTS,DIAMONDS,CLUBS,SPADES}
             for (int i = getStartIndex(ranks); i < ranks.length; i++) {
-                addCard(new SimpleCard(suit, ranks[i]));
+                addCard(new Card(suit, ranks[i]));
             }
         }
     }

@@ -2,7 +2,6 @@ package cardengine.application.ui;
 
 import cardengine.framework.core.Card;
 import cardengine.framework.core.Rank;
-import cardengine.framework.core.SimpleCard;
 import cardengine.framework.core.Suit;
 
 import java.awt.BasicStroke;
@@ -18,7 +17,7 @@ import java.awt.RenderingHints;
  * <p>Rendert eine {@link Card} als klassisches Blatt: weisser, abgerundeter Rahmen,
  * Rang und Farbsymbol in den Ecken sowie ein grosses Symbol in der Mitte – Herz/Karo
  * rot, Pik/Kreuz schwarz. {@code null} wird als verdeckte Rueckseite gezeichnet.
- * {@link SimpleCard} wird ueber {@link Suit}/{@link Rank} in Symbole uebersetzt, sodass
+ * Die {@link Card} wird ueber {@link Suit}/{@link Rank} in Symbole uebersetzt, sodass
  * keine Karten-ID mehr noetig ist (z.&nbsp;B. ♠4).</p>
  *
  * @author Claude (Opus 4.8)
@@ -53,10 +52,8 @@ public final class CardRenderer {
         int arc = Math.max(8, w / 6);
         if (card == null) {
             paintBack(g2, x, y, w, h, arc);
-        } else if (card instanceof SimpleCard sc) {
-            paintFace(g2, sc.getSuit(), sc.getRank(), x, y, w, h, arc);
         } else {
-            paintGeneric(g2, card.toString(), x, y, w, h, arc);
+            paintFace(g2, card.getSuit(), card.getRank(), x, y, w, h, arc);
         }
         g2.dispose();
     }
@@ -97,14 +94,6 @@ public final class CardRenderer {
         g2.dispose();
     }
 
-    private static void paintGeneric(Graphics2D g, String text, int x, int y, int w, int h, int arc) {
-        drawCardBase(g, x, y, w, h, arc);
-        g.setColor(BLACK);
-        g.setFont(new Font("SansSerif", Font.PLAIN, Math.max(9, h / 8)));
-        FontMetrics fm = g.getFontMetrics();
-        g.drawString(text, x + (w - fm.stringWidth(text)) / 2, y + h / 2);
-    }
-
     private static void drawCardBase(Graphics2D g, int x, int y, int w, int h, int arc) {
         g.setColor(FACE);
         g.fillRoundRect(x, y, w, h, arc, arc);
@@ -131,10 +120,7 @@ public final class CardRenderer {
 
     /** @return kompakte Bezeichnung wie {@code ♠4} (Farbe + Rang). */
     public static String shortLabel(Card card) {
-        if (card instanceof SimpleCard sc) {
-            return suitSymbol(sc.getSuit()) + rankLabel(sc.getRank());
-        }
-        return card != null ? card.toString() : "??";
+        return card != null ? suitSymbol(card.getSuit()) + rankLabel(card.getRank()) : "??";
     }
 
     private static String rankLabel(Rank rank) {

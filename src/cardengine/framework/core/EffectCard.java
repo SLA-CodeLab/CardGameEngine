@@ -2,7 +2,7 @@ package cardengine.framework.core;
 
 import cardengine.framework.strategy.Effect;
 
-public class EffectCard extends SimpleCard {
+public class EffectCard extends Card {
     private Effect action;
 
     public EffectCard(Suit suit, Rank rank, Effect action) {

@@ -1,7 +1,7 @@
 package cardengine.showcase.minigame;
 
+import cardengine.framework.core.Card;
 import cardengine.framework.core.Rank;
-import cardengine.framework.core.SimpleCard;
 import cardengine.framework.core.StandardDeck;
 import cardengine.framework.core.Suit;
 import cardengine.framework.factory.Deck;
@@ -10,7 +10,7 @@ import cardengine.framework.factory.DeckFactory;
 /**
  * Factory des Minigames: erzeugt ein Durak-artiges 36-Karten-Deck.
  *
- * <p>Statt namenloser Platzhalterkarten werden jetzt echte {@link SimpleCard}s mit
+ * <p>Statt namenloser Platzhalterkarten werden jetzt echte {@link Card}s mit
  * {@link Suit} und {@link Rank} erzeugt (6 bis Ass in allen vier Farben). Dadurch
  * lassen sich die Karten in der GUI als richtige Kartenblaetter (z.&nbsp;B. ♠4)
  * darstellen – es wird keine Karten-ID mehr benoetigt.</p>
@@ -31,7 +31,7 @@ public class MiniFactory extends DeckFactory {
         for (Suit suit : Suit.values()) {
             for (Rank rank : Rank.values()) {
                 if (rank.ordinal() >= MIN_RANK_ORDINAL) {
-                    deck.addCard(new SimpleCard(suit, rank));
+                    deck.addCard(new Card(suit, rank));
                 }
             }
         }
