@@ -16,9 +16,9 @@ public abstract class StandardDeck extends CardCollection implements Deck {
     }
 
     /**
-     *
-     * @author Lukas
+     * Um oberste Karte vom Deck zu nehmen. Habe mit size - 1 damit migration zu Eclipse kein Problem wird
      * @return oberste Karte des Decks
+     * @author Lukas
      */
     @Override
     public Card drawCard() {

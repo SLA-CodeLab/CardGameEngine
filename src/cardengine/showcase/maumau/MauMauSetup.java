@@ -51,7 +51,15 @@ public class MauMauSetup implements GameSetup {
     }
 
     @Override
-    public Phase getStartPhase() {
+    public void assignFirstPlayer(Game game) {
+        // Kein Sonderkriterium: der erste Spieler in der Liste ("Du") beginnt.
+        if (!game.getPlayers().isEmpty()) {
+            game.setActivePlayer(game.getPlayers().get(0));
+        }
+    }
+
+    @Override
+    public Phase getStartPhase(Game game) {
         return new MauMauPlayPhase();
     }
 }

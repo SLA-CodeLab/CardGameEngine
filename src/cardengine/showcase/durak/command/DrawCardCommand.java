@@ -22,18 +22,24 @@ public class DrawCardCommand extends AbstractCommand {
 
     @Override
     public void execute() {
-        if (deck.isEmpty()) {
-            moved = false; return;
+        if (deck == null || deck.isEmpty() || getPlayer() == null) {
+            moved = false;
+            return;
         }
+
         card = deck.drawCard();
-        getPlayer().getHand().addCard(card);
-        moved = true;
+        if (card != null) {
+            getPlayer().getHand().addCard(card);
+            moved = true;
+        }
     }
 
     @Override
     public void undo() {
-        // ist nicht möglich da nach dem Nachziehen kein undo möglich ist
-        // erstmal ergibt das kein Sinn und zweitens müsste dafür das Deck-Interface um returnCard oder sowas erweitert werden
-
+        if (card != null && getPlayer() != null) {
+            getPlayer().getHand().removeCard(card);
+            //deck.undoDrawCard(); deck.popTrumpf(); deck.shuffle(); //todo hier muss undo für Karte ziehen umgesetzt werden
+            moved = false;
+        }
     }
 }

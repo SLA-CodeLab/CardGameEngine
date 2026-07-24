@@ -27,10 +27,10 @@ public class Game {
      * Diese Methode startet das Spiel aber noch nicht das macht start() nur den aufbau
      * Also alles im (alten) Aktivitätsdiagramm was oberhalb GameLoop steht
      *
-     * @author Lukas
      * @param deckFactory erzeugt das showcasespezifische Deck
      * @param winCondition showcasespezifische Siegbedingung
      * @param setup um Hände und Startphase vom Showcase zu bekommen
+     * @author Hauptverantwortlich Lukas, aber viel Architektur von allen
      */
     public void initGame(DeckFactory deckFactory, WinCondition winCondition, GameSetup setup) {
         //Deck anlegen
@@ -45,10 +45,11 @@ public class Game {
             deck.shuffle();
         }
 
-        //Hand verteilen und startphase vom showcase
+        //Setup ziehen
         if (setup != null) {
             setup.distributeInitialHands(this);
-            startPhase = setup.getStartPhase();
+            setup.assignFirstPlayer(this);
+            startPhase = setup.getStartPhase(this);
         }
 
         //GameLoop war in der Konsolen version hier nach Aktivitätsdigramm fällt aber jetzt weg
@@ -80,9 +81,17 @@ public class Game {
 //        }
 //    }
 
+    /**
+     * Beim Aufruf des Starten des Spiels aufgerufen.
+     * Methode setzt startPhase und falls kein startSpieler vom Showcase gesetzt dann default Startspieler
+     *
+     * @author Lukas
+     */
     public void start() {
         changePhase(startPhase);
-        setActivePlayer(players.get(0));
+        if (activePlayer == null) {
+            setActivePlayer(players.get(0));
+        }
         notifyStateChanged();
     }
 
@@ -108,12 +117,6 @@ public class Game {
             notifyGameOver(getWinner());
         }
         notifyStateChanged();
-    }
-
-    public void executeCommand(Command command) {
-        if (commandHistory != null) {
-            commandHistory.executeCommand(command);
-        }
     }
 
     public void addGameListener(GameListener l) {

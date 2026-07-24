@@ -34,6 +34,9 @@ public class Card {
      * Das sollte auch alte Usages nicht kaputt machen da ignorierter Returnwert nicht so deep ist
      * @author Lukas
      * @return Gibt die geflippte Version der Karte wieder
+     *
+     *todo ich habe diese Funktion viel benutzt aber ist irgendwie unschön nicht hundert prozent sicher zu sein ob jetzt sichtbar oder nicht
+     * vielleicht wäre es besser eine setVisible und setHidden zu machen
      */
     public Card flip() {
         if (this.visibility == CardVisibility.HIDDEN) {

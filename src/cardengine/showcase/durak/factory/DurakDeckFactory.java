@@ -8,7 +8,6 @@ import cardengine.framework.factory.DeckFactory;
  * @author Stanislav
  */
 public class DurakDeckFactory extends DeckFactory {
-
     private static final int NUMBER_OF_CARDS = 36;
 
     @Override
@@ -19,5 +18,5 @@ public class DurakDeckFactory extends DeckFactory {
     @Override
     public int getDeckSize() {
         return NUMBER_OF_CARDS;
-    }
+    } //todo wird nirgendwo gebraucht bzw es gibt static final variable ist also unnötig Code Smell
 }

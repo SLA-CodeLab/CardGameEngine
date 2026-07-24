@@ -4,23 +4,35 @@ import cardengine.framework.core.*;
 import cardengine.framework.factory.Deck;
 import cardengine.framework.state.Phase;
 import cardengine.showcase.durak.factory.DurakDeck;
+import cardengine.showcase.durak.state.AttackPhase;
 
 public class DurakGameSetup implements GameSetup {
     private static final int HAND_SIZE = 6;
 
     /**
-     * @author Stanislav
+     * Iteriert über alle Spieler und verteilt jedem 6 Handkarten
+     *
+     * @author Lukas
      */
     @Override
     public void distributeInitialHands(Game game) {
-        //todo
+        Deck deck = game.getDeck();
+        if (deck == null) return;
+        for (Player p : game.getPlayers()) {
+            for (int i = 0; i < HAND_SIZE; i++) {
+                Card c = deck.drawCard();
+                if (c != null) p.getHand().addCard(c);
+            }
+        }
     }
 
     /**
      * @author Stanislav
      */
     //Hilfsmethode zum Wissen, wer startet
-    private void assignFirstPlayer(Game game, Suit trumpSuit) {
+    @Override
+    public void assignFirstPlayer(Game game) {
+        Suit trumpSuit = ((DurakDeck) game.getDeck()).getTrumpSuit(); // von Lukas hinzugefügt //todo code smell?
         Player lowestTrumpOwner = null;
         Rank lowestTrumpRank = null;
 
@@ -59,10 +71,14 @@ public class DurakGameSetup implements GameSetup {
     }
 
     /**
-     * @author Stanislav
+     * Die Startphase wird dann im Framework aus GameSetup geholt. Startphase bei Durak ist Angriffsphase.
+     * Für die Phasen wird immer der Verteidiger gemerkt damit zwischen Angreifer und Zuleger gewechselt werden kann.
+     * @param game liefert Startspieler über activePlayer
+     * @author Lukas
      */
     @Override
-    public Phase getStartPhase() {
-        return null;
+    public Phase getStartPhase(Game game) {
+        Player verteidiger = game.getNextPlayer(game.getActivePlayer());
+        return new AttackPhase(verteidiger);
     }
 }
