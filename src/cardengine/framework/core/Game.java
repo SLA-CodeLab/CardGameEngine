@@ -149,6 +149,32 @@ public class Game {
     }
 
     /**
+     * @param player Ausgangsspieler
+     * @return der in Uhrzeigersinn nächster Spieler
+     * @author Lukas
+     */
+    public Player getNextPlayer(Player player) {
+        int i = players.indexOf(player);
+        if (i < 0 || players.isEmpty()) {
+            return null;
+        }
+        return players.get((i + 1) % players.size());
+    }
+
+    /**
+     * @param player Ausgangsspieler
+     * @return der in Uhrzeigersinn letzter Spieler
+     * @author Lukas
+     */
+    public Player getPreviousPlayer(Player player) {
+        int i = players.indexOf(player);
+        if (i < 0 || players.isEmpty()) {
+            return null;
+        }
+        return players.get((i - 1 + players.size()) % players.size());
+    }
+
+    /**
      * @author Lukas
      */
     public void undoLastAction() {

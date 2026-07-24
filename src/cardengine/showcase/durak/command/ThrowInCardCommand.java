@@ -35,4 +35,8 @@ public class ThrowInCardCommand extends AbstractCommand {
         table.transferCard(card.flip(), getPlayer().getHand());
         moved = false;
     }
+
+    public Card getCard() {
+        return card;
+    }
 }
