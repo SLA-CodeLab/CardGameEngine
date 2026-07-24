@@ -5,7 +5,7 @@ import cardengine.framework.core.Card;
 import cardengine.framework.core.Game;
 import cardengine.framework.core.Player;
 import cardengine.framework.state.Phase;
-import cardengine.showcase.maumau.command.MauMauDrawCommand;
+import cardengine.showcase.maumau.command.DrawCardCommand;
 import cardengine.showcase.maumau.command.PlayCardCommand;
 
 import java.util.List;
@@ -23,7 +23,7 @@ import java.util.List;
  *   <li>Ein {@link PlayCardCommand} ist gueltig, wenn er vom aktiven Spieler kommt,
  *       die Karte wirklich auf dessen Hand liegt und sie zur obersten Ablagekarte
  *       passt (gleiche Farbe oder gleicher Rang).</li>
- *   <li>Ein {@link MauMauDrawCommand} ist gueltig, wenn er vom aktiven Spieler kommt
+ *   <li>Ein {@link DrawCardCommand} ist gueltig, wenn er vom aktiven Spieler kommt
  *       und der Nachziehstapel nicht leer ist.</li>
  * </ul>
  *
@@ -33,7 +33,7 @@ import java.util.List;
  *
  * @author Claude (Opus 4.8)
  */
-public class MauMauPlayPhase implements Phase {
+public class PlayPhase implements Phase {
 
     @Override
     public boolean isValid(Game game, Command cmd) {
@@ -53,7 +53,7 @@ public class MauMauPlayPhase implements Phase {
             return matches(card, topOfDiscard(game));
         }
 
-        if (cmd instanceof MauMauDrawCommand draw) {
+        if (cmd instanceof DrawCardCommand draw) {
             if (draw.getPlayer() != active) {
                 return false;
             }

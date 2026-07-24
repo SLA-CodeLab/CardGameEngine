@@ -1,11 +1,10 @@
-package cardengine.showcase.maumau.bot;
+package cardengine.application.bot;
 
 import cardengine.framework.command.Command;
 import cardengine.framework.core.Card;
 import cardengine.framework.core.Game;
 import cardengine.framework.core.Player;
-import cardengine.application.bot.BotStrategy;
-import cardengine.showcase.maumau.command.MauMauDrawCommand;
+import cardengine.showcase.maumau.command.DrawCardCommand;
 import cardengine.showcase.maumau.command.PlayCardCommand;
 
 import java.util.List;
@@ -35,7 +34,7 @@ public class MauMauBot implements BotStrategy {
             }
         }
         if (game.getDeck() != null && !game.getDeck().isEmpty()) {
-            return new MauMauDrawCommand(me, game.getDeck());
+            return new DrawCardCommand(me, game.getDeck());
         }
         return null;
     }

@@ -9,8 +9,8 @@ import cardengine.showcase.durak.command.DrawCardCommand;
 public class DrawPhase implements Phase {
 
     /**
-     * todo Schreibe morgen Doku
-     *      * @return true wenn regelkonform
+     * Prüft ob der Spieler Karten ziehen darf.
+     * @return true wenn das Deck noch Karten hat
      * @author Lukas
      */
     @Override
@@ -25,30 +25,27 @@ public class DrawPhase implements Phase {
     }
 
     /**
-     * todo Schreibe morgen Doku
-     * @return true, wenn legen Regelkonform ist
+     * Es wird nur in die nächste Phase übergegangen wenn kein Spieler mehr eine Karte ziehen muss und kann
+     * @return DrawPhase wenn Karte gezogen werden muss oder AttackPhase wenn es weiter gehen kann
      * @author Lukas
      */
-    //todo hier wird noch nicht die richtige Reihenfolge zum Ziehen bestimmt also Angreifer -> Zuleger -> Verteidiger
     @Override
     public Phase next(Game game) {
         if (playerNeedCards(game)) return this;
-        return new AttackPhase(game.getNextPlayer(game.getActivePlayer()));
+        return DurakTurn.startAttack(game, game.getActivePlayer());
     }
 
     /**
-     * todo Schreibe morgen Doku
+     * Prüft Handkartenlimit und schaut das jeder Spieler möglichst 6 Karten auf der Hand hat
+     * todo hier muss noch die Reihenfolge der Prioritäten beim ziehen beachtet werden
      * @param game
      * @return
      * @author Lukas
      */
     private boolean playerNeedCards(Game game) {
-        if (game.getDeck() != null && !game.getDeck().isEmpty()) {
-            for (Player p : game.getPlayers()) {
-                if (p.getHand().size() < 6) {
-                    return true;
-                }
-            }
+        if (game.getDeck().isEmpty()) return false;
+        for (Player p : game.getPlayers()) {
+            if (p.getHand().size() < 6) return true;
         }
         return false;
     }

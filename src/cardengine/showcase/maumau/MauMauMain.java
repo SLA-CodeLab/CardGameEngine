@@ -5,7 +5,7 @@ import cardengine.application.ui.GameView;
 import cardengine.framework.core.Game;
 import cardengine.framework.core.Player;
 import cardengine.application.bot.BotStrategy;
-import cardengine.showcase.maumau.bot.MauMauBot;
+import cardengine.application.bot.MauMauBot;
 import cardengine.showcase.maumau.factory.MauMauDeckFactory;
 import cardengine.showcase.maumau.strategy.MauMauWinCondition;
 

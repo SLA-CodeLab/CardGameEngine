@@ -17,7 +17,7 @@ import cardengine.framework.factory.Deck;
  *
  * @author Claude (Opus 4.8)
  */
-public class MauMauDrawCommand extends AbstractCommand {
+public class DrawCardCommand extends AbstractCommand {
 
     private final Deck deck;
     private Card card;
@@ -27,7 +27,7 @@ public class MauMauDrawCommand extends AbstractCommand {
      * @param player Spieler, der zieht
      * @param deck   Nachziehstapel
      */
-    public MauMauDrawCommand(Player player, Deck deck) {
+    public DrawCardCommand(Player player, Deck deck) {
         super(player);
         this.deck = deck;
     }

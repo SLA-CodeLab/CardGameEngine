@@ -9,7 +9,7 @@ import cardengine.framework.core.Card;
 import cardengine.framework.core.Game;
 import cardengine.framework.core.Player;
 import cardengine.framework.observer.GameListener;
-import cardengine.showcase.maumau.command.MauMauDrawCommand;
+import cardengine.showcase.maumau.command.DrawCardCommand;
 import cardengine.showcase.maumau.command.PlayCardCommand;
 
 import java.util.Map;
@@ -21,7 +21,7 @@ import java.util.Map;
  * Framework-Commands:</p>
  * <ul>
  *   <li>Klick auf eine eigene Handkarte -&gt; {@link PlayCardCommand} (Karte legen).</li>
- *   <li>„Karte ziehen"-Button -&gt; {@link MauMauDrawCommand}.</li>
+ *   <li>„Karte ziehen"-Button -&gt; {@link DrawCardCommand}.</li>
  *   <li>„Rückgängig"-Button -&gt; {@code Game.undoLastAction()}.</li>
  * </ul>
  *
@@ -80,7 +80,7 @@ public class MauMauController implements GameListener {
         }
         int before = active.getHand().size();
 
-        game.submitCommand(new MauMauDrawCommand(active, game.getDeck()));
+        game.submitCommand(new DrawCardCommand(active, game.getDeck()));
 
         if (active.getHand().size() > before) {
             view.log(active.getName() + " zieht eine Karte.");
@@ -95,7 +95,7 @@ public class MauMauController implements GameListener {
         Player active = game.getActivePlayer();
         if (cmd instanceof PlayCardCommand play) {
             view.log(active.getName() + " legt " + CardRenderer.shortLabel(play.getCard()));
-        } else if (cmd instanceof MauMauDrawCommand) {
+        } else if (cmd instanceof DrawCardCommand) {
             view.log(active.getName() + " zieht eine Karte.");
         }
         game.submitCommand(cmd);

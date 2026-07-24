@@ -6,14 +6,14 @@ import cardengine.framework.core.GameSetup;
 import cardengine.framework.core.Player;
 import cardengine.framework.factory.Deck;
 import cardengine.framework.state.Phase;
-import cardengine.showcase.maumau.state.MauMauPlayPhase;
+import cardengine.showcase.maumau.state.PlayPhase;
 
 /**
  * GENERIERT von Claude (Opus 4.8).
  *
  * <p>Spielaufbau fuer Mau-Mau: verteilt an jeden Spieler {@value #HAND_SIZE}
  * Handkarten und deckt danach eine Startkarte auf den Ablagestapel (den Tisch)
- * auf. Die Startphase ist die {@link MauMauPlayPhase}.</p>
+ * auf. Die Startphase ist die {@link PlayPhase}.</p>
  *
  * <p>Bewusst spielerzahl-agnostisch: es wird ueber {@code game.getPlayers()}
  * iteriert, damit dasselbe Setup mit 2, 3 oder 4 Spielern funktioniert.</p>
@@ -60,6 +60,6 @@ public class MauMauSetup implements GameSetup {
 
     @Override
     public Phase getStartPhase(Game game) {
-        return new MauMauPlayPhase();
+        return new PlayPhase();
     }
 }

@@ -19,7 +19,8 @@ public class DefendPhase implements Phase {
     }
 
     /**
-     * todo Schreibe morgen Doku
+     * guckt ob der verteidiger auch gerade am zug ist und ob dieser die betreffende Handkarte auch im Deck hat falls ja,
+     * dann geht er in defendable funkition rein
      * @return true wenn regelkonform
      * @author Lukas
      */
@@ -47,10 +48,10 @@ public class DefendPhase implements Phase {
     }
 
     /**
-     * todo Schreibe morgen Doku
-     * @param schlagkarte
-     * @param game
-     * @return
+     * guckt sich die karte an mit der geschlagen werden soll, holt sich dann die letzte karte die gelegt wurde also die, die zu verteidigen ist
+     * und ruft darauf dann schlaegt auf
+     * @param schlagkarte karte an mit der geschlagen werden soll
+     * @return true, wenn schlagbar
      * @author Lukas
      */
     private boolean defendable(Card schlagkarte, Game game) {
@@ -63,11 +64,11 @@ public class DefendPhase implements Phase {
     }
 
     /**
-     * todo Schreibe morgen Doku
-     * @param schlag
-     * @param angriff
-     * @param trumpf
-     * @return
+     * Vergleicht Karten ob die Karte basierend auf Suit und Rank und unter beachtung Trumpf schlagen kann
+     * @param schlag Karte die zum schlagen verwendet werden soll
+     * @param angriff Karte mit der angegriffen wurde und die verteidigt werden muss
+     * @param trumpf Suit des Trumpfs für dieses Spiel
+     * @return true, wenn 'schlag' auf 'angriff' passt
      * @author Lukas
      */
     private boolean schlaegt(Card schlag, Card angriff, Suit trumpf) {
@@ -78,24 +79,21 @@ public class DefendPhase implements Phase {
     }
 
     /**
-     * todo Schreibe morgen Doku
-     * @return true, wenn legen Regelkonform ist
+     * @return die nächste Phase
      * @author Lukas
      */
-
-    //todo hier muss es eigentlich zwei Fälle geben also das der Verteifiger Erfolgreich alles geschlagen hat dann nächster Angreifer wird oder
-    // nicht erfolgreich geschlagen hat und dann der Zuleger nächster Angreifer wird
     @Override
     public Phase next(Game game) {
         if (game.getTable().isEmpty()) {
-            game.setActivePlayer(game.getNextPlayer(verteidiger));
-            if (game.getDeck().isEmpty()) {
-                return new AttackPhase(game.getNextPlayer(game.getActivePlayer()));
-            } else {
+            Player candidate = game.getNextPlayer(verteidiger);
+            game.setActivePlayer(candidate);
+            if (DurakTurn.needsRefill(game)) {
                 return new DrawPhase();
             }
+            return DurakTurn.startAttack(game, candidate);
         }
         else if (allDefended(game)) {
+            game.setActivePlayer(DurakTurn.prevInGame(game, verteidiger));
             return new AttackPhase(verteidiger);
         }
         else  {

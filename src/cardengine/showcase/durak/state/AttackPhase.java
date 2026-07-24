@@ -29,7 +29,7 @@ public class AttackPhase implements Phase {
      */
     @Override
     public boolean isValid(Game game, Command cmd) {
-        Player angreifer = game.getPreviousPlayer(verteidiger);
+        Player angreifer = game.getActivePlayer();
         if (angreifer == null || cmd == null) {
             return false;
         }
@@ -45,7 +45,7 @@ public class AttackPhase implements Phase {
             return darfLegen(card, game);
         }
 
-        Player zuleger = game.getNextPlayer(verteidiger);
+        Player zuleger = DurakTurn.nextInGame(game, verteidiger);
         if (cmd instanceof ThrowInCardCommand throwIn) {
             if (throwIn.getPlayer() != zuleger) {
                 return false;
@@ -96,11 +96,12 @@ public class AttackPhase implements Phase {
      */
     @Override
     public Phase next(Game game) {
-        if(allDefended(game)) {
-            if (game.getDeck().isEmpty()) {
-                return new AttackPhase(game.getNextPlayer(game.getActivePlayer()));
+        if (allDefended(game)) {
+            game.setActivePlayer(verteidiger);
+            if (DurakTurn.needsRefill(game)) {
+                return new DrawPhase();
             }
-            return new DrawPhase();
+            return DurakTurn.startAttack(game, verteidiger);
         }
         game.setActivePlayer(verteidiger);
         return new DefendPhase(verteidiger);

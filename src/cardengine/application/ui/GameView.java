@@ -201,6 +201,17 @@ public class GameView extends JFrame {
     }
 
     /**
+     * Aktiviert bzw. deaktiviert den Aktions-Button. Der Controller entscheidet damit
+     * phasenabhaengig, ob die Aktion (bei Durak z.&nbsp;B. „Passen"/„Aufnehmen") gerade
+     * moeglich ist – unabhaengig davon, ob der Nachziehstapel leer ist.
+     *
+     * @param enabled true, wenn der Aktions-Button anklickbar sein soll
+     */
+    public void setActionEnabled(boolean enabled) {
+        drawButton.setEnabled(enabled);
+    }
+
+    /**
      * Zeichnet den kompletten Spielzustand neu.
      *
      * @param game aktuelles Spiel
