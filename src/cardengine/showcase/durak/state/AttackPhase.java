@@ -15,6 +15,27 @@ public class AttackPhase implements Phase {
     //Eigentlich wollte ich das unbedingt vermeiden weil das bisschen gegen das State Pattern geht wenn Phase Objektvariablen hat
     // aber Durak ist echt besonders damit das der activePlayer die ganze Zeit um den Verteidiger rumwechselt. Da finde ich einfach keine schöne Lösung
     // todo eventuell muss man hier architektur ändern aber würde es erstmal so lassen
+
+    // todo ZULEGER - hier ist die eigentliche Baustelle (analysiert von Claude, Opus 4.8):
+    //  Der Zuleger wird nie aktiv und bekommt deshalb nie die Gelegenheit zuzulegen.
+    //  isValid() akzeptiert unten zwar einen ThrowInCardCommand vom Zuleger
+    //  (DurakTurn.nextInGame(verteidiger)), aber activePlayer ist immer der Angreifer -
+    //  weder GUI noch Bot koennen so einen Command ueberhaupt einreichen.
+    //
+    //  In DurakTurn ALLEIN ist das nicht loesbar, weil dort der noetige Zustand fehlt.
+    //  Zum Fixen braucht es hier:
+    //   1) ein Feld 'aktuellerLeger' (wer darf gerade nachlegen), das beim Angreifer startet;
+    //   2) in next(): nach jedem geschlagenen Paar reihum weiterschalten mit
+    //      aktuellerLeger = DurakTurn.nextInGame(game, aktuellerLeger) - der Verteidiger
+    //      wird dabei uebersprungen - und game.setActivePlayer(aktuellerLeger) setzen;
+    //   3) den Angriff erst beenden (Bito), wenn ALLE reihum gepasst haben. Dafuer muss
+    //      "passen" vom "Tisch abraeumen" getrennt werden -> siehe todo in EndAttackCommand.
+    //  Ausserdem muss DefendPhase.next() dann den aktuellen Leger setzen statt fest den
+    //  Angreifer -> siehe todo dort.
+    //
+    //  Die Anwendungsschicht ist darauf schon vorbereitet: DurakController und DurakBot
+    //  fragen fuer jede Karte die Phase, welcher Command gueltig ist (Angriff/Zulegen/
+    //  Verteidigen), und laufen ohne Aenderung weiter, sobald der Zuleger aktiv wird.
     private Player verteidiger;
     public AttackPhase(Player verteidiger) {
         this.verteidiger = verteidiger;

@@ -20,6 +20,12 @@ public class EndAttackCommand extends AbstractCommand {
         this.table = table;
     }
 
+    // todo ZULEGER (analysiert von Claude, Opus 4.8): execute() raeumt den Tisch sofort ab,
+    //  d.h. "ich passe" und "Bito / Angriff endgueltig vorbei" sind hier derselbe Command.
+    //  Solange das so ist, kann es keinen Zuleger geben: sobald der Angreifer passt, ist der
+    //  Tisch leer und niemand kann mehr nachlegen. Noetig waere eine Trennung, z.B. ein
+    //  PassCommand (reicht nur weiter, Tisch bleibt liegen) und das Abraeumen erst dann,
+    //  wenn alle reihum gepasst haben. Siehe todo in AttackPhase.
     @Override public void execute() {
         beaten = new ArrayList<>(table.getCards());
         for (Card card : beaten) table.removeCard(card);

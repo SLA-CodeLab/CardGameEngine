@@ -3,6 +3,7 @@ package cardengine.showcase.durak;
 import cardengine.application.bot.BotStrategy;
 import cardengine.application.bot.DurakBot;
 import cardengine.application.controller.DurakController;
+import cardengine.application.ui.DurakTablePanel;
 import cardengine.application.ui.GameView;
 import cardengine.framework.core.Game;
 import cardengine.framework.core.Player;
@@ -35,7 +36,9 @@ public class DurakMain {
             bots.put(players.get(2), new DurakBot());
             bots.put(players.get(3), new DurakBot());
 
-            GameView view = new GameView(game.getPlayers(), "Durak");
+            // Durak legt die Karten paarweise (Angriff/Verteidigung) aus, nicht auf einen
+            // Ablagestapel -> eigene Tischansicht. (Claude, Opus 4.8)
+            GameView view = new GameView(game.getPlayers(), "Durak", new DurakTablePanel());
             new DurakController(game, view, bots);
 
             game.initGame(new DurakDeckFactory(), new DurakWinCondition(), new DurakGameSetup());

@@ -3,6 +3,7 @@ package cardengine.application.ui;
 import cardengine.framework.core.Card;
 import cardengine.framework.core.Game;
 import cardengine.framework.core.Player;
+import cardengine.framework.core.Suit;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -21,19 +22,33 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.function.Consumer;
 
 /**
  * Haupt-Fenster (View) der Swing-GUI im Kartenspiel-Look (Durak-Stil).
  *
- * <p>Zeigt einen gruenen Spieltisch ({@link FeltPanel}) mit aufgefaecherten Haenden
- * ({@link PlayerPanel}) rund um den Nachziehstapel ({@link DeckPanel}), darueber eine
- * Titel-/Statusleiste und darunter die Bedienelemente samt Log. Die View kennt keine
- * Spielregeln: sie stellt den {@link Game}-Zustand dar ({@link #render(Game)}) und meldet
- * Klicks ueber {@link #setDrawAction(ActionListener)} / {@link #setUndoAction(ActionListener)}
- * an den Controller.</p>
+ * <p>Zeigt einen gruenen Spieltisch ({@link FeltPanel}) mit den Spielern rund um die
+ * Tischmitte, darueber eine Titel-/Statusleiste und darunter die Bedienelemente samt Log.
+ * Die View kennt keine Spielregeln: sie stellt den {@link Game}-Zustand dar
+ * ({@link #render(Game)}) und meldet Klicks an den Controller.</p>
+ *
+ * <p><b>Ergaenzungen (Claude, Opus 4.8):</b></p>
+ * <ul>
+ *   <li><b>Sitzordnung im Kreis:</b> Die Spieler sitzen im Uhrzeigersinn um den Tisch
+ *       (unten/links/oben/rechts) statt nebeneinander in einer Reihe. Der eigene Spieler
+ *       sitzt immer unten ({@link #setLocalPlayer(Player)}).</li>
+ *   <li><b>Austauschbare Tischmitte:</b> Welche {@link TablePanel}-Ansicht in der Mitte
+ *       liegt, gibt das jeweilige Spiel vor – Ablagestapel bei Mau-Mau, Angriffs-/
+ *       Verteidigungspaare bei Durak.</li>
+ *   <li><b>Klare Zustaendigkeit:</b> {@link #render(Game)} zeichnet nur noch den Zustand.
+ *       Ob der Aktionsknopf anklickbar ist, entscheidet der Controller ueber
+ *       {@link #setActionEnabled(boolean)} – vorher hat die View das mit
+ *       "Deck nicht leer" ueberschrieben und der Controller hat direkt danach korrigiert.</li>
+ * </ul>
  *
  * @author Claude (Opus 4.8)
  */
@@ -43,36 +58,81 @@ public class GameView extends JFrame {
     private static final Color ACCENT = new Color(0xE0C067);
 
     private final JLabel statusLabel = new JLabel();
-    private final JButton drawButton = new JButton("Karte ziehen");
+    private final JButton actionButton = new JButton("Karte ziehen");
     private final JButton undoButton = new JButton("Rückgängig");
     private final JTextArea logArea = new JTextArea(6, 30);
 
-    private final List<PlayerPanel> playerPanels = new ArrayList<>();
-    private final DeckPanel deckPanel = new DeckPanel();
-    private final DiscardPanel discardPanel = new DiscardPanel();
     private final List<Player> players;
     private final String gameTitle;
+
+    /** Spieler -> Sitzflaeche. LinkedHashMap, damit die Sitzreihenfolge stabil bleibt. */
+    private final Map<Player, PlayerPanel> playerPanels = new LinkedHashMap<>();
+
+    private final DeckPanel deckPanel = new DeckPanel();
+    private final TablePanel tablePanel;
+
+    /** Sitzflaechen-Container der vier Himmelsrichtungen. */
+    private final JPanel seatNorth = transparentRow();
+    private final JPanel seatSouth = transparentRow();
+    private final JPanel seatWest = transparentRow();
+    private final JPanel seatEast = transparentRow();
+
+    /** Spieler, dessen Hand offen liegt und der unten sitzt. */
+    private Player localPlayer;
+
+    /** Trumpfinformationen fuer Deckanzeige und Handsortierung (Durak). */
+    private Card trumpCard;
+    private Suit trumpSuit;
+
+    /** Vom Controller gesetzter Statustext; {@code null} = Standardtext. */
+    private String statusOverride;
 
     /**
      * @param players   Spieler, fuer die je ein {@link PlayerPanel} angelegt wird
      * @param gameTitle Name des Spiels (Fenstertitel und Kopfzeile), z.&nbsp;B. "Mau-Mau"
      */
     public GameView(List<Player> players, String gameTitle) {
+        this(players, gameTitle, new DiscardPanel());
+    }
+
+    /**
+     * ERGAENZUNG von Claude (Opus 4.8).
+     *
+     * @param players    Spieler, fuer die je ein {@link PlayerPanel} angelegt wird
+     * @param gameTitle  Name des Spiels
+     * @param tablePanel Ansicht der Tischmitte (Ablagestapel oder Durak-Paare)
+     */
+    public GameView(List<Player> players, String gameTitle, TablePanel tablePanel) {
         super("CardGameEngine – " + gameTitle);
         this.players = players;
         this.gameTitle = gameTitle;
+        this.tablePanel = tablePanel;
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
+        for (Player p : players) {
+            playerPanels.put(p, new PlayerPanel(p));
+        }
+        if (!players.isEmpty()) {
+            localPlayer = players.get(0);
+        }
+
         add(buildTitleBar(), BorderLayout.NORTH);
         add(buildTable(), BorderLayout.CENTER);
         add(buildControls(), BorderLayout.SOUTH);
+        rebuildSeats();
 
-        log("Willkommen! Klicke 'Karte ziehen', um zu ziehen.");
-        setMinimumSize(new Dimension(560, 640));
+        log("Willkommen bei " + gameTitle + "!");
+        setMinimumSize(new Dimension(900, 720));
         pack();
         setLocationRelativeTo(null);
+    }
+
+    private static JPanel transparentRow() {
+        JPanel p = new JPanel(new FlowLayout(FlowLayout.CENTER, 8, 4));
+        p.setOpaque(false);
+        return p;
     }
 
     private JPanel buildTitleBar() {
@@ -95,32 +155,20 @@ public class GameView extends JFrame {
     private JPanel buildTable() {
         FeltPanel felt = new FeltPanel();
         felt.setLayout(new BorderLayout());
-        felt.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        felt.setBorder(BorderFactory.createEmptyBorder(6, 6, 6, 6));
 
-        for (Player p : players) {
-            playerPanels.add(new PlayerPanel(p));
-        }
-
-        // Mittelbereich mit Nachziehstapel (links) und Ablagestapel (rechts).
-        JPanel center = new JPanel(new FlowLayout(FlowLayout.CENTER, 24, 0));
+        // Mitte: Nachziehstapel (mit Trumpf) links, Spielflaeche rechts daneben.
+        JPanel center = new JPanel(new BorderLayout(18, 0));
         center.setOpaque(false);
-        center.add(deckPanel);
-        center.add(discardPanel);
+        center.setBorder(BorderFactory.createEmptyBorder(4, 12, 4, 12));
+        center.add(deckPanel, BorderLayout.WEST);
+        center.add(tablePanel, BorderLayout.CENTER);
 
-        if (players.size() == 2) {
-            // Klassische Sitzordnung: Gegner oben, eigener Spieler unten.
-            felt.add(playerPanels.get(1), BorderLayout.NORTH);
-            felt.add(center, BorderLayout.CENTER);
-            felt.add(playerPanels.get(0), BorderLayout.SOUTH);
-        } else {
-            felt.add(center, BorderLayout.NORTH);
-            JPanel row = new JPanel(new GridLayout(1, players.size(), 8, 8));
-            row.setOpaque(false);
-            for (PlayerPanel pp : playerPanels) {
-                row.add(pp);
-            }
-            felt.add(row, BorderLayout.SOUTH);
-        }
+        felt.add(seatNorth, BorderLayout.NORTH);
+        felt.add(seatWest, BorderLayout.WEST);
+        felt.add(center, BorderLayout.CENTER);
+        felt.add(seatEast, BorderLayout.EAST);
+        felt.add(seatSouth, BorderLayout.SOUTH);
         return felt;
     }
 
@@ -131,10 +179,10 @@ public class GameView extends JFrame {
 
         JPanel buttons = new JPanel(new FlowLayout(FlowLayout.CENTER, 14, 4));
         buttons.setOpaque(false);
-        styleButton(drawButton, new Color(0x2E7D45));
+        styleButton(actionButton, new Color(0x2E7D45));
         styleButton(undoButton, new Color(0x5A5A5A));
-        undoButton.setEnabled(false);
-        buttons.add(drawButton);
+        setButtonEnabled(undoButton, false);
+        buttons.add(actionButton);
         buttons.add(undoButton);
         south.add(buttons, BorderLayout.NORTH);
 
@@ -154,14 +202,173 @@ public class GameView extends JFrame {
         b.setBackground(bg);
         b.setBorder(BorderFactory.createEmptyBorder(8, 18, 8, 18));
         b.setOpaque(true);
+        b.putClientProperty("activeBg", bg);
     }
 
-    /** Registriert den Handler fuer den „Karte ziehen"-Button. */
-    public void setDrawAction(ActionListener listener) {
-        for (ActionListener al : drawButton.getActionListeners()) {
-            drawButton.removeActionListener(al);
+    /**
+     * ERGAENZUNG von Claude (Opus 4.8).
+     *
+     * <p>Ein {@code setOpaque(true)}-Button behaelt seine kraeftige Hintergrundfarbe auch
+     * im deaktivierten Zustand und sieht dadurch klickbar aus. Deshalb wird die Farbe hier
+     * mitgeschaltet.</p>
+     */
+    private void setButtonEnabled(JButton b, boolean enabled) {
+        b.setEnabled(enabled);
+        Color active = (Color) b.getClientProperty("activeBg");
+        b.setBackground(enabled ? active : new Color(0x3A4A40));
+        b.setForeground(enabled ? Color.WHITE : new Color(0x8A9A90));
+    }
+
+    /**
+     * ERGAENZUNG von Claude (Opus 4.8).
+     *
+     * <p>Setzt den eigenen Spieler: Seine Hand liegt offen, alle anderen werden verdeckt
+     * gezeichnet, und er sitzt unten am Tisch. Die uebrigen Spieler werden von dort aus im
+     * Uhrzeigersinn verteilt (unten &rarr; links &rarr; oben &rarr; rechts).</p>
+     *
+     * @param localPlayer eigener Spieler; {@code null} deckt alle Haende auf (Debug/Zuschauer)
+     */
+    public void setLocalPlayer(Player localPlayer) {
+        this.localPlayer = localPlayer;
+        rebuildSeats();
+    }
+
+    /**
+     * Verteilt die Spielerflaechen im Kreis um den Tisch. Der eigene Spieler sitzt unten,
+     * die anderen folgen im Uhrzeigersinn. Bei mehr als vier Spielern reihen sich die
+     * ueberzaehligen oben ein.
+     */
+    private void rebuildSeats() {
+        seatNorth.removeAll();
+        seatSouth.removeAll();
+        seatWest.removeAll();
+        seatEast.removeAll();
+
+        int n = players.size();
+        if (n == 0) {
+            return;
         }
-        drawButton.addActionListener(listener);
+        int localIndex = Math.max(0, players.indexOf(localPlayer));
+        PlayerPanel.Seat[] ring = ringFor(n);
+
+        // Mehr Spieler als Sitzplaetze: alle Gegner oben nebeneinander.
+        if (ring == null) {
+            seatNorth.setLayout(new GridLayout(1, n - 1, 8, 8));
+        } else {
+            seatNorth.setLayout(new FlowLayout(FlowLayout.CENTER, 8, 4));
+        }
+
+        for (int i = 0; i < n; i++) {
+            Player p = players.get(i);
+            PlayerPanel panel = playerPanels.get(p);
+            int offset = (i - localIndex + n) % n;
+
+            PlayerPanel.Seat seat;
+            if (ring != null) {
+                seat = ring[offset];
+            } else {
+                seat = offset == 0 ? PlayerPanel.Seat.BOTTOM : PlayerPanel.Seat.TOP;
+            }
+            panel.setSeat(seat);
+            // Nur die eigene Hand liegt offen. localPlayer == null -> alles offen (Debug).
+            panel.setFaceUp(localPlayer == null || p == localPlayer);
+            panel.setTrumpSuit(trumpSuit);
+            containerFor(seat).add(panel);
+        }
+
+        seatNorth.revalidate();
+        seatSouth.revalidate();
+        seatWest.revalidate();
+        seatEast.revalidate();
+        repaint();
+    }
+
+    /** @return Sitzreihenfolge im Uhrzeigersinn ab "unten", oder {@code null} bei &gt;4 Spielern. */
+    private PlayerPanel.Seat[] ringFor(int playerCount) {
+        switch (playerCount) {
+            case 1:
+                return new PlayerPanel.Seat[]{PlayerPanel.Seat.BOTTOM};
+            case 2:
+                return new PlayerPanel.Seat[]{PlayerPanel.Seat.BOTTOM, PlayerPanel.Seat.TOP};
+            case 3:
+                return new PlayerPanel.Seat[]{
+                        PlayerPanel.Seat.BOTTOM, PlayerPanel.Seat.LEFT, PlayerPanel.Seat.TOP};
+            case 4:
+                return new PlayerPanel.Seat[]{
+                        PlayerPanel.Seat.BOTTOM, PlayerPanel.Seat.LEFT,
+                        PlayerPanel.Seat.TOP, PlayerPanel.Seat.RIGHT};
+            default:
+                return null;
+        }
+    }
+
+    private JPanel containerFor(PlayerPanel.Seat seat) {
+        switch (seat) {
+            case TOP:
+                return seatNorth;
+            case LEFT:
+                return seatWest;
+            case RIGHT:
+                return seatEast;
+            case BOTTOM:
+            default:
+                return seatSouth;
+        }
+    }
+
+    /**
+     * ERGAENZUNG von Claude (Opus 4.8).
+     *
+     * <p>Setzt die Trumpfinformation: Die Karte liegt quer unter dem Nachziehstapel, die
+     * Farbe steuert zusaetzlich die Sortierung der Handkarten.</p>
+     *
+     * @param trumpCard offen liegende Trumpfkarte, oder {@code null} (schon gezogen)
+     * @param trumpSuit Trumpffarbe, oder {@code null} bei Spielen ohne Trumpf
+     */
+    public void setTrump(Card trumpCard, Suit trumpSuit) {
+        this.trumpCard = trumpCard;
+        this.trumpSuit = trumpSuit;
+        for (PlayerPanel panel : playerPanels.values()) {
+            panel.setTrumpSuit(trumpSuit);
+        }
+    }
+
+    /**
+     * ERGAENZUNG von Claude (Opus 4.8).
+     *
+     * <p>Markiert die Karten, die der eigene Spieler jetzt legen darf. Welche das sind,
+     * entscheidet die {@code Phase} ueber {@code isValid} – die View bekommt nur das
+     * Ergebnis und hebt es hervor.</p>
+     *
+     * @param playable legbare Karten, oder {@code null} fuer "kein Highlighting"
+     */
+    public void setPlayableCards(Set<Card> playable) {
+        for (Map.Entry<Player, PlayerPanel> e : playerPanels.entrySet()) {
+            e.getValue().setPlayableCards(e.getKey() == localPlayer ? playable : null);
+        }
+    }
+
+    /** Beschriftet einen Sitz mit seiner Rolle im aktuellen Zug (z.&nbsp;B. "Angreifer"). */
+    public void setRoleLabel(Player player, String role) {
+        PlayerPanel panel = playerPanels.get(player);
+        if (panel != null) {
+            panel.setRoleLabel(role);
+        }
+    }
+
+    /** Entfernt alle Rollenbeschriftungen. */
+    public void clearRoleLabels() {
+        for (PlayerPanel panel : playerPanels.values()) {
+            panel.setRoleLabel(null);
+        }
+    }
+
+    /** Registriert den Handler fuer den Aktions-Button. */
+    public void setDrawAction(ActionListener listener) {
+        for (ActionListener al : actionButton.getActionListeners()) {
+            actionButton.removeActionListener(al);
+        }
+        actionButton.addActionListener(listener);
     }
 
     /** Registriert den Handler fuer den „Rückgängig"-Button. */
@@ -176,39 +383,35 @@ public class GameView extends JFrame {
      * GENERIERT von Claude (Opus 4.8).
      *
      * <p>Registriert den Handler, der beim Klick auf eine Handkarte des aktiven
-     * Spielers mit genau dieser Karte aufgerufen wird (fuer "Karte spielen", z.&nbsp;B.
-     * in Mau-Mau). Spiele ohne Kartenauswahl (Minigame) setzen diesen Handler
-     * einfach nicht.</p>
+     * Spielers mit genau dieser Karte aufgerufen wird.</p>
      *
      * @param listener Empfaenger der angeklickten Karte
      */
     public void setCardClickAction(Consumer<Card> listener) {
-        for (PlayerPanel pp : playerPanels) {
+        for (PlayerPanel pp : playerPanels.values()) {
             pp.setCardClickListener(listener);
         }
     }
 
-    /**
-     * GENERIERT von Claude (Opus 4.8).
-     *
-     * <p>Beschriftet den Aktions-Button um (Standard: „Karte ziehen"), damit die
-     * gleiche View fuer verschiedene Spiele passende Begriffe zeigen kann.</p>
-     *
-     * @param text neue Button-Beschriftung
-     */
+    /** Beschriftet den Aktions-Button um (Standard: „Karte ziehen"). */
     public void setDrawButtonText(String text) {
-        drawButton.setText(text);
+        actionButton.setText(text);
     }
 
     /**
-     * Aktiviert bzw. deaktiviert den Aktions-Button. Der Controller entscheidet damit
-     * phasenabhaengig, ob die Aktion (bei Durak z.&nbsp;B. „Passen"/„Aufnehmen") gerade
-     * moeglich ist – unabhaengig davon, ob der Nachziehstapel leer ist.
+     * Aktiviert bzw. deaktiviert den Aktions-Button. Seit der Umstellung entscheidet das
+     * ausschliesslich der Controller – die View ueberschreibt es nicht mehr.
      *
      * @param enabled true, wenn der Aktions-Button anklickbar sein soll
      */
     public void setActionEnabled(boolean enabled) {
-        drawButton.setEnabled(enabled);
+        setButtonEnabled(actionButton, enabled);
+    }
+
+    /** Setzt einen eigenen Statustext (z.&nbsp;B. mit Phase/Rolle); {@code null} = Standard. */
+    public void setStatus(String status) {
+        this.statusOverride = status;
+        statusLabel.setText(status != null ? status : statusLabel.getText());
     }
 
     /**
@@ -220,25 +423,23 @@ public class GameView extends JFrame {
         boolean running = game.getCurrentPhase() != null;
         Player active = game.getActivePlayer();
 
-        for (int i = 0; i < players.size(); i++) {
-            Player p = players.get(i);
-            playerPanels.get(i).update(p, running && p == active);
+        for (Map.Entry<Player, PlayerPanel> e : playerPanels.entrySet()) {
+            Player p = e.getKey();
+            e.getValue().update(p, running && p == active);
         }
 
         int deckSize = game.getDeck() != null ? game.getDeck().getDeckSize() : 0;
-        deckPanel.setDeckSize(deckSize);
+        deckPanel.setDeck(deckSize, trumpCard, trumpSuit);
+        tablePanel.setCards(game.getTable().getCards());
 
-        // Ablagestapel (Tisch): oberste Karte + Anzahl.
-        List<Card> pile = game.getTable().getCards();
-        Card topDiscard = pile.isEmpty() ? null : pile.get(pile.size() - 1);
-        discardPanel.setTop(topDiscard, pile.size());
-
-        if (running) {
+        if (statusOverride != null) {
+            statusLabel.setText(statusOverride);
+        } else if (running && active != null) {
             statusLabel.setText(active.getName() + " ist am Zug");
         }
 
-        drawButton.setEnabled(running && deckSize > 0);
-        undoButton.setEnabled(running && game.canUndo());
+        // Undo ist eine generische Faehigkeit des Frameworks -> darf die View selbst pruefen.
+        setButtonEnabled(undoButton, running && game.canUndo());
     }
 
     /**
@@ -247,18 +448,29 @@ public class GameView extends JFrame {
      * @param winner Gewinner oder {@code null} bei Unentschieden
      */
     public void showGameOver(Player winner) {
-        drawButton.setEnabled(false);
-        undoButton.setEnabled(false);
-
         String msg = (winner != null)
-                ? "Gewinner: " + winner.getName() + " mit "
-                  + winner.getHand().getCards().size() + " Karten!"
+                ? "Gewinner: " + winner.getName() + "!"
                 : "Unentschieden!";
-        statusLabel.setText("Spiel vorbei – " + msg);
-        log(msg);
+        showGameOver(msg);
+    }
+
+    /**
+     * ERGAENZUNG von Claude (Opus 4.8).
+     *
+     * <p>Variante mit fertigem Text – Durak meldet den <em>Verlierer</em> ("Durak"), nicht
+     * einen Gewinner, deshalb bildet der Controller den Satz selbst.</p>
+     *
+     * @param message anzuzeigender Schlusstext
+     */
+    public void showGameOver(String message) {
+        setButtonEnabled(actionButton, false);
+        setButtonEnabled(undoButton, false);
+
+        statusLabel.setText("Spiel vorbei");
+        log(message);
         // Nach dem finalen Neuzeichnen anzeigen, damit der Tisch zuerst aktuell ist.
         SwingUtilities.invokeLater(() ->
-                JOptionPane.showMessageDialog(this, msg, "Spielende", JOptionPane.INFORMATION_MESSAGE));
+                JOptionPane.showMessageDialog(this, message, "Spielende", JOptionPane.INFORMATION_MESSAGE));
     }
 
     /**

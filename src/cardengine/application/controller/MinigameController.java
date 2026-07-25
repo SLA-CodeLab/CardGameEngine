@@ -32,6 +32,8 @@ public class MinigameController implements GameListener {
         this.view = view;
 
         game.addGameListener(this);
+        // Framework-Test: hier gibt es keinen "eigenen" Spieler, alle Haende bleiben offen.
+        view.setLocalPlayer(null);
         view.setDrawAction(e -> onDraw());
         view.setUndoAction(e -> onUndo());
     }
@@ -61,6 +63,10 @@ public class MinigameController implements GameListener {
     @Override
     public void onStateChanged(Game game) {
         view.render(game);
+        // Seit der View-Umstellung schaltet der Controller den Aktions-Button selbst frei.
+        boolean running = game.getCurrentPhase() != null;
+        boolean deckLeft = game.getDeck() != null && !game.getDeck().isEmpty();
+        view.setActionEnabled(running && deckLeft);
     }
 
     @Override

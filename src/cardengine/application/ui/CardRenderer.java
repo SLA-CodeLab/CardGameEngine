@@ -1,6 +1,7 @@
 package cardengine.application.ui;
 
 import cardengine.framework.core.Card;
+import cardengine.framework.core.CardVisibility;
 import cardengine.framework.core.Rank;
 import cardengine.framework.core.Suit;
 
@@ -31,30 +32,113 @@ public final class CardRenderer {
     private static final Color BACK_FILL = new Color(0x6B1414);
     private static final Color BACK_TRIM = new Color(0xE0C067);
 
+    /** Rahmen fuer eine Karte, die der Spieler jetzt legen darf. */
+    private static final Color PLAYABLE = new Color(0x66FF88);
+    /** Rahmen fuer die offene, noch zu schlagende Angriffskarte. */
+    private static final Color OPEN_ATTACK = new Color(0xFF6B6B);
+    /** Schleier ueber Karten, die gerade nicht gelegt werden duerfen. */
+    private static final Color DIM = new Color(0, 0, 0, 105);
+
     private CardRenderer() {
     }
 
     /**
-     * Zeichnet eine Karte in den angegebenen Bereich.
+     * ERGAENZUNG von Claude (Opus 4.8).
      *
-     * @param g    Zeichenkontext
-     * @param card Karte, oder {@code null} fuer eine verdeckte Rueckseite
-     * @param x    linke Kante
-     * @param y    obere Kante
-     * @param w    Breite
-     * @param h    Hoehe
+     * <p>Wertet das bislang ungenutzte {@link CardVisibility} aus: Nur eine als
+     * {@code VISIBLE} markierte Karte wird offen gezeichnet. Damit steuert das
+     * Framework-Feld tatsaechlich die Darstellung, statt nur mitgeschrieben zu werden.</p>
+     *
+     * @param card zu pruefende Karte
+     * @return true, wenn die Karte offen liegt
      */
-    public static void paintCard(Graphics2D g, Card card, int x, int y, int w, int h) {
+    public static boolean isFaceUp(Card card) {
+        return card != null && card.getVisibility() == CardVisibility.VISIBLE;
+    }
+
+    /**
+     * Zeichnet eine Karte in den angegebenen Bereich – wahlweise offen oder verdeckt.
+     * Ueber {@code faceUp} bestimmt der Aufrufer die Sicht-Perspektive (fremde Hand =
+     * verdeckt), ohne dafuer {@code null} uebergeben zu muessen.
+     *
+     * @param g      Zeichenkontext
+     * @param card   Karte, oder {@code null} fuer eine verdeckte Rueckseite
+     * @param faceUp true zeichnet die Vorderseite, false die Rueckseite
+     * @param x      linke Kante
+     * @param y      obere Kante
+     * @param w      Breite
+     * @param h      Hoehe
+     */
+    public static void paintCard(Graphics2D g, Card card, boolean faceUp, int x, int y, int w, int h) {
         Graphics2D g2 = (Graphics2D) g.create();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 
         int arc = Math.max(8, w / 6);
-        if (card == null) {
+        if (card == null || !faceUp) {
             paintBack(g2, x, y, w, h, arc);
         } else {
             paintFace(g2, card.getSuit(), card.getRank(), x, y, w, h, arc);
         }
+        g2.dispose();
+    }
+
+    /**
+     * ERGAENZUNG von Claude (Opus 4.8).
+     *
+     * <p>Zeichnet eine Karte um 90 Grad gedreht – gebraucht fuer die Trumpfkarte, die in
+     * Durak quer unter dem Nachziehstapel liegt.</p>
+     *
+     * @param cx Mittelpunkt x der gedrehten Karte
+     * @param cy Mittelpunkt y der gedrehten Karte
+     * @param w  Breite der Karte vor der Drehung
+     * @param h  Hoehe der Karte vor der Drehung
+     */
+    public static void paintCardRotated(Graphics2D g, Card card, boolean faceUp, int cx, int cy, int w, int h) {
+        Graphics2D g2 = (Graphics2D) g.create();
+        g2.rotate(Math.PI / 2, cx, cy);
+        paintCard(g2, card, faceUp, cx - w / 2, cy - h / 2, w, h);
+        g2.dispose();
+    }
+
+    /**
+     * ERGAENZUNG von Claude (Opus 4.8).
+     *
+     * <p>Legt einen gruenen Leuchtrahmen um eine Karte, die der Spieler jetzt legen darf.
+     * Welche Karten das sind, entscheidet nicht die View, sondern die aktuelle
+     * {@code Phase} ueber {@code isValid} – der Controller reicht das Ergebnis nur durch.</p>
+     */
+    public static void paintPlayableGlow(Graphics2D g, int x, int y, int w, int h) {
+        Graphics2D g2 = (Graphics2D) g.create();
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        int arc = Math.max(8, w / 6);
+        g2.setColor(new Color(PLAYABLE.getRed(), PLAYABLE.getGreen(), PLAYABLE.getBlue(), 70));
+        g2.setStroke(new BasicStroke(6f));
+        g2.drawRoundRect(x - 2, y - 2, w + 3, h + 3, arc, arc);
+        g2.setColor(PLAYABLE);
+        g2.setStroke(new BasicStroke(2.5f));
+        g2.drawRoundRect(x - 1, y - 1, w + 1, h + 1, arc, arc);
+        g2.dispose();
+    }
+
+    /** Roter Rahmen fuer die offene Angriffskarte, die noch geschlagen werden muss. */
+    public static void paintOpenAttackMarker(Graphics2D g, int x, int y, int w, int h) {
+        Graphics2D g2 = (Graphics2D) g.create();
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        int arc = Math.max(8, w / 6);
+        g2.setColor(OPEN_ATTACK);
+        g2.setStroke(new BasicStroke(2.5f));
+        g2.drawRoundRect(x - 2, y - 2, w + 3, h + 3, arc, arc);
+        g2.dispose();
+    }
+
+    /** Dunkler Schleier fuer Karten, die gerade nicht gelegt werden duerfen. */
+    public static void paintDimmed(Graphics2D g, int x, int y, int w, int h) {
+        Graphics2D g2 = (Graphics2D) g.create();
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        int arc = Math.max(8, w / 6);
+        g2.setColor(DIM);
+        g2.fillRoundRect(x, y, w, h, arc, arc);
         g2.dispose();
     }
 
@@ -121,6 +205,16 @@ public final class CardRenderer {
     /** @return kompakte Bezeichnung wie {@code ♠4} (Farbe + Rang). */
     public static String shortLabel(Card card) {
         return card != null ? suitSymbol(card.getSuit()) + rankLabel(card.getRank()) : "??";
+    }
+
+    /** @return das Symbol einer Farbe, z.&nbsp;B. fuer die Trumpfanzeige. */
+    public static String symbolOf(Suit suit) {
+        return suit != null ? suitSymbol(suit) : "?";
+    }
+
+    /** @return die Anzeigefarbe einer Kartenfarbe (Herz/Karo rot, sonst schwarz). */
+    public static Color colorOf(Suit suit) {
+        return suit != null ? suitColor(suit) : BLACK;
     }
 
     private static String rankLabel(Rank rank) {

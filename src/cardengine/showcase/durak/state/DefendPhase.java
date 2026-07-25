@@ -93,6 +93,9 @@ public class DefendPhase implements Phase {
             return DurakTurn.startAttack(game, candidate);
         }
         else if (allDefended(game)) {
+            // todo ZULEGER: Hier wird fest der urspruengliche Angreifer wieder aktiv.
+            //  Sobald die AttackPhase reihum weiterschaltet, muss stattdessen deren
+            //  aktueller Leger uebernommen werden. Siehe todo in AttackPhase.
             game.setActivePlayer(DurakTurn.prevInGame(game, verteidiger));
             return new AttackPhase(verteidiger);
         }

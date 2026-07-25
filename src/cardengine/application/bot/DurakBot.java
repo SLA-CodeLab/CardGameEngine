@@ -5,29 +5,37 @@ import cardengine.framework.core.Card;
 import cardengine.framework.core.Game;
 import cardengine.framework.core.Player;
 import cardengine.framework.core.Suit;
+import cardengine.framework.state.Phase;
 import cardengine.showcase.durak.command.AttackCardCommand;
 import cardengine.showcase.durak.command.DefendCardCommand;
 import cardengine.showcase.durak.command.EndAttackCommand;
 import cardengine.showcase.durak.command.TakeCardCommand;
+import cardengine.showcase.durak.command.ThrowInCardCommand;
 import cardengine.showcase.durak.factory.DurakDeck;
-import cardengine.showcase.durak.state.AttackPhase;
-import cardengine.showcase.durak.state.DefendPhase;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 /**
  * GENERIERT von Claude (Opus 4.8).
  *
- * <p>Einfacher Durak-Bot (Strategy-Pattern). Genau wie {@code MauMauBot} laeuft er ueber
- * dieselben Commands wie ein Mensch – er schlaegt nur einen Zug vor, die endgueltige
- * Kontrolle bleibt bei {@code Phase.isValid}. Heuristik:</p>
+ * <p>Einfacher Durak-Bot (Strategy-Pattern). Er laeuft ueber dieselben Commands wie ein
+ * Mensch und schlaegt nur einen Zug vor – die endgueltige Kontrolle bleibt bei
+ * {@code Phase.isValid}.</p>
+ *
+ * <p><b>Ueberarbeitet (Claude, Opus 4.8):</b> Der Bot hatte die Regeln vorher
+ * <em>nachgebaut</em> (eigene {@code beats()}-Methode, eigener Rangvergleich) – doppelte
+ * Logik, die stillschweigend von {@code DefendPhase} abweichen kann. Jetzt baut er
+ * Kandidaten-Commands und fragt die Phase, welcher davon erlaubt ist. Zwei Vorteile:</p>
  * <ul>
- *   <li><b>AttackPhase</b> (Bot ist Angreifer): erste legal legbare Karte angreifen,
- *       sonst {@code EndAttackCommand} (passen).</li>
- *   <li><b>DefendPhase</b> (Bot ist Verteidiger): erste Karte, die die offene
- *       Angriffskarte schlaegt, sonst {@code TakeCardCommand} (aufnehmen).</li>
- *   <li><b>DrawPhase</b>: nichts – das Nachziehen steuert der Controller.</li>
+ *   <li>Keine zweite Regelimplementierung mehr.</li>
+ *   <li>Er beherrscht automatisch auch das <b>Zulegen</b> ({@link ThrowInCardCommand}),
+ *       sobald die Phasen den Zuleger aktiv schalten.</li>
  * </ul>
+ *
+ * <p>Heuristik: moeglichst billig spielen – zuerst niedrige Nicht-Trumpf-Karten, Truempfe
+ * zuletzt. Kann er nichts legen, passt er bzw. nimmt auf.</p>
  *
  * @author Claude (Opus 4.8)
  */
@@ -35,63 +43,68 @@ public class DurakBot implements BotStrategy {
 
     @Override
     public Command decideMove(Game game, Player me) {
-        if (game.getCurrentPhase() instanceof AttackPhase) {
-            Card attack = firstLegalAttack(game, me);
-            if (attack != null) {
-                return new AttackCardCommand(me, game.getTable(), attack);
-            }
-            return new EndAttackCommand(me, game.getTable()); // nichts (mehr) zu legen -> passen
-        }
-        if (game.getCurrentPhase() instanceof DefendPhase) {
-            Card beat = firstBeatingCard(game, me);
-            if (beat != null) {
-                return new DefendCardCommand(me, game.getTable(), beat);
-            }
-            return new TakeCardCommand(me, game.getTable()); // nicht schlagbar -> aufnehmen
-        }
-        return null; // DrawPhase steuert der Controller
-    }
-
-    /** Erste Handkarte, die gelegt werden darf: bei leerem Tisch beliebig, sonst rang-passend. */
-    private Card firstLegalAttack(Game game, Player me) {
-        List<Card> table = game.getTable().getCards();
-        for (Card card : me.getHand().getCards()) {
-            if (table.isEmpty() || matchesRankOnTable(card, table)) {
-                return card;
-            }
-        }
-        return null;
-    }
-
-    private boolean matchesRankOnTable(Card card, List<Card> table) {
-        for (Card c : table) {
-            if (c.getRank() == card.getRank()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /** Erste Handkarte, die die offene Angriffskarte schlaegt (gleiche Farbe hoeher oder Trumpf). */
-    private Card firstBeatingCard(Game game, Player me) {
-        List<Card> table = game.getTable().getCards();
-        if (table.isEmpty()) {
+        Phase phase = game.getCurrentPhase();
+        if (phase == null || me == null) {
             return null;
         }
-        Card open = table.get(table.size() - 1);
-        Suit trump = ((DurakDeck) game.getDeck()).getTrumpSuit();
-        for (Card card : me.getHand().getCards()) {
-            if (beats(card, open, trump)) {
-                return card;
+
+        // 1. Eine Karte legen - die billigste, die die Phase akzeptiert.
+        for (Card card : cheapestFirst(game, me)) {
+            Command cmd = firstValidFor(game, phase, me, card);
+            if (cmd != null) {
+                return cmd;
             }
+        }
+
+        // 2. Sonst: passen (Angriff beenden) oder aufnehmen.
+        Command end = new EndAttackCommand(me, game.getTable());
+        if (phase.isValid(game, end)) {
+            return end;
+        }
+        Command take = new TakeCardCommand(me, game.getTable());
+        if (phase.isValid(game, take)) {
+            return take;
         }
         return null;
     }
 
-    private boolean beats(Card schlag, Card angriff, Suit trump) {
-        if (schlag.getSuit() == angriff.getSuit()) {
-            return schlag.getRank().ordinal() > angriff.getRank().ordinal();
+    /**
+     * Baut die moeglichen Commands fuer eine Karte und liefert den ersten, den die Phase
+     * erlaubt: angreifen, zulegen oder verteidigen.
+     *
+     * <p>{@code isValid} prueft nur – die Commands werden hier gebaut, nicht ausgefuehrt.</p>
+     */
+    private Command firstValidFor(Game game, Phase phase, Player me, Card card) {
+        Command attack = new AttackCardCommand(me, game.getTable(), card);
+        if (phase.isValid(game, attack)) {
+            return attack;
         }
-        return schlag.getSuit() == trump && angriff.getSuit() != trump;
+        Command throwIn = new ThrowInCardCommand(me, card, game.getTable());
+        if (phase.isValid(game, throwIn)) {
+            return throwIn;
+        }
+        Command defend = new DefendCardCommand(me, game.getTable(), card);
+        if (phase.isValid(game, defend)) {
+            return defend;
+        }
+        return null;
+    }
+
+    /**
+     * Handkarten nach "Wert" sortiert: erst Nicht-Truempfe aufsteigend, dann Truempfe.
+     * So gibt der Bot seine starken Karten zuletzt her.
+     */
+    private List<Card> cheapestFirst(Game game, Player me) {
+        Suit trump = trumpOf(game);
+        List<Card> cards = new ArrayList<>(me.getHand().getCards());
+        cards.sort(Comparator
+                .comparingInt((Card c) -> (trump != null && c.getSuit() == trump) ? 1 : 0)
+                .thenComparingInt(c -> c.getRank().ordinal()));
+        return cards;
+    }
+
+    /** @return Trumpffarbe, oder {@code null}, wenn das Deck keine kennt. */
+    private Suit trumpOf(Game game) {
+        return (game.getDeck() instanceof DurakDeck durakDeck) ? durakDeck.getTrumpSuit() : null;
     }
 }

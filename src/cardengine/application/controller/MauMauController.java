@@ -9,10 +9,15 @@ import cardengine.framework.core.Card;
 import cardengine.framework.core.Game;
 import cardengine.framework.core.Player;
 import cardengine.framework.observer.GameListener;
+import cardengine.framework.state.Phase;
 import cardengine.showcase.maumau.command.DrawCardCommand;
 import cardengine.showcase.maumau.command.PlayCardCommand;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * GENERIERT von Claude (Opus 4.8).
@@ -40,6 +45,9 @@ public class MauMauController implements GameListener {
     private final GameView view;
     private final BotDriver botDriver;
 
+    /** Spieler an diesem Rechner – nur seine Hand liegt offen (Claude, Opus 4.8). */
+    private final Player localPlayer;
+
     /**
      * @param game vorbereitetes Spiel
      * @param view zugehoerige Ansicht
@@ -49,11 +57,23 @@ public class MauMauController implements GameListener {
         this.game = game;
         this.view = view;
         this.botDriver = new BotDriver(game, bots, BOT_DELAY_MS, this::submitBotMove);
+        this.localPlayer = firstHuman(game, bots);
 
         game.addGameListener(this);
+        view.setLocalPlayer(localPlayer);
         view.setCardClickAction(this::onPlayCard);
         view.setDrawAction(e -> onDraw());
         view.setUndoAction(e -> onUndo());
+    }
+
+    /** @return erster Spieler ohne Bot-Strategie, oder {@code null} (reines Bot-Spiel). */
+    private static Player firstHuman(Game game, Map<Player, BotStrategy> bots) {
+        for (Player p : game.getPlayers()) {
+            if (!bots.containsKey(p)) {
+                return p;
+            }
+        }
+        return null;
     }
 
     /** Versucht, die angeklickte Karte des aktiven Spielers abzulegen. */
@@ -112,7 +132,43 @@ public class MauMauController implements GameListener {
     @Override
     public void onStateChanged(Game game) {
         view.render(game);
+        updateHighlighting();
+        updateActionButton();
         botDriver.onState(); // ist als Naechstes ein Bot dran? Dann zieht er selbst.
+    }
+
+    /**
+     * ERGAENZUNG von Claude (Opus 4.8).
+     *
+     * <p>Hebt die Handkarten hervor, die gerade wirklich passen. Die Regel dafuer steht
+     * nicht hier, sondern in {@code PlayPhase.isValid} – der Controller baut nur
+     * Kandidaten-Commands und fragt die Phase.</p>
+     */
+    private void updateHighlighting() {
+        Phase phase = game.getCurrentPhase();
+        Player active = game.getActivePlayer();
+        if (phase == null || localPlayer == null || active != localPlayer) {
+            view.setPlayableCards(Collections.emptySet());
+            return;
+        }
+        Set<Card> playable = new LinkedHashSet<>();
+        for (Card card : new ArrayList<>(localPlayer.getHand().getCards())) {
+            if (phase.isValid(game, new PlayCardCommand(localPlayer, card, game.getTable()))) {
+                playable.add(card);
+            }
+        }
+        view.setPlayableCards(playable);
+    }
+
+    /**
+     * Seit der View-Umstellung entscheidet der Controller ueber den Aktions-Button:
+     * ziehen kann nur der Mensch, wenn er dran ist und der Stapel noch Karten hat.
+     */
+    private void updateActionButton() {
+        boolean running = game.getCurrentPhase() != null;
+        boolean mine = localPlayer != null && game.getActivePlayer() == localPlayer;
+        boolean deckLeft = game.getDeck() != null && !game.getDeck().isEmpty();
+        view.setActionEnabled(running && mine && deckLeft);
     }
 
     @Override

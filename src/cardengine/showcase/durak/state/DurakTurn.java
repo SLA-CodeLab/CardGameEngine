@@ -73,6 +73,11 @@ final class DurakTurn {
      * Startet die naechste Angriffsphase: {@code candidate} (oder der naechste noch
      * spielende Spieler danach) wird Angreifer, der naechste noch spielende Sitz danach
      * wird Verteidiger. Setzt den aktiven Spieler auf den Angreifer.
+     *
+     * <p>Diese Klasse liefert mit {@link #nextInGame(Game, Player)} zwar den Baustein fuer
+     * eine Zuleger-Rotation, kann sie aber nicht selbst umsetzen: dafuer braucht es
+     * <em>Zustand</em> pro Angriff (wer ist gerade mit Nachlegen dran, wer hat schon
+     * gepasst), und der gehoert in die {@link AttackPhase}. Siehe das todo dort.</p>
      */
     static Phase startAttack(Game game, Player candidate) {
         Player attacker = firstInGame(game, candidate);
