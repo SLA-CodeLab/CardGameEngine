@@ -56,7 +56,7 @@ import java.util.Set;
  */
 public class DurakController implements GameListener {
 
-    private static final int BOT_DELAY_MS = 800;
+    private static final int BOT_DELAY_MS = 2000;
     private static final int HAND_TARGET = 6;
 
     private final Game game;
