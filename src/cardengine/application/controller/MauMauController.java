@@ -6,12 +6,16 @@ import cardengine.application.ui.CardRenderer;
 import cardengine.application.ui.GameView;
 import cardengine.framework.command.Command;
 import cardengine.framework.core.Card;
+import cardengine.framework.core.EffectCard;
 import cardengine.framework.core.Game;
 import cardengine.framework.core.Player;
+import cardengine.framework.core.Suit;
 import cardengine.framework.observer.GameListener;
 import cardengine.framework.state.Phase;
 import cardengine.showcase.maumau.command.DrawCardCommand;
 import cardengine.showcase.maumau.command.PlayCardCommand;
+import cardengine.showcase.maumau.state.PlayPhase;
+import cardengine.showcase.maumau.strategy.effect.ChooseSuitEffect;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -39,7 +43,7 @@ import java.util.Set;
  */
 public class MauMauController implements GameListener {
 
-    private static final int BOT_DELAY_MS = 800;
+    private static final int BOT_DELAY_MS = 2000;
 
     private final Game game;
     private final GameView view;
@@ -82,13 +86,32 @@ public class MauMauController implements GameListener {
         if (botDriver.isBot(active)) {
             return; // Bots spielen nur ueber den BotDriver, nicht per Klick.
         }
+
+        PlayCardCommand cmd = new PlayCardCommand(active, card, game.getTable(), game);
+
+        // ERGAENZUNG (Claude, Fable 5): Bube -> Farbwunsch vorher abfragen und am
+        // Effekt hinterlegen. Gefragt wird nur, wenn der Zug ueberhaupt gueltig
+        // waere – sonst erschiene der Dialog vor einer ohnehin folgenden Ablehnung.
+        Phase phase = game.getCurrentPhase();
+        if (phase != null && phase.isValid(game, cmd)
+                && card instanceof EffectCard effectCard
+                && effectCard.getAction() instanceof ChooseSuitEffect wishEffect) {
+            Suit suit = view.askSuitWish();
+            if (suit == null) {
+                return; // Dialog abgebrochen -> Karte doch nicht legen
+            }
+            wishEffect.setChosenSuit(suit);
+        }
+
+        Player nextBefore = game.getNextPlayer(active); // fuer die Effekt-Logzeile
         int pileBefore = game.getTable().size();
 
-        game.submitCommand(new PlayCardCommand(active, card, game.getTable()));
+        game.submitCommand(cmd);
 
         // Nur bei tatsaechlich gelegter Karte loggen (sonst hat isValid abgelehnt).
         if (game.getTable().size() > pileBefore) {
             view.log(active.getName() + " legt " + CardRenderer.shortLabel(card));
+            logEffect(active, card, nextBefore);
         }
     }
 
@@ -113,12 +136,56 @@ public class MauMauController implements GameListener {
      */
     private void submitBotMove(Command cmd) {
         Player active = game.getActivePlayer();
+        Player nextBefore = game.getNextPlayer(active);
         if (cmd instanceof PlayCardCommand play) {
             view.log(active.getName() + " legt " + CardRenderer.shortLabel(play.getCard()));
-        } else if (cmd instanceof DrawCardCommand) {
-            view.log(active.getName() + " zieht eine Karte.");
+            game.submitCommand(cmd);
+            logEffect(active, play.getCard(), nextBefore);
+        } else {
+            if (cmd instanceof DrawCardCommand) {
+                view.log(active.getName() + " zieht eine Karte.");
+            }
+            game.submitCommand(cmd);
         }
-        game.submitCommand(cmd);
+    }
+
+    /**
+     * ERGAENZUNG von Claude (Fable 5).
+     *
+     * <p>Schreibt nach einer erfolgreich gelegten Effektkarte, was passiert ist.
+     * Die Effekte selbst kennen die View nicht (Modell-Code) – die Uebersetzung in
+     * Logzeilen ist Aufgabe des Controllers. Aufzurufen <em>nach</em>
+     * {@code submitCommand}, damit z.&nbsp;B. der Farbwunsch schon gesetzt ist.</p>
+     *
+     * @param who        Spieler, der die Karte gelegt hat
+     * @param card       die gelegte Karte
+     * @param nextBefore der naechste Spieler zum Zeitpunkt des Legens (Betroffener von 7/8)
+     */
+    private void logEffect(Player who, Card card, Player nextBefore) {
+        if (!(card instanceof EffectCard)) {
+            return;
+        }
+        switch (card.getRank()) {
+            case SEVEN -> {
+                if (nextBefore != null) {
+                    view.log(nextBefore.getName() + " zieht zwei Strafkarten.");
+                }
+            }
+            case EIGHT -> {
+                if (nextBefore != null) {
+                    view.log(nextBefore.getName() + " wird übersprungen.");
+                }
+            }
+            case JACK -> {
+                if (game.getCurrentPhase() instanceof PlayPhase phase) {
+                    Suit wish = phase.getActiveSuitWish(game);
+                    if (wish != null) {
+                        view.log(who.getName() + " wünscht sich " + CardRenderer.symbolOf(wish) + ".");
+                    }
+                }
+            }
+            default -> { /* keine weitere Ausgabe */ }
+        }
     }
 
     /** Nimmt den letzten Zug zurueck (nur die Kartenbewegung; siehe Framework-Undo). */
@@ -131,10 +198,28 @@ public class MauMauController implements GameListener {
 
     @Override
     public void onStateChanged(Game game) {
+        view.setStatus(buildWishStatus()); // null = Standardtext "X ist am Zug"
         view.render(game);
         updateHighlighting();
         updateActionButton();
         botDriver.onState(); // ist als Naechstes ein Bot dran? Dann zieht er selbst.
+    }
+
+    /**
+     * ERGAENZUNG von Claude (Fable 5).
+     *
+     * @return Statuszeile mit aktiver Wunschfarbe, oder {@code null}, wenn kein
+     *         Farbwunsch gilt (dann zeigt die View ihren Standardtext)
+     */
+    private String buildWishStatus() {
+        if (game.getCurrentPhase() instanceof PlayPhase phase) {
+            Suit wish = phase.getActiveSuitWish(game);
+            Player active = game.getActivePlayer();
+            if (wish != null && active != null) {
+                return active.getName() + " ist am Zug – gewünschte Farbe: " + CardRenderer.symbolOf(wish);
+            }
+        }
+        return null;
     }
 
     /**
@@ -153,7 +238,7 @@ public class MauMauController implements GameListener {
         }
         Set<Card> playable = new LinkedHashSet<>();
         for (Card card : new ArrayList<>(localPlayer.getHand().getCards())) {
-            if (phase.isValid(game, new PlayCardCommand(localPlayer, card, game.getTable()))) {
+            if (phase.isValid(game, new PlayCardCommand(localPlayer, card, game.getTable(), game))) {
                 playable.add(card);
             }
         }
@@ -178,6 +263,6 @@ public class MauMauController implements GameListener {
 
     @Override
     public void onInvalidMove(Command cmd) {
-        view.log("Ungültiger Zug – Karte passt nicht (Farbe/Zahl) oder du bist nicht dran.");
+        view.log("Ungültiger Zug – Karte passt nicht (Farbe/Zahl bzw. gewünschte Farbe) oder du bist nicht dran.");
     }
 }

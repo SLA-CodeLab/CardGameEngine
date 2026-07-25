@@ -474,6 +474,38 @@ public class GameView extends JFrame {
     }
 
     /**
+     * ERGAENZUNG von Claude (Fable 5).
+     *
+     * <p>Fragt den Spieler in einem Dialog nach einer Wunschfarbe (Mau-Mau: nach
+     * dem Legen eines Buben). Die Regel dahinter kennt die View nicht – sie stellt
+     * nur die Auswahl dar und meldet das Ergebnis an den Controller.</p>
+     *
+     * @return die gewaehlte Farbe oder {@code null}, wenn der Dialog geschlossen wurde
+     */
+    public Suit askSuitWish() {
+        Suit[] suits = Suit.values();
+        String[] options = new String[suits.length];
+        for (int i = 0; i < suits.length; i++) {
+            options[i] = CardRenderer.symbolOf(suits[i]) + " " + germanSuitName(suits[i]);
+        }
+        int choice = JOptionPane.showOptionDialog(this,
+                "Welche Farbe wünschst du dir?", "Farbwunsch (Bube)",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE,
+                null, options, options[0]);
+        return (choice >= 0 && choice < suits.length) ? suits[choice] : null;
+    }
+
+    /** Deutsche Namen der Farben fuer den Wunschdialog (Claude, Fable 5). */
+    private static String germanSuitName(Suit suit) {
+        return switch (suit) {
+            case HEARTS -> "Herz";
+            case DIAMONDS -> "Karo";
+            case CLUBS -> "Kreuz";
+            case SPADES -> "Pik";
+        };
+    }
+
+    /**
      * Haengt eine Zeile an das Log-Fenster.
      *
      * @param line auszugebende Zeile
