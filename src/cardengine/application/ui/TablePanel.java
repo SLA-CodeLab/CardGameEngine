@@ -1,6 +1,7 @@
 package cardengine.application.ui;
 
 import cardengine.framework.core.Card;
+import cardengine.showcase.durak.ui.DurakTablePanel;
 
 import javax.swing.JPanel;
 import java.util.List;

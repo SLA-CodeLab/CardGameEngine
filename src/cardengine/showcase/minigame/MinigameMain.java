@@ -1,6 +1,5 @@
 package cardengine.showcase.minigame;
 
-import cardengine.application.controller.MinigameController;
 import cardengine.application.ui.GameView;
 import cardengine.framework.core.Game;
 import cardengine.framework.core.Player;

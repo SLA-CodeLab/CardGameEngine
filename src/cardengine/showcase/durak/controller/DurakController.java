@@ -1,4 +1,4 @@
-package cardengine.application.controller;
+package cardengine.showcase.durak.controller;
 
 import cardengine.application.bot.BotDriver;
 import cardengine.application.bot.BotStrategy;

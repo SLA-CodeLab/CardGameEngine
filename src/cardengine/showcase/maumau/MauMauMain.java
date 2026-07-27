@@ -1,11 +1,11 @@
 package cardengine.showcase.maumau;
 
-import cardengine.application.controller.MauMauController;
+import cardengine.showcase.maumau.controller.MauMauController;
 import cardengine.application.ui.GameView;
 import cardengine.framework.core.Game;
 import cardengine.framework.core.Player;
 import cardengine.application.bot.BotStrategy;
-import cardengine.application.bot.MauMauBot;
+import cardengine.showcase.maumau.bot.MauMauBot;
 import cardengine.showcase.maumau.factory.MauMauDeckFactory;
 import cardengine.showcase.maumau.strategy.MauMauWinCondition;
 

@@ -1,5 +1,6 @@
-package cardengine.application.bot;
+package cardengine.showcase.maumau.bot;
 
+import cardengine.application.bot.BotStrategy;
 import cardengine.framework.command.Command;
 import cardengine.framework.core.Card;
 import cardengine.framework.core.Game;

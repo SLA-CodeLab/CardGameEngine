@@ -1,9 +1,9 @@
 package cardengine.showcase.durak;
 
 import cardengine.application.bot.BotStrategy;
-import cardengine.application.bot.DurakBot;
-import cardengine.application.controller.DurakController;
-import cardengine.application.ui.DurakTablePanel;
+import cardengine.showcase.durak.bot.DurakBot;
+import cardengine.showcase.durak.controller.DurakController;
+import cardengine.showcase.durak.ui.DurakTablePanel;
 import cardengine.application.ui.GameView;
 import cardengine.framework.core.Game;
 import cardengine.framework.core.Player;
