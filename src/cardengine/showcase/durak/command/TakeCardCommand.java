@@ -2,8 +2,8 @@ package cardengine.showcase.durak.command;
 
 import cardengine.framework.command.AbstractCommand;
 import cardengine.framework.core.Card;
+import cardengine.framework.core.CardCollection;
 import cardengine.framework.core.Player;
-import cardengine.framework.core.Table;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,11 +14,11 @@ import java.util.List;
  * @author Lukas
  */
 public class TakeCardCommand extends AbstractCommand {
-    private Table table;
+    private CardCollection table;
     private List<Card> cards;
     private boolean moved;
 
-    public TakeCardCommand(Player player, Table table) {
+    public TakeCardCommand(Player player, CardCollection table) {
         super(player);
         this.table = table;
     }

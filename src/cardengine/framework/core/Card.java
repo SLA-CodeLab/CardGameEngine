@@ -40,10 +40,18 @@ public class Card {
      */
     public Card flip() {
         if (this.visibility == CardVisibility.HIDDEN) {
-            this.visibility = CardVisibility.VISIBLE;
+            setVisible();
         } else {
-            this.visibility = CardVisibility.HIDDEN;
+            setHidden();
         }
+        return this;
+    }
+    public Card setVisible(){
+        setVisibility(CardVisibility.VISIBLE);
+        return this;
+    }
+    public Card setHidden(){
+        setVisibility(CardVisibility.HIDDEN);
         return this;
     }
 

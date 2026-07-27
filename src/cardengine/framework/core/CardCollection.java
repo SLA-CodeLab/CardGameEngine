@@ -3,7 +3,7 @@ package cardengine.framework.core;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class CardCollection {
+public class CardCollection {
     protected List<Card> cards = new ArrayList<>();
 
     public void addCard(Card card) {

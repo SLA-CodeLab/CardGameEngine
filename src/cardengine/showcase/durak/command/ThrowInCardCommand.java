@@ -2,8 +2,8 @@ package cardengine.showcase.durak.command;
 
 import cardengine.framework.command.AbstractCommand;
 import cardengine.framework.core.Card;
+import cardengine.framework.core.CardCollection;
 import cardengine.framework.core.Player;
-import cardengine.framework.core.Table;
 
 /**
  * Macht genau das gleiche wie AttackCard also ist vielleicht redundant je nachdem wie Phase genau aussehen wird
@@ -12,11 +12,11 @@ import cardengine.framework.core.Table;
  * @author Lukas
  */
 public class ThrowInCardCommand extends AbstractCommand {
-    private Table table;
+    private CardCollection table;
     private Card card;
     private boolean moved;
 
-    public ThrowInCardCommand(Player player, Card card, Table table) {
+    public ThrowInCardCommand(Player player, Card card, CardCollection table) {
         super(player);
         this.table = table;
         this.card = card;

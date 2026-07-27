@@ -2,8 +2,8 @@ package cardengine.showcase.durak.command;
 
 import cardengine.framework.command.AbstractCommand;
 import cardengine.framework.core.Card;
+import cardengine.framework.core.CardCollection;
 import cardengine.framework.core.Player;
-import cardengine.framework.core.Table;
 
 import java.util.ArrayList;
 
@@ -12,10 +12,10 @@ import java.util.ArrayList;
  * @author Lukas
  */
 public class EndAttackCommand extends AbstractCommand {
-    private Table table;
+    private CardCollection table;
     private ArrayList<Card> beaten;
 
-    public EndAttackCommand(Player player, Table table) {
+    public EndAttackCommand(Player player, CardCollection table) {
         super(player);
         this.table = table;
     }

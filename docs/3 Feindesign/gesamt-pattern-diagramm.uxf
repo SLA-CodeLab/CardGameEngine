@@ -146,32 +146,6 @@ StandardDeck
     <additional_attributes>10.0;130.0;10.0;10.0</additional_attributes>
   </element>
   <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>1136</x>
-      <y>1144</y>
-      <w>136</w>
-      <h>24</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>150.0;10.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>976</x>
-      <y>1120</y>
-      <w>168</w>
-      <h>72</h>
-    </coordinates>
-    <panel_attributes>Table
---
-
---
-getCard(Suit, Rank): Card  </panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
     <id>UMLClass</id>
     <coordinates>
       <x>1256</x>
@@ -327,43 +301,17 @@ r2=-visibility</panel_attributes>
     <additional_attributes>10.0;120.0;10.0;10.0</additional_attributes>
   </element>
   <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>1352</x>
-      <y>1336</y>
-      <w>168</w>
-      <h>96</h>
-    </coordinates>
-    <panel_attributes>Hand
---
-
---
-getPlayableCards(): List&lt;Card&gt;</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
     <id>Relation</id>
     <coordinates>
       <x>1224</x>
-      <y>1360</y>
-      <w>144</w>
-      <h>32</h>
+      <y>1240</y>
+      <w>240</w>
+      <h>144</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
-m1=1
-m2=1</panel_attributes>
-    <additional_attributes>160.0;10.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>1416</x>
-      <y>1240</y>
-      <w>24</w>
-      <h>112</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;120.0</additional_attributes>
+r1=-hand
+m1=1</panel_attributes>
+    <additional_attributes>250.0;10.0;250.0;160.0;10.0;160.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -968,13 +916,13 @@ Game
     <coordinates>
       <x>856</x>
       <y>1152</y>
-      <w>136</w>
+      <w>416</w>
       <h>40</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 r1=-table
 m1=1</panel_attributes>
-    <additional_attributes>150.0;20.0;10.0;20.0</additional_attributes>
+    <additional_attributes>500.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>

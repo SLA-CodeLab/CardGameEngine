@@ -2,8 +2,8 @@ package cardengine.showcase.durak.command;
 
 import cardengine.framework.command.AbstractCommand;
 import cardengine.framework.core.Card;
+import cardengine.framework.core.CardCollection;
 import cardengine.framework.core.Player;
-import cardengine.framework.core.Table;
 
 /**
  * Command um mit einer Karte eine angreifende Karte zu schlagen
@@ -13,11 +13,11 @@ import cardengine.framework.core.Table;
  * @author Lukas
  */
 public class DefendCardCommand extends AbstractCommand {
-    private Table table;
+    private CardCollection table;
     private Card card;
     private boolean moved;
 
-    public DefendCardCommand(Player player, Table table, Card card) {
+    public DefendCardCommand(Player player, CardCollection table, Card card) {
         super(player);
         this.table = table;
         this.card = card;

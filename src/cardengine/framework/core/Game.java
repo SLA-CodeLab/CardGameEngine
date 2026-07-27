@@ -17,7 +17,7 @@ public class Game {
     private CommandHistory commandHistory = new CommandHistory();
     private WinCondition winCondition;
     private Deck deck;
-    private Table table = new Table();
+    private CardCollection table = new CardCollection();
     private List<Player> players = new ArrayList<>();
     private Player activePlayer;
     private List<GameListener> listeners = new ArrayList<>();
@@ -216,7 +216,7 @@ public class Game {
         return deck;
     }
 
-    public Table getTable() {
+    public CardCollection getTable() {
         return table;
     }
 

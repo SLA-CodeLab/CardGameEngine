@@ -28,13 +28,17 @@ public class DurakMain {
                     new Player(1, "Alice"),
                     new Player(2, "Bob"),
                     new Player(3, "Carol"),
-                    new Player(4, "Dave"));
+                    new Player(4, "Dave"),
+                    new Player(5, "Egor"),
+                    new Player(6, "Akim"));
             players.forEach(game::addPlayer);
 
             Map<Player, BotStrategy> bots = new LinkedHashMap<>();
             bots.put(players.get(1), new DurakBot());
             bots.put(players.get(2), new DurakBot());
             bots.put(players.get(3), new DurakBot());
+            bots.put(players.get(4), new DurakBot());
+            bots.put(players.get(5), new DurakBot());
 
             // Durak legt die Karten paarweise (Angriff/Verteidigung) aus, nicht auf einen
             // Ablagestapel -> eigene Tischansicht. (Claude, Opus 4.8)

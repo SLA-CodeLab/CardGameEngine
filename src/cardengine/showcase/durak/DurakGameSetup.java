@@ -39,8 +39,8 @@ public class DurakGameSetup implements GameSetup {
         // alle Spieler scannen
         for (Player player : game.getPlayers()){
 
-            //eine Hand des Spielers erhalten
-            Hand hand = player.getHand();
+            //eine Hand des Spielers erhalten refactored HAND = CardCollection
+            CardCollection hand = player.getHand();
 
             // alle Cards scannen
             for (Card card : hand.getCards()) {
