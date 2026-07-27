@@ -1,18 +1,14 @@
 package cardengine.framework.core;
 
 public class Player {
-    private int id; //todo wofür ID das wird nirgendwo verwendet Code Smell
+  //todo wofür ID das wird nirgendwo verwendet Code Smell
     private String name;
     private CardCollection hand = new CardCollection();
 
-    public Player(int id, String name) {
-        this.id = id;
+    public Player(String name) {
         this.name = name;
     }
 
-    public int getId() {
-        return id;
-    }
 
     public String getName() {
         return name;

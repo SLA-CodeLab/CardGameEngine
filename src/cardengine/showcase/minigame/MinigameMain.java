@@ -25,10 +25,10 @@ public class MinigameMain {
         SwingUtilities.invokeLater(() -> {
             Game game = new Game();
             List<Player> players = Arrays.asList(
-                    new Player(1, "Alice"),
-                    new Player(2, "Bob"),
-                    new Player(3, "Carol"),
-                    new Player(4, "Dave"));
+                    new Player("Alice"),
+                    new Player( "Bob"),
+                    new Player( "Carol"),
+                    new Player( "Dave"));
             players.forEach(game::addPlayer);
 
             GameView view = new GameView(game.getPlayers(), "Minigame");

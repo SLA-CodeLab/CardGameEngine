@@ -40,6 +40,8 @@ public class Game {
 
         this.winCondition = winCondition;
 
+        setup.validateNumberOfPlayers(this);
+
         //Deck mischen
         if (deck != null) {
             deck.shuffle();

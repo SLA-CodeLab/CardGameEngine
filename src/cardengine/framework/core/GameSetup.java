@@ -6,4 +6,5 @@ public interface GameSetup {
     void distributeInitialHands(Game game);
     void assignFirstPlayer(Game game);
     Phase getStartPhase(Game game);
+    void validateNumberOfPlayers(Game game); //TEST UND INTEGRATION
     }

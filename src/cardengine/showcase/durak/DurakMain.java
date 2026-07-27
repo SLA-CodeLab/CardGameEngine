@@ -25,12 +25,12 @@ public class DurakMain {
         SwingUtilities.invokeLater(() -> {
             Game game = new Game();
             List<Player> players = Arrays.asList(
-                    new Player(1, "Alice"),
-                    new Player(2, "Bob"),
-                    new Player(3, "Carol"),
-                    new Player(4, "Dave"),
-                    new Player(5, "Egor"),
-                    new Player(6, "Akim"));
+                    new Player("Alice"),
+                    new Player("Bob"),
+                    new Player("Carol"),
+                    new Player("Dave"),
+                    new Player("Akim"),
+                    new Player("Akim"));
             players.forEach(game::addPlayer);
 
             Map<Player, BotStrategy> bots = new LinkedHashMap<>();

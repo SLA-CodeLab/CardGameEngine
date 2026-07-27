@@ -32,9 +32,9 @@ public class MauMauMain {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             Game game = new Game();
-            Player du = new Player(1, "Du");
-            Player botBob = new Player(2, "Bot Bob");
-            Player botCarol = new Player(3, "Bot Carol");
+            Player du = new Player( "Du");
+            Player botBob = new Player( "Bot Bob");
+            Player botCarol = new Player( "Bot Carol");
             game.addPlayer(du);
             game.addPlayer(botBob);
             game.addPlayer(botCarol);

@@ -24,6 +24,7 @@ public class MauMauSetup implements GameSetup {
 
     /** Startkarten pro Spieler. */
     private static final int HAND_SIZE = 5;
+    private static final int MAX_PLAYERS = 6;
 
     @Override
     public void distributeInitialHands(Game game) {
@@ -61,5 +62,15 @@ public class MauMauSetup implements GameSetup {
     @Override
     public Phase getStartPhase(Game game) {
         return new PlayPhase();
+    }
+
+    @Override
+    public void validateNumberOfPlayers(Game game) {
+        if (game.getPlayers().size() > MAX_PLAYERS) {
+            throw new IllegalArgumentException("Too many players");
+        }
+        if (game.getPlayers().size() < 2) {
+            throw new IllegalArgumentException("Not enough players");
+        }
     }
 }
