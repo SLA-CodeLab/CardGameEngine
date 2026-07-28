@@ -1,5 +1,6 @@
 package cardengine.framework.core;
 
+import cardengine.framework.command.HistoryEntry;
 import cardengine.framework.observer.GameListener;
 import cardengine.framework.state.Phase;
 import cardengine.framework.command.Command;
@@ -109,9 +110,9 @@ public class Game {
             return;
         }
 
-        commandHistory.executeCommand(command);
+        commandHistory.executeCommand(command, currentPhase,activePlayer);
 
-        Phase nextPhase = currentPhase.next(this);
+        Phase nextPhase = currentPhase.next(this,command);
         changePhase(nextPhase);
 
         if (checkWinCondition()) {
@@ -183,8 +184,11 @@ public class Game {
      * @author Lukas
      */
     public void undoLastAction() {
-        if (commandHistory != null) {
-            commandHistory.undo();
+        HistoryEntry entry = commandHistory.undo();
+        if (entry != null) {
+            this.currentPhase = entry.getPhaseBefore();
+            this.activePlayer = entry.getActivePlayerBefore();
+            notifyStateChanged();
         }
         notifyStateChanged();
     }

@@ -83,8 +83,8 @@ public class DefendPhase implements Phase {
      * @author Lukas
      */
     @Override
-    public Phase next(Game game) {
-        if (game.getTable().isEmpty()) {
+    public Phase next(Game game, Command cmd) {
+        if (cmd instanceof TakeCardCommand) {
             Player candidate = game.getNextPlayer(verteidiger);
             game.setActivePlayer(candidate);
             if (DurakTurn.needsRefill(game)) {
@@ -92,16 +92,11 @@ public class DefendPhase implements Phase {
             }
             return DurakTurn.startAttack(game, candidate);
         }
-        else if (allDefended(game)) {
             // todo ZULEGER: Hier wird fest der urspruengliche Angreifer wieder aktiv.
             //  Sobald die AttackPhase reihum weiterschaltet, muss stattdessen deren
             //  aktueller Leger uebernommen werden. Siehe todo in AttackPhase.
             game.setActivePlayer(DurakTurn.prevInGame(game, verteidiger));
             return new AttackPhase(verteidiger);
-        }
-        else  {
-            return new DefendPhase(verteidiger);
-        }
     }
 
     private boolean allDefended(Game game) {

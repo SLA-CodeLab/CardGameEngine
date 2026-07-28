@@ -1,14 +1,17 @@
 package cardengine.framework.command;
 
+import cardengine.framework.core.Player;
+import cardengine.framework.state.Phase;
+
 import java.util.Stack;
 
 public class CommandHistory {
-    private Stack<Command> history = new Stack<>();
+    private Stack<HistoryEntry> history = new Stack<>();
 
-    public void executeCommand(Command command) {
+    public void executeCommand(Command command, Phase phasebefore, Player aktivePlayerBefore) {
         if (command != null) {
             command.execute();
-            history.push(command);
+            history.push(new HistoryEntry(command, phasebefore, aktivePlayerBefore));
         }
     }
 
@@ -16,11 +19,16 @@ public class CommandHistory {
         return !history.isEmpty();
     }
 
-    public void undo() {
+    /**
+     * @author Stanislav
+     */
+    public HistoryEntry undo() {
         if (canUndo()) {
-            Command command = history.pop();
-            command.undo();
+            HistoryEntry entry = history.pop();
+            entry.getCommand().undo();
+            return entry;
         }
+        return null;
     }
 
     public void clearHistory() {

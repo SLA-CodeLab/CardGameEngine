@@ -88,6 +88,7 @@ public class AttackPhase implements Phase {
         return false;
     }
 
+
     /**
      * Hilfmethode
      * @param card Karte die gelegt werden soll
@@ -114,10 +115,11 @@ public class AttackPhase implements Phase {
      * weitergegeben und der Verteidiger muss die neuen Karten verteidigen
      * @return DrawPhase wenn Table leer oder DefendPhase wenn neue Karten da
      * @author Lukas
+     * @author Stanislav fix
      */
     @Override
-    public Phase next(Game game) {
-        if (allDefended(game)) {
+    public Phase next(Game game, Command cmd) {
+        if (cmd instanceof EndAttackCommand) {
             game.setActivePlayer(verteidiger);
             if (DurakTurn.needsRefill(game)) {
                 return new DrawPhase();

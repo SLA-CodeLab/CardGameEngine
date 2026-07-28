@@ -32,7 +32,7 @@ public class DrawPhase implements Phase {
      * @author Lukas
      */
     @Override
-    public Phase next(Game game) {
+    public Phase next(Game game, Command cmd) {
         if (playerNeedCards(game)) return this;
         return DurakTurn.startAttack(game, game.getActivePlayer());
     }
