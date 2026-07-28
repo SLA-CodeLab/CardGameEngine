@@ -9,6 +9,7 @@ import cardengine.showcase.durak.state.AttackPhase;
 public class DurakGameSetup implements GameSetup {
     private static final int HAND_SIZE = 6;
     private static final int MAX_PLAYERS = 6;
+    private static final int MIN_PLAYERS = 2;
 
     /**
      * Iteriert über alle Spieler und verteilt jedem 6 Handkarten
@@ -82,12 +83,22 @@ public class DurakGameSetup implements GameSetup {
         Player verteidiger = game.getNextPlayer(game.getActivePlayer());
         return new AttackPhase(verteidiger);
     }
+
+
+    /**
+     * @author Stanislav
+     * Die Ueberpruefunge der gultigen Anzahl der Spieler muss in Setup liegen
+     */
     public void validateNumberOfPlayers(Game game) {
         if (game.getPlayers().size() > MAX_PLAYERS) {
             throw new IllegalArgumentException("Too many players");
         }
-        if (game.getPlayers().size() < 2) {
+        if (game.getPlayers().size() < MIN_PLAYERS) {
             throw new IllegalArgumentException("Not enough players");
         }
+    }
+
+    public static int getHandSize() {
+        return HAND_SIZE;
     }
 }

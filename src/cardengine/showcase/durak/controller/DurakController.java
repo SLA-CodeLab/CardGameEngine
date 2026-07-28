@@ -11,6 +11,7 @@ import cardengine.framework.core.Player;
 import cardengine.framework.core.Suit;
 import cardengine.framework.observer.GameListener;
 import cardengine.framework.state.Phase;
+import cardengine.showcase.durak.DurakGameSetup;
 import cardengine.showcase.durak.command.AttackCardCommand;
 import cardengine.showcase.durak.command.DefendCardCommand;
 import cardengine.showcase.durak.command.DrawCardCommand;
@@ -57,7 +58,7 @@ import java.util.Set;
 public class DurakController implements GameListener {
 
     private static final int BOT_DELAY_MS = 2000;
-    private static final int HAND_TARGET = 6;
+    private static final int HAND_TARGET = DurakGameSetup.getHandSize();
 
     private final Game game;
     private final GameView view;

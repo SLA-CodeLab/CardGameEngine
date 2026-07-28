@@ -5,6 +5,8 @@ import cardengine.framework.core.Game;
 import cardengine.framework.core.Player;
 import cardengine.framework.state.Phase;
 import cardengine.showcase.durak.command.DrawCardCommand;
+import cardengine.showcase.durak.DurakGameSetup;
+
 
 public class DrawPhase implements Phase {
 
@@ -45,7 +47,7 @@ public class DrawPhase implements Phase {
     private boolean playerNeedCards(Game game) {
         if (game.getDeck().isEmpty()) return false;
         for (Player p : game.getPlayers()) {
-            if (p.getHand().size() < 6) return true;
+            if (p.getHand().size() < DurakGameSetup.getHandSize()) return true;
         }
         return false;
     }
