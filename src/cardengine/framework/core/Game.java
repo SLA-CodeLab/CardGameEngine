@@ -191,11 +191,11 @@ public class Game {
         notifyStateChanged();
     }
 
-    public void changePhase(Phase newPhase) {
+    private void changePhase(Phase newPhase) {
         this.currentPhase = newPhase;
     }
 
-    public boolean checkWinCondition() {
+    private boolean checkWinCondition() {
         if (winCondition != null) {
             return winCondition.isGameOver(this);
         }

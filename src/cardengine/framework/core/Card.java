@@ -44,10 +44,10 @@ public class Card {
         }
         return this;
     }
-    public void setVisible(){
+    private void setVisible(){
         setVisibility(CardVisibility.VISIBLE);
     }
-    public void setHidden(){
+    private void setHidden(){
         setVisibility(CardVisibility.HIDDEN);
     }
 
