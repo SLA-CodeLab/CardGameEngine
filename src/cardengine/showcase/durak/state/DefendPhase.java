@@ -13,7 +13,7 @@ import cardengine.showcase.durak.factory.DurakDeck;
 import java.util.List;
 
 public class DefendPhase implements Phase {
-    private Player verteidiger;
+    private final Player verteidiger;
     public DefendPhase(Player verteidiger) {
         this.verteidiger = verteidiger;
     }
@@ -99,7 +99,4 @@ public class DefendPhase implements Phase {
             return new AttackPhase(verteidiger);
     }
 
-    private boolean allDefended(Game game) {
-        return (game.getTable().size() % 2) == 0;
-    }
 }

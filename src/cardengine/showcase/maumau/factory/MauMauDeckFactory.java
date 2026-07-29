@@ -12,12 +12,11 @@ import cardengine.framework.factory.DeckFactory;
  * @author Claude (Opus 4.8)
  */
 public class MauMauDeckFactory extends DeckFactory {
-
     private static final int NUMBER_OF_CARDS = 32;
 
     @Override
     public Deck createDeck() {
-        return new MauMauDeck();
+        return new MauMauDeck(getDeckSize());
     }
 
     @Override

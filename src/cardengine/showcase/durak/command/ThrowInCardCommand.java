@@ -12,8 +12,8 @@ import cardengine.framework.core.Player;
  * @author Lukas
  */
 public class ThrowInCardCommand extends AbstractCommand {
-    private CardCollection table;
-    private Card card;
+    private final CardCollection table;
+    private final Card card;
     private boolean moved;
 
     public ThrowInCardCommand(Player player, Card card, CardCollection table) {

@@ -15,13 +15,13 @@ import java.util.List;
 public class Game {
     private Phase currentPhase;
     private Phase startPhase;
-    private CommandHistory commandHistory = new CommandHistory();
+    private final CommandHistory commandHistory = new CommandHistory();
     private WinCondition winCondition;
     private Deck deck;
-    private CardCollection table = new CardCollection();
-    private List<Player> players = new ArrayList<>();
+    private final CardCollection table = new CardCollection();
+    private final List<Player> players = new ArrayList<>();
     private Player activePlayer;
-    private List<GameListener> listeners = new ArrayList<>();
+    private final List<GameListener> listeners = new ArrayList<>();
 
     /**
      * Wenn ein Spiel gestartet wird soll diese Methode das gesamte Spiel vorbereiten also von Karten vorbereiten Deck shuffeln und Hände verteilen.
@@ -49,11 +49,9 @@ public class Game {
         } else throw new NullPointerException("deck is null");
 
         //Setup ziehen
-        if (setup != null) {
-            setup.distributeInitialHands(this);
-            setup.assignFirstPlayer(this);
-            startPhase = setup.getStartPhase(this);
-        } else throw new NullPointerException("setup is null");
+        setup.distributeInitialHands(this);
+        setup.assignFirstPlayer(this);
+        startPhase = setup.getStartPhase(this);
 
         //GameLoop war in der Konsolen version hier nach Aktivitätsdigramm fällt aber jetzt weg
     }
@@ -143,7 +141,7 @@ public class Game {
     }
 
     public boolean canUndo() {
-        return commandHistory != null && commandHistory.canUndo();
+        return commandHistory.canUndo();
     }
 
     public void setActivePlayer(Player player) {

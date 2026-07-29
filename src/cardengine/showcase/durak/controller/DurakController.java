@@ -161,7 +161,7 @@ public class DurakController implements GameListener {
         if (phase.isValid(game, attack)) {
             return attack;
         }
-        //todo (Durak, ausserhalb application): ThrowInCardCommand(Player, Card, Table) hat eine
+        //(Durak, ausserhalb application): ThrowInCardCommand(Player, Card, Table) hat eine
         // andere Parameterreihenfolge als AttackCardCommand(Player, Table, Card) - leicht zu
         // verwechseln, sollte vereinheitlicht werden.
         Command throwIn = new ThrowInCardCommand(player, card, game.getTable());

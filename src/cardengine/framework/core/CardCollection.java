@@ -28,9 +28,6 @@ public class CardCollection {
         return cards.size();
     }
 
-    public void deleteAll() {
-        cards.clear();
-    }
 
     /**
      * Verschiebt eine konkrete Karte aus dieser Collection in eine andere.

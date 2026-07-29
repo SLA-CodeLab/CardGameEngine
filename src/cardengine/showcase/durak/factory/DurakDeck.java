@@ -3,7 +3,7 @@ package cardengine.showcase.durak.factory;
 import cardengine.framework.core.*;
 
 public class DurakDeck extends StandardDeck {
-    private final static int DURAK_RANK_COUNT = 9;
+    private int rankCount;
     private Suit trumpSuit;
 
     /**
@@ -33,7 +33,8 @@ public class DurakDeck extends StandardDeck {
     /**
      * @author Stanislav
      */
-    public DurakDeck() {
+    public DurakDeck(int totalCards) {
+        this.rankCount = totalCards / Suit.values().length;
         Rank[] ranks = Rank.values();// {TWO, THREE .. usw}
         for (Suit suit : Suit.values()) { //{HEARTS,DIAMONDS,CLUBS,SPADES}
             for (int i = getStartIndex(ranks); i < ranks.length; i++) {
@@ -44,13 +45,9 @@ public class DurakDeck extends StandardDeck {
     /**
      * @author Stanislav
      */
-    //um eine Deck zu erzuegen, die mit 6 Startet, eigentlich koennte man auch bei Framework schreiben
     // die loesung von Claude war bei MiniGame --   private static final int MIN_RANK_ORDINAL = Rank.SIX.ordinal();
-    //todo ich finde auch man sollte das in Framework machen // von Lukas
-
-    private int getStartIndex(Rank[] ranks) {
-        int skip = Math.max(0, ranks.length - DURAK_RANK_COUNT);
-        return skip;
+    public int getStartIndex(Rank[] ranks) {
+        return Math.max(0, ranks.length - this.rankCount);
     }
 
     public Suit getTrumpSuit() {

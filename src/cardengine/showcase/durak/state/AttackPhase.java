@@ -36,7 +36,7 @@ public class AttackPhase implements Phase {
     //  Die Anwendungsschicht ist darauf schon vorbereitet: DurakController und DurakBot
     //  fragen fuer jede Karte die Phase, welcher Command gueltig ist (Angriff/Zulegen/
     //  Verteidigen), und laufen ohne Aenderung weiter, sobald der Zuleger aktiv wird.
-    private Player verteidiger;
+    private final Player verteidiger;
     public AttackPhase(Player verteidiger) {
         this.verteidiger = verteidiger;
     }
@@ -133,11 +133,11 @@ public class AttackPhase implements Phase {
 
     /**
      * Diese Hilfsfunktion berechnet ob alle Karten verteidigt sind oder nicht.
-     *
+
      * Damit das funktioniert habe ich nur geschaut ob die Anzahl Karten gerade ist oder nicht.
      * Es kann also nicht mehere offene Angriffskarten geben. Es gibt Regeln in Durak wie es mehrere offene Karten gibt aber das ist
      * gefühlt unmöglich vernünftig mit unserem Code ohne krasse Änderungen in der Architektur abzubilden
-     *
+
      * ANNAHME FÜR DIE ZUKUNFT: ES KANN IMMER NUR EINE ANGREIFENDE KARTE GEBEN; ERST SOBALD VERTEIDIGT KANN EINE NEUE GELEGT WERDEN
      *
      * @param game Hauptgameobjekt damit er sich die Anzahl Karten auf Tisch holen kann
