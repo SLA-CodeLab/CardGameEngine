@@ -37,7 +37,7 @@ public class Game {
         //Deck anlegen
         if (deckFactory != null) {
             this.deck = deckFactory.createDeck();
-        }
+        } else throw new NullPointerException("deckFactory is null");
 
         this.winCondition = winCondition;
 
@@ -46,14 +46,14 @@ public class Game {
         //Deck mischen
         if (deck != null) {
             deck.shuffle();
-        }
+        } else throw new NullPointerException("deck is null");
 
         //Setup ziehen
         if (setup != null) {
             setup.distributeInitialHands(this);
             setup.assignFirstPlayer(this);
             startPhase = setup.getStartPhase(this);
-        }
+        } else throw new NullPointerException("setup is null");
 
         //GameLoop war in der Konsolen version hier nach Aktivitätsdigramm fällt aber jetzt weg
     }

@@ -9,12 +9,6 @@ public abstract class StandardDeck extends CardCollection implements Deck {
     public void shuffle() {
         Collections.shuffle(cards);
     }
-
-    @Override
-    public void resetDeck() {
-        cards.clear();
-    }
-
     /**
      * Um oberste Karte vom Deck zu nehmen. Habe mit size - 1 damit migration zu Eclipse kein Problem wird
      * @return oberste Karte des Decks
