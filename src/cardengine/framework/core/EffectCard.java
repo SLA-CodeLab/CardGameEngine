@@ -3,7 +3,7 @@ package cardengine.framework.core;
 import cardengine.framework.strategy.Effect;
 
 public class EffectCard extends Card {
-    private Effect action;
+    private final Effect action;
 
     public EffectCard(Suit suit, Rank rank, Effect action) {
         super(suit,rank);

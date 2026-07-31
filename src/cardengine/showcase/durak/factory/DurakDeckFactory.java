@@ -12,11 +12,11 @@ public class DurakDeckFactory extends DeckFactory {
 
     @Override
     public Deck createDeck() {
-        return new DurakDeck();
+        return new DurakDeck(this.getDeckSize());
     }
 
     @Override
     public int getDeckSize() {
         return NUMBER_OF_CARDS;
-    } //todo wird nirgendwo gebraucht bzw es gibt static final variable ist also unnötig Code Smell
+    }
 }

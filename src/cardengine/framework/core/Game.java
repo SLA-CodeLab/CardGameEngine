@@ -1,5 +1,6 @@
 package cardengine.framework.core;
 
+import cardengine.framework.command.HistoryEntry;
 import cardengine.framework.observer.GameListener;
 import cardengine.framework.state.Phase;
 import cardengine.framework.command.Command;
@@ -14,13 +15,13 @@ import java.util.List;
 public class Game {
     private Phase currentPhase;
     private Phase startPhase;
-    private CommandHistory commandHistory = new CommandHistory();
+    private final CommandHistory commandHistory = new CommandHistory();
     private WinCondition winCondition;
     private Deck deck;
-    private Table table = new Table();
-    private List<Player> players = new ArrayList<>();
+    private final CardCollection table = new CardCollection();
+    private final List<Player> players = new ArrayList<>();
     private Player activePlayer;
-    private List<GameListener> listeners = new ArrayList<>();
+    private final List<GameListener> listeners = new ArrayList<>();
 
     /**
      * Wenn ein Spiel gestartet wird soll diese Methode das gesamte Spiel vorbereiten also von Karten vorbereiten Deck shuffeln und Hände verteilen.
@@ -36,21 +37,21 @@ public class Game {
         //Deck anlegen
         if (deckFactory != null) {
             this.deck = deckFactory.createDeck();
-        }
+        } else throw new NullPointerException("deckFactory is null");
 
         this.winCondition = winCondition;
+
+        setup.validateNumberOfPlayers(this);
 
         //Deck mischen
         if (deck != null) {
             deck.shuffle();
-        }
+        } else throw new NullPointerException("deck is null");
 
         //Setup ziehen
-        if (setup != null) {
-            setup.distributeInitialHands(this);
-            setup.assignFirstPlayer(this);
-            startPhase = setup.getStartPhase(this);
-        }
+        setup.distributeInitialHands(this);
+        setup.assignFirstPlayer(this);
+        startPhase = setup.getStartPhase(this);
 
         //GameLoop war in der Konsolen version hier nach Aktivitätsdigramm fällt aber jetzt weg
     }
@@ -107,9 +108,9 @@ public class Game {
             return;
         }
 
-        commandHistory.executeCommand(command);
+        commandHistory.executeCommand(command, currentPhase,activePlayer);
 
-        Phase nextPhase = currentPhase.next(this);
+        Phase nextPhase = currentPhase.next(this,command);
         changePhase(nextPhase);
 
         if (checkWinCondition()) {
@@ -140,7 +141,7 @@ public class Game {
     }
 
     public boolean canUndo() {
-        return commandHistory != null && commandHistory.canUndo();
+        return commandHistory.canUndo();
     }
 
     public void setActivePlayer(Player player) {
@@ -181,17 +182,20 @@ public class Game {
      * @author Lukas
      */
     public void undoLastAction() {
-        if (commandHistory != null) {
-            commandHistory.undo();
+        HistoryEntry entry = commandHistory.undo();
+        if (entry != null) {
+            this.currentPhase = entry.getPhaseBefore();
+            this.activePlayer = entry.getActivePlayerBefore();
+            notifyStateChanged();
         }
         notifyStateChanged();
     }
 
-    public void changePhase(Phase newPhase) {
+    private void changePhase(Phase newPhase) {
         this.currentPhase = newPhase;
     }
 
-    public boolean checkWinCondition() {
+    private boolean checkWinCondition() {
         if (winCondition != null) {
             return winCondition.isGameOver(this);
         }
@@ -216,7 +220,7 @@ public class Game {
         return deck;
     }
 
-    public Table getTable() {
+    public CardCollection getTable() {
         return table;
     }
 

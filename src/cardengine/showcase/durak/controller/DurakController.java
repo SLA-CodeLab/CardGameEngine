@@ -1,4 +1,4 @@
-package cardengine.application.controller;
+package cardengine.showcase.durak.controller;
 
 import cardengine.application.bot.BotDriver;
 import cardengine.application.bot.BotStrategy;
@@ -11,6 +11,7 @@ import cardengine.framework.core.Player;
 import cardengine.framework.core.Suit;
 import cardengine.framework.observer.GameListener;
 import cardengine.framework.state.Phase;
+import cardengine.showcase.durak.DurakGameSetup;
 import cardengine.showcase.durak.command.AttackCardCommand;
 import cardengine.showcase.durak.command.DefendCardCommand;
 import cardengine.showcase.durak.command.DrawCardCommand;
@@ -57,7 +58,7 @@ import java.util.Set;
 public class DurakController implements GameListener {
 
     private static final int BOT_DELAY_MS = 2000;
-    private static final int HAND_TARGET = 6;
+    private static final int HAND_TARGET = DurakGameSetup.getHandSize();
 
     private final Game game;
     private final GameView view;
@@ -160,7 +161,7 @@ public class DurakController implements GameListener {
         if (phase.isValid(game, attack)) {
             return attack;
         }
-        //todo (Durak, ausserhalb application): ThrowInCardCommand(Player, Card, Table) hat eine
+        //(Durak, ausserhalb application): ThrowInCardCommand(Player, Card, Table) hat eine
         // andere Parameterreihenfolge als AttackCardCommand(Player, Table, Card) - leicht zu
         // verwechseln, sollte vereinheitlicht werden.
         Command throwIn = new ThrowInCardCommand(player, card, game.getTable());

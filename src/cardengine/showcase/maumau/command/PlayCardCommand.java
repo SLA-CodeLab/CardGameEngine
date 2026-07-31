@@ -1,11 +1,7 @@
 package cardengine.showcase.maumau.command;
 
 import cardengine.framework.command.AbstractCommand;
-import cardengine.framework.core.Card;
-import cardengine.framework.core.EffectCard;
-import cardengine.framework.core.Game;
-import cardengine.framework.core.Player;
-import cardengine.framework.core.Table;
+import cardengine.framework.core.*;
 
 /**
  * GENERIERT von Claude (Opus 4.8).
@@ -31,7 +27,7 @@ import cardengine.framework.core.Table;
 public class PlayCardCommand extends AbstractCommand {
 
     private final Game game;
-    private final Table discardPile;
+    private final CardCollection discardPile;
     private final Card card;
     private boolean moved;
 
@@ -41,7 +37,7 @@ public class PlayCardCommand extends AbstractCommand {
      * @param discardPile Ablagestapel (der Tisch des Spiels)
      * @param game        das Spiel – wird zum Anwenden von Karteneffekten benoetigt
      */
-    public PlayCardCommand(Player player, Card card, Table discardPile, Game game) {
+    public PlayCardCommand(Player player, Card card, CardCollection discardPile, Game game) {
         super(player);
         this.card = card;
         this.discardPile = discardPile;

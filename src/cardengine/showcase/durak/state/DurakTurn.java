@@ -3,6 +3,7 @@ package cardengine.showcase.durak.state;
 import cardengine.framework.core.Game;
 import cardengine.framework.core.Player;
 import cardengine.framework.state.Phase;
+import cardengine.showcase.durak.DurakGameSetup;
 
 /**
  * Ey sorry wollte echt nichts innerhalb von Durak generieren aber ich musste das alles einfach noch fertig bekommen beovr ich weg bin // von Lukas
@@ -64,7 +65,7 @@ final class DurakTurn {
     static boolean needsRefill(Game game) {
         if (game.getDeck() == null || game.getDeck().isEmpty()) return false;
         for (Player p : game.getPlayers()) {
-            if (p.getHand().size() < 6) return true;
+            if (p.getHand().size() < DurakGameSetup.getHandSize()) return true;
         }
         return false;
     }

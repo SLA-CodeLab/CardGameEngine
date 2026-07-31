@@ -182,7 +182,7 @@ StandardDeck
     </coordinates>
     <panel_attributes>lt=&lt;-
 m1=*
-m2=
+m2=0
 r2=-cards</panel_attributes>
     <additional_attributes>160.0;20.0;10.0;20.0</additional_attributes>
   </element>
@@ -1405,6 +1405,28 @@ getAction(): Effect
     <additional_attributes>10.0;10.0;190.0;10.0;190.0;200.0</additional_attributes>
   </element>
   <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>630</x>
+      <y>1064</y>
+      <w>21</w>
+      <h>147</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;190.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>539</x>
+      <y>1197</y>
+      <w>112</w>
+      <h>21</h>
+    </coordinates>
+    <panel_attributes>UpdateTablePhase</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
     <id>UMLClass</id>
     <coordinates>
       <x>560</x>
@@ -1588,16 +1610,5 @@ GameSetup
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>190.0;540.0;10.0;540.0;10.0;10.0;50.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>1974</x>
-      <y>1407</y>
-      <w>196</w>
-      <h>105</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
-    <additional_attributes>260.0;10.0;260.0;60.0;10.0;60.0;10.0;130.0</additional_attributes>
   </element>
 </diagram>

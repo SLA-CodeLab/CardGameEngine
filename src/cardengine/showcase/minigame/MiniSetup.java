@@ -7,6 +7,7 @@ import cardengine.framework.factory.Deck;
 import cardengine.framework.core.GameSetup;
 import cardengine.framework.state.Phase;
 
+
 /**
  * GENERIERT ZUM TESTEN DES FRAMEWORKS
  *
@@ -16,6 +17,7 @@ public class MiniSetup implements GameSetup {
 
     /** Anzahl der Startkarten pro Spieler (Durak-artige Starthand). */
     private static final int START_HAND_SIZE = 3;
+    private static final int MAX_PLAYERS = 6;
 
     @Override
     public void distributeInitialHands(Game game) {
@@ -46,5 +48,15 @@ public class MiniSetup implements GameSetup {
     @Override
     public Phase getStartPhase(Game game) {
         return new MiniDrawPhase();
+    }
+
+    @Override
+    public void validateNumberOfPlayers(Game game) {
+        if (game.getPlayers().size() > MAX_PLAYERS) {
+            throw new IllegalArgumentException("Too many players");
+        }
+        if (game.getPlayers().size() < 2) {
+            throw new IllegalArgumentException("Not enough players");
+        }
     }
 }

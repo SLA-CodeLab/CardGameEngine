@@ -1,4 +1,4 @@
-package cardengine.application.controller;
+package cardengine.showcase.minigame;
 
 import cardengine.application.ui.CardRenderer;
 import cardengine.application.ui.GameView;
@@ -7,7 +7,6 @@ import cardengine.framework.core.Card;
 import cardengine.framework.core.Game;
 import cardengine.framework.core.Player;
 import cardengine.framework.observer.GameListener;
-import cardengine.showcase.minigame.MiniDrawCommand;
 
 import java.util.List;
 

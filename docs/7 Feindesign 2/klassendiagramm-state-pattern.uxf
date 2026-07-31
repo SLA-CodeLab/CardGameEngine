@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>8</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>632</x>
+      <y>280</y>
+      <w>200</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;control&gt;&gt;
+Game
+--
+-currentPhase: Phase
+
+--
++ submitCommand(Command): void
++ changePhase(Phase):void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>880</x>
+      <y>280</y>
+      <w>200</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+Phase
+--
+--
++ isValid(Game, Command) : boolean
++ next(Game, Command): Phase</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>824</x>
+      <y>288</y>
+      <w>72</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+r1=-phase
+m1=1</panel_attributes>
+    <additional_attributes>70.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>552</x>
+      <y>224</y>
+      <w>800</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>framework
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>552</x>
+      <y>496</y>
+      <w>800</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>showcase.durak
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>400</x>
+      <y>496</y>
+      <w>128</w>
+      <h>128</h>
+    </coordinates>
+    <panel_attributes>Hier nur mal bsp
+wie State Pattern
+im Showcase behandelt
+werden müsste. 
+Weil es kein Sinn ergibt
+Phasen im Framework
+zu definieren weil alle
+Spiele extrem 
+unterschiedlich sind</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>992</x>
+      <y>544</y>
+      <w>192</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>DrawPhase
+--
+verteidiger: Player
+--
+- playerNeedCards(Game): boolean</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1024</x>
+      <y>344</y>
+      <w>24</w>
+      <h>216</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;250.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>656</x>
+      <y>344</y>
+      <w>264</w>
+      <h>216</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>310.0;10.0;310.0;40.0;10.0;40.0;10.0;250.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>576</x>
+      <y>544</y>
+      <w>184</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>AttackPhase
+--
+verteidiger: Player
+--
+-darfLegen(Card, Game): boolean
+-allDefended(Game): boolean
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>776</x>
+      <y>544</y>
+      <w>200</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>DefendPhase
+--
+verteidiger: Player
+--
+- schlaegt(Card, Card, tSuit): boolean
+- defendable(Card,Game): boolean
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>912</x>
+      <y>344</y>
+      <w>24</w>
+      <h>216</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;250.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1192</x>
+      <y>544</y>
+      <w>128</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;utility&gt;&gt;
+DurakTurn
+--
+
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>632</x>
+      <y>584</y>
+      <w>640</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>780.0;10.0;780.0;60.0;10.0;60.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>864</x>
+      <y>584</y>
+      <w>408</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>490.0;10.0;490.0;60.0;10.0;60.0;10.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1048</x>
+      <y>584</y>
+      <w>224</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>260.0;10.0;260.0;60.0;10.0;60.0;10.0;30.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>280</x>
+      <y>696</y>
+      <w>256</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>Einzige Phase des Mau-Mau (State-Pattern).
+Mau-Mau kennt keinen echten Phasenwechsel 
+wie Durak: Es gibt nur "der Aktive ist 
+am Zug". Deshalb bleibtdiese Phase aktiv 
+und {@link #next(Game)} schaltet lediglich 
+reihum den naechsten Spieler weiter.
+Diese Klasse wurde von Claude (Fable 5)
+generiert
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>552</x>
+      <y>664</y>
+      <w>800</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>showcase.maumau
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>872</x>
+      <y>696</y>
+      <w>272</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>PlayPhase
+--
+- wishedSuit: Suit
+- wishCard: Card
+--
++setSuitWish(Suit, Card): void
++getActiveSuitWish(Game): Suit
+-matches(Card,Card): boolean
+-topOfDiscard(Game): Card</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>976</x>
+      <y>344</y>
+      <w>24</w>
+      <h>368</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;440.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1120</x>
+      <y>280</y>
+      <w>200</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+Command
+--
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1072</x>
+      <y>312</y>
+      <w>64</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>60.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+</diagram>

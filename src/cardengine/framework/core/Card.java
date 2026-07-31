@@ -1,9 +1,9 @@
 package cardengine.framework.core;
 
 public class Card {
-    private Suit suit;
-    private Rank rank;
-    private CardVisibility visibility = CardVisibility.HIDDEN;
+    private final Suit suit;
+    private final Rank rank;
+    private CardVisibility visibility;
 
     public Card(Suit suit, Rank rank) {
         this.suit = suit;
@@ -35,16 +35,20 @@ public class Card {
      * @author Lukas
      * @return Gibt die geflippte Version der Karte wieder
      *
-     *todo ich habe diese Funktion viel benutzt aber ist irgendwie unschön nicht hundert prozent sicher zu sein ob jetzt sichtbar oder nicht
-     * vielleicht wäre es besser eine setVisible und setHidden zu machen
      */
     public Card flip() {
         if (this.visibility == CardVisibility.HIDDEN) {
-            this.visibility = CardVisibility.VISIBLE;
+            setVisible();
         } else {
-            this.visibility = CardVisibility.HIDDEN;
+            setHidden();
         }
         return this;
+    }
+    private void setVisible(){
+        setVisibility(CardVisibility.VISIBLE);
+    }
+    private void setHidden(){
+        setVisibility(CardVisibility.HIDDEN);
     }
 
     public String toString() {

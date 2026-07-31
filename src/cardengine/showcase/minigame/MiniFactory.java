@@ -11,35 +11,41 @@ import cardengine.framework.factory.DeckFactory;
  * Factory des Minigames: erzeugt ein Durak-artiges 36-Karten-Deck.
  *
  * <p>Statt namenloser Platzhalterkarten werden jetzt echte {@link Card}s mit
- * {@link Suit} und {@link Rank} erzeugt (6 bis Ass in allen vier Farben). Dadurch
- * lassen sich die Karten in der GUI als richtige Kartenblaetter (z.&nbsp;B. ♠4)
- * darstellen – es wird keine Karten-ID mehr benoetigt.</p>
+ * {@link Suit} und {@link Rank} erzeugt. Dadurch lassen sich die Karten in der
+ * GUI als richtige Kartenblaetter (z.&nbsp;B. ♠4) darstellen.</p>
  *
  * @author Claude (Opus 4.8)
  */
 public class MiniFactory extends DeckFactory {
 
-    /** Kleinster Rang im Durak-Deck (6). Alles ab hier kommt ins Deck. */
-    private static final int MIN_RANK_ORDINAL = Rank.SIX.ordinal();
+    private static final int NUMBER_OF_CARDS = 36;
 
     @Override
     public Deck createDeck() {
-        // StandardDeck ist abstrakt (ohne abstrakte Methoden), daher anonyme Subklasse.
+        int rankCount = NUMBER_OF_CARDS / Suit.values().length;
+
+        // StandardDeck ist abstrakt, daher anonyme Subklasse.
         StandardDeck deck = new StandardDeck() {
+            @Override
+            public int getStartIndex(Rank[] ranks) {
+                return Math.max(0, ranks.length - rankCount);
+            }
         };
 
+        Rank[] ranks = Rank.values();
+        int startIndex = deck.getStartIndex(ranks);
+
         for (Suit suit : Suit.values()) {
-            for (Rank rank : Rank.values()) {
-                if (rank.ordinal() >= MIN_RANK_ORDINAL) {
-                    deck.addCard(new Card(suit, rank));
-                }
+            for (int i = startIndex; i < ranks.length; i++) {
+                deck.addCard(new Card(suit, ranks[i]));
             }
         }
+
         return deck;
     }
 
     @Override
     public int getDeckSize() {
-        return (Rank.values().length - MIN_RANK_ORDINAL) * Suit.values().length;
+        return NUMBER_OF_CARDS;
     }
 }

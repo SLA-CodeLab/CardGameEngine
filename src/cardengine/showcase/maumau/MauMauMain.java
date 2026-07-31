@@ -1,11 +1,11 @@
 package cardengine.showcase.maumau;
 
-import cardengine.application.controller.MauMauController;
+import cardengine.showcase.maumau.controller.MauMauController;
 import cardengine.application.ui.GameView;
 import cardengine.framework.core.Game;
 import cardengine.framework.core.Player;
 import cardengine.application.bot.BotStrategy;
-import cardengine.application.bot.MauMauBot;
+import cardengine.showcase.maumau.bot.MauMauBot;
 import cardengine.showcase.maumau.factory.MauMauDeckFactory;
 import cardengine.showcase.maumau.strategy.MauMauWinCondition;
 
@@ -32,9 +32,9 @@ public class MauMauMain {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             Game game = new Game();
-            Player du = new Player(1, "Du");
-            Player botBob = new Player(2, "Bot Bob");
-            Player botCarol = new Player(3, "Bot Carol");
+            Player du = new Player( "Du");
+            Player botBob = new Player( "Bot Bob");
+            Player botCarol = new Player( "Bot Carol");
             game.addPlayer(du);
             game.addPlayer(botBob);
             game.addPlayer(botCarol);

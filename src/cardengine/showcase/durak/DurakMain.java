@@ -1,9 +1,9 @@
 package cardengine.showcase.durak;
 
 import cardengine.application.bot.BotStrategy;
-import cardengine.application.bot.DurakBot;
-import cardengine.application.controller.DurakController;
-import cardengine.application.ui.DurakTablePanel;
+import cardengine.showcase.durak.bot.DurakBot;
+import cardengine.showcase.durak.controller.DurakController;
+import cardengine.showcase.durak.ui.DurakTablePanel;
 import cardengine.application.ui.GameView;
 import cardengine.framework.core.Game;
 import cardengine.framework.core.Player;
@@ -25,16 +25,20 @@ public class DurakMain {
         SwingUtilities.invokeLater(() -> {
             Game game = new Game();
             List<Player> players = Arrays.asList(
-                    new Player(1, "Alice"),
-                    new Player(2, "Bob"),
-                    new Player(3, "Carol"),
-                    new Player(4, "Dave"));
+                    new Player("Alice"),
+                    new Player("Bob"),
+                    new Player("Carol"),
+                    new Player("Dave"),
+                    new Player("Akim"),
+                    new Player("Akim"));
             players.forEach(game::addPlayer);
 
             Map<Player, BotStrategy> bots = new LinkedHashMap<>();
             bots.put(players.get(1), new DurakBot());
             bots.put(players.get(2), new DurakBot());
             bots.put(players.get(3), new DurakBot());
+            bots.put(players.get(4), new DurakBot());
+            bots.put(players.get(5), new DurakBot());
 
             // Durak legt die Karten paarweise (Angriff/Verteidigung) aus, nicht auf einen
             // Ablagestapel -> eigene Tischansicht. (Claude, Opus 4.8)

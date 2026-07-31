@@ -29,18 +29,18 @@ import cardengine.showcase.maumau.strategy.effect.SkipEffect;
 public class MauMauDeck extends StandardDeck {
 
     /** Kleinster Rang im Mau-Mau-Blatt (7). Alles ab hier kommt ins Deck. */
-    private static final int MIN_RANK_ORDINAL = Rank.SEVEN.ordinal();
+    //private static final int MIN_RANK_ORDINAL = Rank.SEVEN.ordinal();
+    private int rankCount;
 
-    public MauMauDeck() {
+    public MauMauDeck(int totalCards) {
+        this.rankCount = totalCards / Suit.values().length;
+        Rank[] ranks = Rank.values();// {TWO, THREE .. usw}
         for (Suit suit : Suit.values()) {
-            for (Rank rank : Rank.values()) {
-                if (rank.ordinal() >= MIN_RANK_ORDINAL) {
-                    addCard(createCard(suit, rank));
-                }
+            for (int i = getStartIndex(ranks); i < ranks.length; i++) {
+                    addCard(createCard(suit, ranks[i]));
             }
         }
     }
-
     /**
      *
      * Effect Card mit passendem Effekt, fuer alle anderen Raenge eine normale Card
@@ -53,5 +53,10 @@ public class MauMauDeck extends StandardDeck {
             case JACK -> new EffectCard(suit, rank, new ChooseSuitEffect());
             default -> new Card(suit, rank);
         };
+    }
+
+    @Override
+    public int getStartIndex(Rank[] ranks) {
+        return Math.max(0, ranks.length - this.rankCount);
     }
 }

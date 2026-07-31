@@ -1,8 +1,9 @@
-package cardengine.application.ui;
+package cardengine.showcase.durak.ui;
 
+import cardengine.application.ui.CardRenderer;
+import cardengine.application.ui.TablePanel;
 import cardengine.framework.core.Card;
 
-import javax.swing.JPanel;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;

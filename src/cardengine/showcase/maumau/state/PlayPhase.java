@@ -113,8 +113,9 @@ public class PlayPhase implements Phase {
         return false;
     }
 
+
     @Override
-    public Phase next(Game game) {
+    public Phase next(Game game, Command cmd) {
         List<Player> players = game.getPlayers();
         if (players.isEmpty()) {
             return this;
