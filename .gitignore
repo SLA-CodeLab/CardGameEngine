@@ -4,11 +4,10 @@ out/
 !**/src/test/**/out/
 
 ### Eclipse ###
+# .project/.classpath/.settings sind bewusst NICHT ignoriert:
+# die Abgabe muss als Eclipse-Projekt importierbar sein.
 .apt_generated
-.classpath
 .factorypath
-.project
-.settings
 .springBeans
 .sts4-cache
 bin/

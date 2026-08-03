@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "7 Feindesign 2/Feindesign 2.md",
+                "file": "1 Anforderungsanalyse/Rupp-Schablone.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Feindesign 2"
+              "title": "Rupp-Schablone"
             }
           }
         ]
@@ -183,21 +183,22 @@
       "bases:Create new base": false
     }
   },
-  "active": "326ecef28ef86c45",
+  "active": "0d96583b6a16db25",
   "lastOpenFiles": [
+    "99 Bericht/VorlageHausarbeit.docx",
+    "99 Bericht/Hausarbeit.pdf",
+    "99 Bericht/Hausarbeit.docx",
+    "7 Feindesign 2/Feindesign 2.md",
+    "99 Bericht/~$usarbeitOOAD_azdorov_luakochs_szholob.docx",
+    "7 Feindesign 2/strategy-pattern-sieg.uxf",
+    "7 Feindesign 2/klassendiagramm-state-pattern.uxf",
+    "7 Feindesign 2/gesamt-pattern-diagramm.uxf",
+    "7 Feindesign 2/factory_pattern.uxf",
+    "7 Feindesign 2/effectStrategy-klassendiagram.uxf",
+    "7 Feindesign 2/command-pattern-undo.uxf",
     "3 Feindesign/DurakKlassenDiagramm.uxf",
     "3 Feindesign/DurakKlassenDiagramm.png",
     "3 Feindesign/DurakKlassenDiagramm_alt.png",
-    "99 Bericht/HausarbeitOOAD_azdorov_luakochs_szholob.docx",
-    "99 Bericht/~$usarbeit.docx",
-    "99 Bericht/~WRL0001.tmp",
-    "99 Bericht/~WRD0000.tmp",
-    "99 Bericht/Hausarbeit.docx",
-    "99 Bericht/~$rlageHausarbeitOOAD.docx",
-    "99 Bericht/VorlageHausarbeitOOAD.docx",
-    "99 Bericht",
-    "New folder",
-    "6 Grobdesign 2/durak-activitaetsdiagramm.uxf",
     "6 Grobdesign 2/DurakKlassenDiagramm v1.png",
     "6 Grobdesign 2/DurakKlassenDiagramm.png",
     "6 Grobdesign 2/Grobdesign 2.md",
@@ -214,7 +215,6 @@
     "1 Anforderungsanalyse/Rupp-Schablone.md",
     "1 Anforderungsanalyse/Grundregeln.md",
     "1 Anforderungsanalyse/Glossar.md",
-    "7 Feindesign 2/Feindesign 2.md",
     "Projektstruktur.md",
     "2 Grobdesign/+Übersicht.md",
     "1 Anforderungsanalyse/Rahmenbedingungen/Projektidee.md",

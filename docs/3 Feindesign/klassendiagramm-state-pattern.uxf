@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="15.1">
-  <zoom_level>8</zoom_level>
+  <zoom_level>9</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>584</x>
-      <y>216</y>
-      <w>160</w>
-      <h>56</h>
+      <x>180</x>
+      <y>324</y>
+      <w>180</w>
+      <h>63</h>
     </coordinates>
     <panel_attributes>&lt;&lt;control&gt;&gt;
 Game
@@ -20,10 +20,10 @@ Game
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>832</x>
-      <y>216</y>
-      <w>184</w>
-      <h>48</h>
+      <x>459</x>
+      <y>324</y>
+      <w>207</w>
+      <h>54</h>
     </coordinates>
     <panel_attributes>&lt;&lt;interface&gt;&gt;
 Phase
@@ -34,10 +34,10 @@ Phase
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>736</x>
-      <y>224</y>
-      <w>112</w>
-      <h>40</h>
+      <x>351</x>
+      <y>333</y>
+      <w>126</w>
+      <h>45</h>
     </coordinates>
     <panel_attributes>lt=&lt;-
 r1=-phase
@@ -47,10 +47,10 @@ m1=1</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>560</x>
-      <y>160</y>
-      <w>504</w>
-      <h>240</h>
+      <x>153</x>
+      <y>261</y>
+      <w>567</w>
+      <h>270</h>
     </coordinates>
     <panel_attributes>framework.core
 --</panel_attributes>
@@ -59,10 +59,10 @@ m1=1</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>560</x>
-      <y>432</y>
-      <w>504</w>
-      <h>112</h>
+      <x>153</x>
+      <y>567</y>
+      <w>567</w>
+      <h>126</h>
     </coordinates>
     <panel_attributes>showcase.durak
 --</panel_attributes>
@@ -71,10 +71,10 @@ m1=1</panel_attributes>
   <element>
     <id>UMLNote</id>
     <coordinates>
-      <x>424</x>
-      <y>432</y>
-      <w>128</w>
-      <h>128</h>
+      <x>0</x>
+      <y>567</y>
+      <w>144</w>
+      <h>144</h>
     </coordinates>
     <panel_attributes>Hier nur mal bsp
 wie State Pattern
@@ -90,10 +90,10 @@ unterschiedlich sind</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>912</x>
-      <y>472</y>
-      <w>128</w>
-      <h>48</h>
+      <x>549</x>
+      <y>612</y>
+      <w>144</w>
+      <h>54</h>
     </coordinates>
     <panel_attributes>DrawPhase
 --
@@ -103,10 +103,10 @@ unterschiedlich sind</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>944</x>
-      <y>256</y>
-      <w>24</w>
-      <h>232</h>
+      <x>585</x>
+      <y>369</y>
+      <w>27</w>
+      <h>261</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;270.0</additional_attributes>
@@ -114,10 +114,10 @@ unterschiedlich sind</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>672</x>
-      <y>256</y>
-      <w>200</w>
-      <h>232</h>
+      <x>279</x>
+      <y>369</y>
+      <w>225</w>
+      <h>261</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>230.0;10.0;230.0;70.0;10.0;70.0;10.0;270.0</additional_attributes>
@@ -125,10 +125,10 @@ unterschiedlich sind</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>592</x>
-      <y>472</y>
-      <w>128</w>
-      <h>48</h>
+      <x>189</x>
+      <y>612</y>
+      <w>144</w>
+      <h>54</h>
     </coordinates>
     <panel_attributes>AttackPhase
 --
@@ -138,10 +138,10 @@ unterschiedlich sind</panel_attributes>
   <element>
     <id>UMLPackage</id>
     <coordinates>
-      <x>560</x>
-      <y>560</y>
-      <w>504</w>
-      <h>112</h>
+      <x>153</x>
+      <y>711</y>
+      <w>567</w>
+      <h>126</h>
     </coordinates>
     <panel_attributes>showcase.poker &lt;&lt;planned&gt;&gt;</panel_attributes>
     <additional_attributes/>
@@ -149,10 +149,10 @@ unterschiedlich sind</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>824</x>
-      <y>600</y>
-      <w>128</w>
-      <h>48</h>
+      <x>450</x>
+      <y>756</y>
+      <w>144</w>
+      <h>54</h>
     </coordinates>
     <panel_attributes>BettingPhase
 --
@@ -162,10 +162,10 @@ unterschiedlich sind</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>896</x>
-      <y>256</y>
-      <w>24</w>
-      <h>360</h>
+      <x>531</x>
+      <y>369</y>
+      <w>27</w>
+      <h>405</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;430.0</additional_attributes>
@@ -173,10 +173,10 @@ unterschiedlich sind</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>752</x>
-      <y>472</y>
-      <w>128</w>
-      <h>48</h>
+      <x>369</x>
+      <y>612</y>
+      <w>144</w>
+      <h>54</h>
     </coordinates>
     <panel_attributes>DefendPhase
 --
@@ -186,12 +186,183 @@ unterschiedlich sind</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>864</x>
-      <y>256</y>
-      <w>24</w>
-      <h>232</h>
+      <x>495</x>
+      <y>369</y>
+      <w>27</w>
+      <h>261</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;.</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;270.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1188</x>
+      <y>288</y>
+      <w>225</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+Phase
+--
+
+--
++isValid(Game, Command): boolean
++next(Game, Command): Phase</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1557</x>
+      <y>288</y>
+      <w>153</w>
+      <h>72</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;control&gt;&gt;
+Game
+--
+
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1116</x>
+      <y>459</y>
+      <w>144</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>AttackPhase</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1278</x>
+      <y>459</y>
+      <w>144</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>DrawPhase</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1197</x>
+      <y>603</y>
+      <w>144</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>PlayPhase
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>900</x>
+      <y>558</y>
+      <w>567</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>showcase.maumau.state
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>900</x>
+      <y>252</y>
+      <w>828</w>
+      <h>162</h>
+    </coordinates>
+    <panel_attributes>framework.state
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1404</x>
+      <y>297</y>
+      <w>171</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+r1=-currentPhase
+m1=1</panel_attributes>
+    <additional_attributes>10.0;20.0;170.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1341</x>
+      <y>369</y>
+      <w>27</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1242</x>
+      <y>369</y>
+      <w>27</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1260</x>
+      <y>369</y>
+      <w>27</w>
+      <h>252</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;260.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1278</x>
+      <y>495</y>
+      <w>144</w>
+      <h>27</h>
+    </coordinates>
+    <panel_attributes>DefendPhase</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>900</x>
+      <y>423</y>
+      <w>567</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>showcase.durak.state
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1260</x>
+      <y>369</y>
+      <w>36</w>
+      <h>162</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;160.0;20.0;160.0</additional_attributes>
   </element>
 </diagram>
